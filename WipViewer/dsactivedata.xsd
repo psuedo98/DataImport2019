@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsactivedata" targetNamespace="http://tempuri.org/dsactivedata.xsd" xmlns:mstns="http://tempuri.org/dsactivedata.xsd" xmlns="http://tempuri.org/dsactivedata.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="WipConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="WipConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.WipViewer.Properties.Settings.GlobalReference.Default.WipConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ActiveJobsTableAdapter" GeneratorDataComponentClassName="ActiveJobsTableAdapter" Name="ActiveJobs" UserDataComponentName="ActiveJobsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="WipConnectionString (Settings)" DbObjectName="Wip.dbo.ActiveJobs" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT Batch, BaseID, Weld, Machine, Design, Tracker, Build, Comp, ShipDate, Type, POValue, Actual, Expr1 FROM dbo.ActiveJobs</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Batch" DataSetColumn="Batch" />
+              <Mapping SourceColumn="BaseID" DataSetColumn="BaseID" />
+              <Mapping SourceColumn="Weld" DataSetColumn="Weld" />
+              <Mapping SourceColumn="Machine" DataSetColumn="Machine" />
+              <Mapping SourceColumn="Design" DataSetColumn="Design" />
+              <Mapping SourceColumn="Tracker" DataSetColumn="Tracker" />
+              <Mapping SourceColumn="Build" DataSetColumn="Build" />
+              <Mapping SourceColumn="Comp" DataSetColumn="Comp" />
+              <Mapping SourceColumn="ShipDate" DataSetColumn="ShipDate" />
+              <Mapping SourceColumn="Type" DataSetColumn="Type" />
+              <Mapping SourceColumn="POValue" DataSetColumn="POValue" />
+              <Mapping SourceColumn="Actual" DataSetColumn="Actual" />
+              <Mapping SourceColumn="Expr1" DataSetColumn="Expr1" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsactivedata" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsactivedata" msprop:Generator_UserDSName="dsactivedata">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="ActiveJobs" msprop:Generator_TableClassName="ActiveJobsDataTable" msprop:Generator_TableVarName="tableActiveJobs" msprop:Generator_TablePropName="ActiveJobs" msprop:Generator_RowDeletingName="ActiveJobsRowDeleting" msprop:Generator_RowChangingName="ActiveJobsRowChanging" msprop:Generator_RowEvHandlerName="ActiveJobsRowChangeEventHandler" msprop:Generator_RowDeletedName="ActiveJobsRowDeleted" msprop:Generator_UserTableName="ActiveJobs" msprop:Generator_RowChangedName="ActiveJobsRowChanged" msprop:Generator_RowEvArgName="ActiveJobsRowChangeEvent" msprop:Generator_RowClassName="ActiveJobsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Batch" msprop:Generator_ColumnVarNameInTable="columnBatch" msprop:Generator_ColumnPropNameInRow="Batch" msprop:Generator_ColumnPropNameInTable="BatchColumn" msprop:Generator_UserColumnName="Batch" type="xs:int" />
+              <xs:element name="BaseID" msprop:Generator_ColumnVarNameInTable="columnBaseID" msprop:Generator_ColumnPropNameInRow="BaseID" msprop:Generator_ColumnPropNameInTable="BaseIDColumn" msprop:Generator_UserColumnName="BaseID">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Weld" msprop:Generator_ColumnVarNameInTable="columnWeld" msprop:Generator_ColumnPropNameInRow="Weld" msprop:Generator_ColumnPropNameInTable="WeldColumn" msprop:Generator_UserColumnName="Weld" type="xs:int" minOccurs="0" />
+              <xs:element name="Machine" msprop:Generator_ColumnVarNameInTable="columnMachine" msprop:Generator_ColumnPropNameInRow="Machine" msprop:Generator_ColumnPropNameInTable="MachineColumn" msprop:Generator_UserColumnName="Machine" type="xs:int" minOccurs="0" />
+              <xs:element name="Design" msprop:Generator_ColumnVarNameInTable="columnDesign" msprop:Generator_ColumnPropNameInRow="Design" msprop:Generator_ColumnPropNameInTable="DesignColumn" msprop:Generator_UserColumnName="Design" type="xs:int" minOccurs="0" />
+              <xs:element name="Tracker" msprop:Generator_ColumnVarNameInTable="columnTracker" msprop:Generator_ColumnPropNameInRow="Tracker" msprop:Generator_ColumnPropNameInTable="TrackerColumn" msprop:Generator_UserColumnName="Tracker" type="xs:int" minOccurs="0" />
+              <xs:element name="Build" msprop:Generator_ColumnVarNameInTable="columnBuild" msprop:Generator_ColumnPropNameInRow="Build" msprop:Generator_ColumnPropNameInTable="BuildColumn" msprop:Generator_UserColumnName="Build" type="xs:int" minOccurs="0" />
+              <xs:element name="Comp" msprop:Generator_ColumnVarNameInTable="columnComp" msprop:Generator_ColumnPropNameInRow="Comp" msprop:Generator_ColumnPropNameInTable="CompColumn" msprop:Generator_UserColumnName="Comp" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ShipDate" msprop:Generator_ColumnVarNameInTable="columnShipDate" msprop:Generator_ColumnPropNameInRow="ShipDate" msprop:Generator_ColumnPropNameInTable="ShipDateColumn" msprop:Generator_UserColumnName="ShipDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Type" msprop:Generator_ColumnVarNameInTable="columnType" msprop:Generator_ColumnPropNameInRow="Type" msprop:Generator_ColumnPropNameInTable="TypeColumn" msprop:Generator_UserColumnName="Type" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="POValue" msprop:Generator_ColumnVarNameInTable="columnPOValue" msprop:Generator_ColumnPropNameInRow="POValue" msprop:Generator_ColumnPropNameInTable="POValueColumn" msprop:Generator_UserColumnName="POValue" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Actual" msprop:Generator_ColumnVarNameInTable="columnActual" msprop:Generator_ColumnPropNameInRow="Actual" msprop:Generator_ColumnPropNameInTable="ActualColumn" msprop:Generator_UserColumnName="Actual" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Expr1" msprop:Generator_ColumnVarNameInTable="columnExpr1" msprop:Generator_ColumnPropNameInRow="Expr1" msprop:Generator_ColumnPropNameInTable="Expr1Column" msprop:Generator_UserColumnName="Expr1" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:ActiveJobs" />
+      <xs:field xpath="mstns:Batch" />
+      <xs:field xpath="mstns:BaseID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

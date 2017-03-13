@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="WipModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Batches">
+          <Key>
+            <PropertyRef Name="Batch" />
+          </Key>
+          <Property Name="Batch" Type="int" Nullable="false" />
+          <Property Name="BatchDate" Type="date" />
+        </EntityType>
+        <EntityType Name="JobHours">
+          <Key>
+            <PropertyRef Name="BaseID" />
+            <PropertyRef Name="Batch" />
+          </Key>
+          <Property Name="BaseID" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Batch" Type="int" Nullable="false" />
+          <Property Name="Machine" Type="int" />
+          <Property Name="Weld" Type="int" />
+          <Property Name="Design" Type="int" />
+          <Property Name="Tracker" Type="int" />
+          <Property Name="Build" Type="int" />
+        </EntityType>
+        <EntityType Name="JobMetrics">
+          <Key>
+            <PropertyRef Name="BaseID" />
+            <PropertyRef Name="batch" />
+          </Key>
+          <Property Name="BaseID" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Comp" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ShipDate" Type="date" />
+          <Property Name="Type" Type="nchar" MaxLength="30" />
+          <Property Name="POValue" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Actual" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="batch" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Jobs">
+          <Key>
+            <PropertyRef Name="Base" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Base" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Wip.dbo.ActiveJobs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityContainer Name="WipModelStoreContainer">
+          <EntitySet Name="Batches" EntityType="Self.Batches" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobHours" EntityType="Self.JobHours" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobMetrics" EntityType="Self.JobMetrics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Jobs" EntityType="Self.Jobs" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WipModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="Base" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Base" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="adoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Jobs" EntityType="Self.Job" />
+          <EntitySet Name="JobMetrics" EntityType="WipModel.JobMetric" />
+          <EntitySet Name="JobHours" EntityType="WipModel.JobHour" />
+          <EntitySet Name="Batches" EntityType="WipModel.Batch" />
+        </EntityContainer>
+        <EntityType Name="JobMetric">
+          <Key>
+            <PropertyRef Name="BaseID" />
+            <PropertyRef Name="batch" />
+          </Key>
+          <Property Name="BaseID" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Comp" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ShipDate" Type="DateTime" Precision="0" />
+          <Property Name="Type" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="POValue" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Actual" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="batch" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JobHour">
+          <Key>
+            <PropertyRef Name="BaseID" />
+            <PropertyRef Name="Batch" />
+          </Key>
+          <Property Name="BaseID" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Batch" Type="Int32" Nullable="false" />
+          <Property Name="Machine" Type="Int32" />
+          <Property Name="Weld" Type="Int32" />
+          <Property Name="Design" Type="Int32" />
+          <Property Name="Tracker" Type="Int32" />
+          <Property Name="Build" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Batch">
+          <Key>
+            <PropertyRef Name="Batch1" />
+          </Key>
+          <Property Name="Batch1" Type="Int32" Nullable="false" />
+          <Property Name="BatchDate" Type="DateTime" Precision="0" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WipModelStoreContainer" CdmEntityContainer="adoEntities">
+          <EntitySetMapping Name="Jobs">
+            <EntityTypeMapping TypeName="WipModel.Job">
+              <MappingFragment StoreEntitySet="Jobs">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Base" ColumnName="Base" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobMetrics">
+            <EntityTypeMapping TypeName="WipModel.JobMetric">
+              <MappingFragment StoreEntitySet="JobMetrics">
+                <ScalarProperty Name="batch" ColumnName="batch" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Actual" ColumnName="Actual" />
+                <ScalarProperty Name="POValue" ColumnName="POValue" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="ShipDate" ColumnName="ShipDate" />
+                <ScalarProperty Name="Comp" ColumnName="Comp" />
+                <ScalarProperty Name="BaseID" ColumnName="BaseID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobHours">
+            <EntityTypeMapping TypeName="WipModel.JobHour">
+              <MappingFragment StoreEntitySet="JobHours">
+                <ScalarProperty Name="Build" ColumnName="Build" />
+                <ScalarProperty Name="Tracker" ColumnName="Tracker" />
+                <ScalarProperty Name="Design" ColumnName="Design" />
+                <ScalarProperty Name="Weld" ColumnName="Weld" />
+                <ScalarProperty Name="Machine" ColumnName="Machine" />
+                <ScalarProperty Name="Batch" ColumnName="Batch" />
+                <ScalarProperty Name="BaseID" ColumnName="BaseID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Batches">
+            <EntityTypeMapping TypeName="WipModel.Batch">
+              <MappingFragment StoreEntitySet="Batches">
+                <ScalarProperty Name="BatchDate" ColumnName="BatchDate" />
+                <ScalarProperty Name="Batch1" ColumnName="Batch" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
