@@ -35,7 +35,7 @@ namespace WipViewer
 
 
 
-            JobView jobview = new JobView(content, tooltype, shipdate);
+            jobview2 jobview = new jobview2(content, tooltype, shipdate);
             jobview.Show();
         }
 

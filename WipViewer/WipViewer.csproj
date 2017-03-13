@@ -129,6 +129,12 @@
     <Compile Include="JobView.Designer.cs">
       <DependentUpon>JobView.cs</DependentUpon>
     </Compile>
+    <Compile Include="jobview2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="jobview2.Designer.cs">
+      <DependentUpon>jobview2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -145,6 +151,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="JobView.resx">
       <DependentUpon>JobView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="jobview2.resx">
+      <DependentUpon>jobview2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
