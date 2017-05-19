@@ -13,6 +13,22 @@ namespace WipViewer
 {
     public partial class frmComment : Form
     {
+
+        jobview2 _owner; 
+
+        public frmComment(jobview2 owner, string jobnumber)
+        {
+            InitializeComponent();
+            _owner = owner;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmComment_FormClosing);
+            strJobNumber = jobnumber;
+        }
+
+        private void frmComment_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _owner.PerformRefresh();
+        }
+
         public string strJobNumber;
         public frmComment()
         {
@@ -32,23 +48,29 @@ namespace WipViewer
 
         }
 
+        private void txtComment_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnComment_Click(this, new EventArgs());
+            }
+        }
+
         private void btnComment_Click(object sender, EventArgs e)
         {
-            CommentEntities db = new CommentEntities();
+            TestEntities db1 = new TestEntities(); 
+          //  CommentEntities db = new CommentEntities();
             comment dbComment = new comment(); 
-            //WipEntities db = new WipEntities();
-           // commentDB dbComment = new commentDB();
-
-
-            
+                       
             dbComment.baseid = strJobNumber;
             dbComment.date = DateTime.Now.Date;
             dbComment.comment1 = txtComment.Text;
+            dbComment.commenter = Environment.UserName; 
 
-            db.comments.Add(dbComment);
+            db1.comments.Add(dbComment);
             try
             {
-                db.SaveChanges();
+                db1.SaveChanges();
             }
             catch (DbEntityValidationException ex)
             {
@@ -71,8 +93,9 @@ namespace WipViewer
 
             finally
             {
-                MessageBox.Show("Comment Saved.");
+             //   MessageBox.Show("Comment Saved.");
                 this.Close(); 
+                
 
             }
 

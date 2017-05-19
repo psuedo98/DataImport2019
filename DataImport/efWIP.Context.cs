@@ -29,5 +29,6 @@ namespace DataImport
         public virtual DbSet<JobMetric> JobMetrics { get; set; }
         public virtual DbSet<JobHour> JobHours { get; set; }
         public virtual DbSet<Batch> Batches { get; set; }
+        public virtual DbSet<picture> pictures { get; set; }
     }
 }

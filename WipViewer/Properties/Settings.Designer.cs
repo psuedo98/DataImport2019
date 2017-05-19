@@ -26,11 +26,22 @@ namespace WipViewer.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost\\sqlexpress;Initial Catalog=Wip;Integrated Security=True;Mul" +
-            "tipleActiveResultSets=True;Application Name=EntityFramework")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=desktop-v09rgin\\sqlexpress;Initial Catalog=Wip;Integrated Security=Tr" +
+            "ue;MultipleActiveResultSets=True;Application Name=EntityFramework")]
         public string WipConnectionString {
             get {
                 return ((string)(this["WipConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost\\sqlexpress;Initial Catalog=Wip;Integrated Security=True;Mul" +
+            "tipleActiveResultSets=True;Application Name=EntityFramework")]
+        public string WipConnectionString1 {
+            get {
+                return ((string)(this["WipConnectionString1"]));
             }
         }
     }

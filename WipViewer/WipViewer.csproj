@@ -9,9 +9,30 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WipViewer</RootNamespace>
     <AssemblyName>WipViewer</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <PublishUrl>R:\wipviewer2017\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <UpdateUrl>\\visfile1\VISSHARED\wipviewer2017\</UpdateUrl>
+    <ProductName>Wip Viewer</ProductName>
+    <PublisherName>Jacob Rotary</PublisherName>
+    <ApplicationRevision>27</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -22,6 +43,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -31,6 +53,22 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>2114C37F510828E6407FC349211F1DB8BDAA67E5</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>WipViewer_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>ICON.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -44,7 +82,6 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Entity.Design" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -59,8 +96,46 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionItem.cs">
+      <DependentUpon>TestModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ActionItemReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ActionItemReport.Designer.cs">
+      <DependentUpon>ActionItemReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ActionItems.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ActionItems.Designer.cs">
+      <DependentUpon>ActionItems.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ActiveJob.cs">
+      <DependentUpon>TestModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Batch.cs">
+      <DependentUpon>TestModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="comment.cs">
-      <DependentUpon>EfComments.tt</DependentUpon>
+      <DependentUpon>TestModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="comment_report.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="comment_report.Designer.cs">
+      <DependentUpon>comment_report.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Comment_report_grid.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Comment_report_grid.Designer.cs">
+      <DependentUpon>Comment_report_grid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
     <Compile Include="DataView.cs">
       <SubType>Form</SubType>
@@ -68,15 +143,37 @@
     <Compile Include="DataView.Designer.cs">
       <DependentUpon>DataView.cs</DependentUpon>
     </Compile>
+    <Compile Include="dsComments.cs">
+      <DependentUpon>dsComments.xsd</DependentUpon>
+    </Compile>
     <Compile Include="dsComments.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dsComments.xsd</DependentUpon>
     </Compile>
+    <Compile Include="ds_ActionItems.cs">
+      <DependentUpon>ds_ActionItems.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ds_ActionItems.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_ActionItems.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ds_activejobs.cs">
+      <DependentUpon>ds_activejobs.xsd</DependentUpon>
+    </Compile>
     <Compile Include="ds_activejobs.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ds_activejobs.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ds_Comments.cs">
+      <DependentUpon>ds_Comments.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ds_Comments.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_Comments.xsd</DependentUpon>
     </Compile>
     <Compile Include="EfComments.Context.cs">
       <AutoGen>True</AutoGen>
@@ -100,7 +197,7 @@
       <DependentUpon>frmComment.cs</DependentUpon>
     </Compile>
     <Compile Include="ImportantDate.cs">
-      <DependentUpon>EfComments.tt</DependentUpon>
+      <DependentUpon>TestModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ImportantDates.cs">
       <DependentUpon>ImportantDates.xsd</DependentUpon>
@@ -109,6 +206,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ImportantDates.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Job.cs">
+      <DependentUpon>TestModel.tt</DependentUpon>
     </Compile>
     <Compile Include="JobBatches.Designer.cs">
       <DependentUpon>JobBatches.xsd</DependentUpon>
@@ -123,6 +223,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>JobDataFull.xsd</DependentUpon>
     </Compile>
+    <Compile Include="JobHour.cs">
+      <DependentUpon>TestModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="JobMetric.cs">
+      <DependentUpon>TestModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="JobView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -135,14 +241,62 @@
     <Compile Include="jobview2.Designer.cs">
       <DependentUpon>jobview2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Job_batches.cs">
+      <DependentUpon>TestModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="Margin_Over_time.cs">
+      <DependentUpon>TestModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="picture.cs">
+      <DependentUpon>TestModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="schedule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="schedule.Designer.cs">
+      <DependentUpon>schedule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Team.cs">
+      <DependentUpon>TestModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Team.Designer.cs">
+      <DependentUpon>Team.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TestModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TestModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TestModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestModel.edmx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="ActionItemReport.resx">
+      <DependentUpon>ActionItemReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ActionItems.resx">
+      <DependentUpon>ActionItems.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="comment_report.resx">
+      <DependentUpon>comment_report.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Comment_report_grid.resx">
+      <DependentUpon>Comment_report_grid.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DataView.resx">
       <DependentUpon>DataView.cs</DependentUpon>
     </EmbeddedResource>
@@ -166,7 +320,25 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="schedule.resx">
+      <DependentUpon>schedule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Team.resx">
+      <DependentUpon>Team.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="DataSet1.xsc">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="DataSet1.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSet1.xss">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
     <None Include="dsComments.xsc">
       <DependentUpon>dsComments.xsd</DependentUpon>
     </None>
@@ -177,6 +349,17 @@
     </None>
     <None Include="dsComments.xss">
       <DependentUpon>dsComments.xsd</DependentUpon>
+    </None>
+    <None Include="ds_ActionItems.xsc">
+      <DependentUpon>ds_ActionItems.xsd</DependentUpon>
+    </None>
+    <None Include="ds_ActionItems.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_ActionItems.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ds_ActionItems.xss">
+      <DependentUpon>ds_ActionItems.xsd</DependentUpon>
     </None>
     <None Include="ds_activejobs.xsc">
       <DependentUpon>ds_activejobs.xsd</DependentUpon>
@@ -193,8 +376,20 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>EfComments.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="ds_Comments.xsc">
+      <DependentUpon>ds_Comments.xsd</DependentUpon>
+    </None>
+    <None Include="ds_Comments.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_Comments.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ds_Comments.xss">
+      <DependentUpon>ds_Comments.xsd</DependentUpon>
+    </None>
     <None Include="EfComments.edmx.diagram">
       <DependentUpon>EfComments.edmx</DependentUpon>
+      <SubType>Designer</SubType>
     </None>
     <None Include="ImportantDates.xsc">
       <DependentUpon>ImportantDates.xsd</DependentUpon>
@@ -239,6 +434,14 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EntityDeploy Include="TestModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TestModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="TestModel.edmx.diagram">
+      <DependentUpon>TestModel.edmx</DependentUpon>
+    </None>
+    <None Include="WipViewer_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -260,6 +463,29 @@
       <DependentUpon>EfComments.edmx</DependentUpon>
       <LastGenOutput>EfComments.cs</LastGenOutput>
     </Content>
+    <Content Include="ICON.ico" />
+    <Content Include="TestModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TestModel.edmx</DependentUpon>
+      <LastGenOutput>TestModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="TestModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TestModel.edmx</DependentUpon>
+      <LastGenOutput>TestModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -22,5 +22,6 @@ namespace DataImport
         public Nullable<decimal> Actual { get; set; }
         public int ID { get; set; }
         public int batch { get; set; }
+        public Nullable<decimal> Margin { get; set; }
     }
 }

@@ -91,6 +91,7 @@ namespace DataImport
                                 metrics.BaseID = xlRange.Cells[i, 1].value();
                                 metrics.Type = xlRange.Cells[i, 2].value();
                                 metrics.batch = intID;
+                                metrics.Margin = (int)xlRange.Cells[i, 15].value(); 
 
 
                                 if (db.Jobs.Any(Job => Job.Base.ToString() == job.Base) == false)

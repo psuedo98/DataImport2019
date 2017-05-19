@@ -287,6 +287,8 @@ namespace WipViewer {
             
             private global::System.Data.DataColumn columnid;
             
+            private global::System.Data.DataColumn columncommenter;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public commentsDataTable() {
@@ -354,6 +356,14 @@ namespace WipViewer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn commenterColumn {
+                get {
+                    return this.columncommenter;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -389,13 +399,14 @@ namespace WipViewer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public commentsRow AddcommentsRow(string baseid, string comment, System.DateTime date) {
+            public commentsRow AddcommentsRow(string baseid, string comment, System.DateTime date, string commenter) {
                 commentsRow rowcommentsRow = ((commentsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         baseid,
                         comment,
                         date,
-                        null};
+                        null,
+                        commenter};
                 rowcommentsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowcommentsRow);
                 return rowcommentsRow;
@@ -429,6 +440,7 @@ namespace WipViewer {
                 this.columncomment = base.Columns["comment"];
                 this.columndate = base.Columns["date"];
                 this.columnid = base.Columns["id"];
+                this.columncommenter = base.Columns["commenter"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -442,6 +454,8 @@ namespace WipViewer {
                 base.Columns.Add(this.columndate);
                 this.columnid = new global::System.Data.DataColumn("id", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnid);
+                this.columncommenter = new global::System.Data.DataColumn("commenter", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncommenter);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnid}, true));
                 this.columnbaseid.MaxLength = 20;
@@ -452,6 +466,7 @@ namespace WipViewer {
                 this.columnid.AllowDBNull = false;
                 this.columnid.ReadOnly = true;
                 this.columnid.Unique = true;
+                this.columncommenter.MaxLength = 60;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -653,6 +668,22 @@ namespace WipViewer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string commenter {
+                get {
+                    try {
+                        return ((string)(this[this.tablecomments.commenterColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'commenter\' in table \'comments\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablecomments.commenterColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsbaseidNull() {
                 return this.IsNull(this.tablecomments.baseidColumn);
             }
@@ -685,6 +716,18 @@ namespace WipViewer {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetdateNull() {
                 this[this.tablecomments.dateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IscommenterNull() {
+                return this.IsNull(this.tablecomments.commenterColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetcommenterNull() {
+                this[this.tablecomments.commenterColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -851,42 +894,45 @@ namespace WipViewer.dsCommentsTableAdapters {
             tableMapping.ColumnMappings.Add("comment", "comment");
             tableMapping.ColumnMappings.Add("date", "date");
             tableMapping.ColumnMappings.Add("id", "id");
+            tableMapping.ColumnMappings.Add("commenter", "commenter");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[comments] WHERE (((@IsNull_baseid = 1 AND [baseid] IS NULL) OR ([baseid] = @Original_baseid)) AND ((@IsNull_comment = 1 AND [comment] IS NULL) OR ([comment] = @Original_comment)) AND ((@IsNull_date = 1 AND [date] IS NULL) OR ([date] = @Original_date)) AND ([id] = @Original_id))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[comments] WHERE (((@IsNull_baseid = 1 AND [baseid] IS NULL) OR ([baseid] = @Original_baseid)) AND ((@IsNull_date = 1 AND [date] IS NULL) OR ([date] = @Original_date)) AND ([id] = @Original_id) AND ((@IsNull_commenter = 1 AND [commenter] IS NULL) OR ([commenter] = @Original_commenter)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_baseid", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "baseid", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_baseid", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "baseid", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_comment", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "comment", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_comment", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "comment", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_date", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_commenter", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "commenter", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_commenter", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "commenter", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[comments] ([baseid], [comment], [date]) VALUES (@baseid, @comm" +
-                "ent, @date);\r\nSELECT baseid, comment, date, id FROM comments WHERE (id = SCOPE_I" +
-                "DENTITY())";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[comments] ([baseid], [comment], [date], [commenter]) VALUES (@" +
+                "baseid, @comment, @date, @commenter);\r\nSELECT baseid, comment, date, id, comment" +
+                "er FROM comments WHERE (id = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@baseid", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "baseid", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@comment", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "comment", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@comment", global::System.Data.SqlDbType.Text, 0, global::System.Data.ParameterDirection.Input, 0, 0, "comment", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@commenter", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "commenter", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[comments] SET [baseid] = @baseid, [comment] = @comment, [date] = @date WHERE (((@IsNull_baseid = 1 AND [baseid] IS NULL) OR ([baseid] = @Original_baseid)) AND ((@IsNull_comment = 1 AND [comment] IS NULL) OR ([comment] = @Original_comment)) AND ((@IsNull_date = 1 AND [date] IS NULL) OR ([date] = @Original_date)) AND ([id] = @Original_id));
-SELECT baseid, comment, date, id FROM comments WHERE (id = @id)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[comments] SET [baseid] = @baseid, [comment] = @comment, [date] = @date, [commenter] = @commenter WHERE (((@IsNull_baseid = 1 AND [baseid] IS NULL) OR ([baseid] = @Original_baseid)) AND ((@IsNull_date = 1 AND [date] IS NULL) OR ([date] = @Original_date)) AND ([id] = @Original_id) AND ((@IsNull_commenter = 1 AND [commenter] IS NULL) OR ([commenter] = @Original_commenter)));
+SELECT baseid, comment, date, id, commenter FROM comments WHERE (id = @id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@baseid", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "baseid", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@comment", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "comment", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@comment", global::System.Data.SqlDbType.Text, 0, global::System.Data.ParameterDirection.Input, 0, 0, "comment", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@commenter", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "commenter", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_baseid", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "baseid", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_baseid", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "baseid", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_comment", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "comment", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_comment", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "comment", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_date", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_commenter", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "commenter", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_commenter", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "commenter", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -903,12 +949,12 @@ SELECT baseid, comment, date, id FROM comments WHERE (id = @id)";
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT baseid, comment, date, id FROM dbo.comments";
+            this._commandCollection[0].CommandText = "SELECT baseid, comment, date, id,commenter FROM dbo.comments";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "SELECT        baseid, comment, date, id\r\nFROM            comments\r\nWHERE        (" +
-                "baseid = @strjobnumber)";
+            this._commandCollection[1].CommandText = "SELECT baseid, comment, commenter, date, id FROM comments WHERE (baseid = @strjob" +
+                "number)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@strjobnumber", global::System.Data.SqlDbType.NChar, 20, global::System.Data.ParameterDirection.Input, 0, 0, "baseid", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
@@ -989,7 +1035,7 @@ SELECT baseid, comment, date, id FROM comments WHERE (id = @id)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(string Original_baseid, string Original_comment, global::System.Nullable<global::System.DateTime> Original_date, int Original_id) {
+        public virtual int Delete(string Original_baseid, global::System.Nullable<global::System.DateTime> Original_date, int Original_id, string Original_commenter) {
             if ((Original_baseid == null)) {
                 this.Adapter.DeleteCommand.Parameters[0].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[1].Value = global::System.DBNull.Value;
@@ -998,23 +1044,23 @@ SELECT baseid, comment, date, id FROM comments WHERE (id = @id)";
                 this.Adapter.DeleteCommand.Parameters[0].Value = ((object)(0));
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_baseid));
             }
-            if ((Original_comment == null)) {
+            if ((Original_date.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((System.DateTime)(Original_date.Value));
+            }
+            else {
                 this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((string)(Original_comment));
-            }
-            if ((Original_date.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((System.DateTime)(Original_date.Value));
+            this.Adapter.DeleteCommand.Parameters[4].Value = ((int)(Original_id));
+            if ((Original_commenter == null)) {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[5].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_commenter));
             }
-            this.Adapter.DeleteCommand.Parameters[6].Value = ((int)(Original_id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -1035,7 +1081,7 @@ SELECT baseid, comment, date, id FROM comments WHERE (id = @id)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string baseid, string comment, global::System.Nullable<global::System.DateTime> date) {
+        public virtual int Insert(string baseid, string comment, global::System.Nullable<global::System.DateTime> date, string commenter) {
             if ((baseid == null)) {
                 this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -1053,6 +1099,12 @@ SELECT baseid, comment, date, id FROM comments WHERE (id = @id)";
             }
             else {
                 this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((commenter == null)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(commenter));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -1074,7 +1126,7 @@ SELECT baseid, comment, date, id FROM comments WHERE (id = @id)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string baseid, string comment, global::System.Nullable<global::System.DateTime> date, string Original_baseid, string Original_comment, global::System.Nullable<global::System.DateTime> Original_date, int Original_id, int id) {
+        public virtual int Update(string baseid, string comment, global::System.Nullable<global::System.DateTime> date, string commenter, string Original_baseid, global::System.Nullable<global::System.DateTime> Original_date, int Original_id, string Original_commenter, int id) {
             if ((baseid == null)) {
                 this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -1093,32 +1145,38 @@ SELECT baseid, comment, date, id FROM comments WHERE (id = @id)";
             else {
                 this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
+            if ((commenter == null)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(commenter));
+            }
             if ((Original_baseid == null)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(Original_baseid));
-            }
-            if ((Original_comment == null)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(Original_comment));
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(Original_baseid));
             }
             if ((Original_date.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((System.DateTime)(Original_date.Value));
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((System.DateTime)(Original_date.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_id));
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(id));
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_id));
+            if ((Original_commenter == null)) {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(Original_commenter));
+            }
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -1139,8 +1197,8 @@ SELECT baseid, comment, date, id FROM comments WHERE (id = @id)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string baseid, string comment, global::System.Nullable<global::System.DateTime> date, string Original_baseid, string Original_comment, global::System.Nullable<global::System.DateTime> Original_date, int Original_id) {
-            return this.Update(baseid, comment, date, Original_baseid, Original_comment, Original_date, Original_id, Original_id);
+        public virtual int Update(string baseid, string comment, global::System.Nullable<global::System.DateTime> date, string commenter, string Original_baseid, global::System.Nullable<global::System.DateTime> Original_date, int Original_id, string Original_commenter) {
+            return this.Update(baseid, comment, date, commenter, Original_baseid, Original_date, Original_id, Original_commenter, Original_id);
         }
     }
     

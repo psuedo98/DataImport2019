@@ -7,6 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataImport", "DataImport\Da
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WipViewer", "WipViewer\WipViewer.csproj", "{DF291A28-A33F-443C-BCC4-2B248F1300B6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B1CC10E1-54A7-4B06-8628-ACE93158FB77}"
+	ProjectSection(SolutionItems) = preProject
+		ICON.ico = ICON.ico
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

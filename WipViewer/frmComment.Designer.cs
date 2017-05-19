@@ -35,28 +35,31 @@
             // 
             // txtComment
             // 
-            this.txtComment.Location = new System.Drawing.Point(59, 12);
-            this.txtComment.Multiline = true;
+            this.txtComment.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtComment.Location = new System.Drawing.Point(109, 12);
             this.txtComment.Name = "txtComment";
-            this.txtComment.Size = new System.Drawing.Size(232, 111);
+            this.txtComment.Size = new System.Drawing.Size(624, 31);
             this.txtComment.TabIndex = 0;
+            this.txtComment.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtComment_KeyDown);
             // 
             // lblComment
             // 
             this.lblComment.AutoSize = true;
+            this.lblComment.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblComment.Location = new System.Drawing.Point(2, 15);
             this.lblComment.Name = "lblComment";
-            this.lblComment.Size = new System.Drawing.Size(51, 13);
+            this.lblComment.Size = new System.Drawing.Size(103, 25);
             this.lblComment.TabIndex = 1;
             this.lblComment.Text = "Comment";
             // 
             // btnComment
             // 
-            this.btnComment.Location = new System.Drawing.Point(216, 129);
+            this.btnComment.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnComment.Location = new System.Drawing.Point(495, 49);
             this.btnComment.Name = "btnComment";
-            this.btnComment.Size = new System.Drawing.Size(75, 23);
+            this.btnComment.Size = new System.Drawing.Size(238, 46);
             this.btnComment.TabIndex = 2;
-            this.btnComment.Text = "Comment";
+            this.btnComment.Text = "Add Comment";
             this.btnComment.UseVisualStyleBackColor = true;
             this.btnComment.Click += new System.EventHandler(this.btnComment_Click);
             // 
@@ -64,7 +67,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(313, 156);
+            this.ClientSize = new System.Drawing.Size(745, 106);
             this.Controls.Add(this.btnComment);
             this.Controls.Add(this.lblComment);
             this.Controls.Add(this.txtComment);

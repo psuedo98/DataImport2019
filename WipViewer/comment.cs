@@ -18,5 +18,6 @@ namespace WipViewer
         public string comment1 { get; set; }
         public Nullable<System.DateTime> date { get; set; }
         public int id { get; set; }
+        public string commenter { get; set; }
     }
 }

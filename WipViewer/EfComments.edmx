@@ -5,14 +5,28 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="CommentModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ActionItems">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Submitter" Type="text" />
+          <Property Name="Asignee" Type="text" />
+          <Property Name="Base" Type="varchar" MaxLength="25" />
+          <Property Name="Duedate" Type="date" />
+          <Property Name="critical" Type="varchar" MaxLength="5" />
+          <Property Name="CreateDate" Type="date" />
+          <Property Name="ActionRequired" Type="text" />
+        </EntityType>
         <EntityType Name="comments">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="baseid" Type="nchar" MaxLength="20" />
-          <Property Name="comment" Type="nchar" MaxLength="200" />
+          <Property Name="comment" Type="text" />
           <Property Name="date" Type="date" />
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="commenter" Type="nchar" MaxLength="60" />
         </EntityType>
         <EntityType Name="ImportantDates">
           <Key>
@@ -30,9 +44,49 @@
           <Property Name="RdySrc" Type="date" />
           <Property Name="DesRel" Type="date" />
         </EntityType>
+        <EntityType Name="pictures">
+          <Key>
+            <PropertyRef Name="BaseId" />
+          </Key>
+          <Property Name="BaseId" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Path" Type="nchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="JobNumber" />
+          </Key>
+          <Property Name="JobNumber" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="ProgramManager" Type="nchar" MaxLength="40" />
+          <Property Name="BuildLeader" Type="nchar" MaxLength="40" />
+          <Property Name="Processor" Type="nchar" MaxLength="40" />
+          <Property Name="KickOff" Type="date" />
+          <Property Name="DataRelease" Type="date" />
+          <Property Name="Folder" Type="date" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PODate" Type="date" />
+        </EntityType>
+        <Association Name="FK_ActionItems_ActionItems">
+          <End Role="ActionItems" Type="Self.ActionItems" Multiplicity="1" />
+          <End Role="ActionItems1" Type="Self.ActionItems" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ActionItems">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ActionItems1">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="CommentModelStoreContainer">
+          <EntitySet Name="ActionItems" EntityType="Self.ActionItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="comments" EntityType="Self.comments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ImportantDates" EntityType="Self.ImportantDates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pictures" EntityType="Self.pictures" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Team" EntityType="Self.Team" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ActionItems_ActionItems" Association="Self.FK_ActionItems_ActionItems">
+            <End Role="ActionItems" EntitySet="ActionItems" />
+            <End Role="ActionItems1" EntitySet="ActionItems" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -43,13 +97,17 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="baseid" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
-          <Property Name="comment1" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+          <Property Name="comment1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="date" Type="DateTime" Precision="0" />
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="commenter" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityContainer Name="CommentEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="comments" EntityType="Self.comment" />
           <EntitySet Name="ImportantDates" EntityType="CommentModel.ImportantDate" />
+          <EntitySet Name="pictures" EntityType="CommentModel.picture" />
+          <EntitySet Name="TeamEFs" EntityType="CommentModel.TeamEF" />
+          <EntitySet Name="ActionItems" EntityType="CommentModel.ActionItem" />
         </EntityContainer>
         <EntityType Name="ImportantDate">
           <Key>
@@ -67,6 +125,40 @@
           <Property Name="RdySrc" Type="DateTime" Precision="0" />
           <Property Name="DesRel" Type="DateTime" Precision="0" />
         </EntityType>
+        <EntityType Name="picture">
+          <Key>
+            <PropertyRef Name="BaseId" />
+          </Key>
+          <Property Name="BaseId" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Path" Type="String" MaxLength="250" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TeamEF">
+          <Key>
+            <PropertyRef Name="JobNumber" />
+          </Key>
+          <Property Name="JobNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="ProgramManager" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
+          <Property Name="BuildLeader" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
+          <Property Name="Processor" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
+          <Property Name="KickOff" Type="DateTime" Precision="0" />
+          <Property Name="DataRelease" Type="DateTime" Precision="0" />
+          <Property Name="Folder" Type="DateTime" Precision="0" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PODate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="ActionItem">
+          <Key>
+            <PropertyRef Name="Base" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Submitter" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Asignee" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Base" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Duedate" Type="DateTime" Precision="0" />
+          <Property Name="critical" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="0" />
+          <Property Name="ActionRequired" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -76,6 +168,7 @@
           <EntitySetMapping Name="comments">
             <EntityTypeMapping TypeName="CommentModel.comment">
               <MappingFragment StoreEntitySet="comments">
+                <ScalarProperty Name="commenter" ColumnName="commenter" />
                 <ScalarProperty Name="baseid" ColumnName="baseid" />
                 <ScalarProperty Name="comment1" ColumnName="comment" />
                 <ScalarProperty Name="date" ColumnName="date" />
@@ -97,6 +190,43 @@
                 <ScalarProperty Name="StartFab" ColumnName="StartFab" />
                 <ScalarProperty Name="RecvMaterial" ColumnName="RecvMaterial" />
                 <ScalarProperty Name="BaseID" ColumnName="BaseID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pictures">
+            <EntityTypeMapping TypeName="CommentModel.picture">
+              <MappingFragment StoreEntitySet="pictures">
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="BaseId" ColumnName="BaseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeamEFs">
+            <EntityTypeMapping TypeName="CommentModel.TeamEF">
+              <MappingFragment StoreEntitySet="Team">
+                <ScalarProperty Name="PODate" ColumnName="PODate" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Folder" ColumnName="Folder" />
+                <ScalarProperty Name="DataRelease" ColumnName="DataRelease" />
+                <ScalarProperty Name="KickOff" ColumnName="KickOff" />
+                <ScalarProperty Name="Processor" ColumnName="Processor" />
+                <ScalarProperty Name="BuildLeader" ColumnName="BuildLeader" />
+                <ScalarProperty Name="ProgramManager" ColumnName="ProgramManager" />
+                <ScalarProperty Name="JobNumber" ColumnName="JobNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActionItems">
+            <EntityTypeMapping TypeName="CommentModel.ActionItem">
+              <MappingFragment StoreEntitySet="ActionItems">
+                <ScalarProperty Name="ActionRequired" ColumnName="ActionRequired" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="critical" ColumnName="critical" />
+                <ScalarProperty Name="Duedate" ColumnName="Duedate" />
+                <ScalarProperty Name="Base" ColumnName="Base" />
+                <ScalarProperty Name="Asignee" ColumnName="Asignee" />
+                <ScalarProperty Name="Submitter" ColumnName="Submitter" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -1,0 +1,591 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="WipModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ActionItems">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Submitter" Type="text" />
+          <Property Name="Asignee" Type="text" />
+          <Property Name="Base" Type="varchar" MaxLength="25" />
+          <Property Name="Duedate" Type="date" />
+          <Property Name="critical" Type="varchar" MaxLength="5" />
+          <Property Name="CreateDate" Type="date" />
+          <Property Name="ActionRequired" Type="text" />
+        </EntityType>
+        <EntityType Name="Batches">
+          <Key>
+            <PropertyRef Name="Batch" />
+          </Key>
+          <Property Name="Batch" Type="int" Nullable="false" />
+          <Property Name="BatchDate" Type="date" />
+        </EntityType>
+        <EntityType Name="comments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="baseid" Type="nchar" MaxLength="20" />
+          <Property Name="comment" Type="text" />
+          <Property Name="date" Type="date" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="commenter" Type="nchar" MaxLength="60" />
+        </EntityType>
+        <EntityType Name="ImportantDates">
+          <Key>
+            <PropertyRef Name="BaseID" />
+          </Key>
+          <Property Name="BaseID" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="RecvMaterial" Type="date" />
+          <Property Name="StartFab" Type="date" />
+          <Property Name="HeatTreat" Type="date" />
+          <Property Name="StartMachining" Type="date" />
+          <Property Name="StartAssy" Type="date" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MachComp" Type="date" />
+          <Property Name="RdyChk" Type="date" />
+          <Property Name="RdySrc" Type="date" />
+          <Property Name="DesRel" Type="date" />
+        </EntityType>
+        <EntityType Name="JobHours">
+          <Key>
+            <PropertyRef Name="BaseID" />
+            <PropertyRef Name="Batch" />
+          </Key>
+          <Property Name="BaseID" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Batch" Type="int" Nullable="false" />
+          <Property Name="Machine" Type="int" />
+          <Property Name="Weld" Type="int" />
+          <Property Name="Design" Type="int" />
+          <Property Name="Tracker" Type="int" />
+          <Property Name="Build" Type="int" />
+        </EntityType>
+        <EntityType Name="JobMetrics">
+          <Key>
+            <PropertyRef Name="BaseID" />
+            <PropertyRef Name="batch" />
+          </Key>
+          <Property Name="BaseID" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Comp" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ShipDate" Type="date" />
+          <Property Name="Type" Type="nchar" MaxLength="30" />
+          <Property Name="POValue" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Actual" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Margin" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="batch" Type="int" Nullable="false" />
+          <Property Name="ShipMonth" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Jobs">
+          <Key>
+            <PropertyRef Name="Base" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Base" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pictures">
+          <Key>
+            <PropertyRef Name="BaseId" />
+          </Key>
+          <Property Name="BaseId" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Path" Type="nchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="JobNumber" />
+          </Key>
+          <Property Name="JobNumber" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="ProgramManager" Type="nchar" MaxLength="40" />
+          <Property Name="BuildLeader" Type="nchar" MaxLength="40" />
+          <Property Name="Processor" Type="nchar" MaxLength="40" />
+          <Property Name="KickOff" Type="date" />
+          <Property Name="DataRelease" Type="date" />
+          <Property Name="Folder" Type="date" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PODate" Type="date" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Wip.dbo.ActiveJobs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ActiveJobs">
+          <Key>
+            <PropertyRef Name="Batch" />
+            <PropertyRef Name="BaseID" />
+          </Key>
+          <Property Name="Batch" Type="int" Nullable="false" />
+          <Property Name="BaseID" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Weld" Type="int" />
+          <Property Name="Machine" Type="int" />
+          <Property Name="Design" Type="int" />
+          <Property Name="Tracker" Type="int" />
+          <Property Name="Build" Type="int" />
+          <Property Name="Comp" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ShipDate" Type="date" />
+          <Property Name="Type" Type="nchar" MaxLength="30" />
+          <Property Name="POValue" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Actual" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Margin" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ShipMonth" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Wip.dbo.Job_batches' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Job_batches">
+          <Key>
+            <PropertyRef Name="Batch" />
+            <PropertyRef Name="BaseID" />
+          </Key>
+          <Property Name="BatchDate" Type="date" />
+          <Property Name="Batch" Type="int" Nullable="false" />
+          <Property Name="Weld" Type="int" />
+          <Property Name="Machine" Type="int" />
+          <Property Name="Build" Type="int" />
+          <Property Name="Tracker" Type="int" />
+          <Property Name="Design" Type="int" />
+          <Property Name="BaseID" Type="nchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Wip.dbo.Margin_Over_time' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Margin_Over_time">
+          <Key>
+            <PropertyRef Name="BaseID" />
+          </Key>
+          <Property Name="BatchDate" Type="date" />
+          <Property Name="BaseID" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Margin" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ShipDate" Type="date" />
+        </EntityType>
+        <Association Name="FK_ActionItems_ActionItems">
+          <End Role="ActionItems" Type="Self.ActionItems" Multiplicity="1" />
+          <End Role="ActionItems1" Type="Self.ActionItems" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ActionItems">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ActionItems1">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WipModelStoreContainer">
+          <EntitySet Name="ActionItems" EntityType="Self.ActionItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Batches" EntityType="Self.Batches" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="comments" EntityType="Self.comments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ImportantDates" EntityType="Self.ImportantDates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobHours" EntityType="Self.JobHours" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobMetrics" EntityType="Self.JobMetrics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Jobs" EntityType="Self.Jobs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pictures" EntityType="Self.pictures" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Team" EntityType="Self.Team" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActiveJobs" EntityType="Self.ActiveJobs" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ActiveJobs].[Batch] AS [Batch], 
+    [ActiveJobs].[BaseID] AS [BaseID], 
+    [ActiveJobs].[Weld] AS [Weld], 
+    [ActiveJobs].[Machine] AS [Machine], 
+    [ActiveJobs].[Design] AS [Design], 
+    [ActiveJobs].[Tracker] AS [Tracker], 
+    [ActiveJobs].[Build] AS [Build], 
+    [ActiveJobs].[Comp] AS [Comp], 
+    [ActiveJobs].[ShipDate] AS [ShipDate], 
+    [ActiveJobs].[Type] AS [Type], 
+    [ActiveJobs].[POValue] AS [POValue], 
+    [ActiveJobs].[Actual] AS [Actual], 
+    [ActiveJobs].[Margin] AS [Margin], 
+    [ActiveJobs].[ShipMonth] AS [ShipMonth]
+    FROM [dbo].[ActiveJobs] AS [ActiveJobs]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Job_batches" EntityType="Self.Job_batches" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Job_batches].[BatchDate] AS [BatchDate], 
+    [Job_batches].[Batch] AS [Batch], 
+    [Job_batches].[Weld] AS [Weld], 
+    [Job_batches].[Machine] AS [Machine], 
+    [Job_batches].[Build] AS [Build], 
+    [Job_batches].[Tracker] AS [Tracker], 
+    [Job_batches].[Design] AS [Design], 
+    [Job_batches].[BaseID] AS [BaseID]
+    FROM [dbo].[Job_batches] AS [Job_batches]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Margin_Over_time" EntityType="Self.Margin_Over_time" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Margin_Over_time].[BatchDate] AS [BatchDate], 
+    [Margin_Over_time].[BaseID] AS [BaseID], 
+    [Margin_Over_time].[Margin] AS [Margin], 
+    [Margin_Over_time].[ShipDate] AS [ShipDate]
+    FROM [dbo].[Margin_Over_time] AS [Margin_Over_time]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_ActionItems_ActionItems" Association="Self.FK_ActionItems_ActionItems">
+            <End Role="ActionItems" EntitySet="ActionItems" />
+            <End Role="ActionItems1" EntitySet="ActionItems" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WipModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ActionItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Submitter" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Asignee" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Base" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Duedate" Type="DateTime" Precision="0" />
+          <Property Name="critical" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="0" />
+          <Property Name="ActionRequired" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ActionItems1" Relationship="Self.FK_ActionItems_ActionItems" FromRole="ActionItems" ToRole="ActionItems1" />
+          <NavigationProperty Name="ActionItem1" Relationship="Self.FK_ActionItems_ActionItems" FromRole="ActionItems1" ToRole="ActionItems" />
+        </EntityType>
+        <EntityType Name="Batch">
+          <Key>
+            <PropertyRef Name="Batch1" />
+          </Key>
+          <Property Name="Batch1" Type="Int32" Nullable="false" />
+          <Property Name="BatchDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="comment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="baseid" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="comment1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="commenter" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ImportantDate">
+          <Key>
+            <PropertyRef Name="BaseID" />
+          </Key>
+          <Property Name="BaseID" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="RecvMaterial" Type="DateTime" Precision="0" />
+          <Property Name="StartFab" Type="DateTime" Precision="0" />
+          <Property Name="HeatTreat" Type="DateTime" Precision="0" />
+          <Property Name="StartMachining" Type="DateTime" Precision="0" />
+          <Property Name="StartAssy" Type="DateTime" Precision="0" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MachComp" Type="DateTime" Precision="0" />
+          <Property Name="RdyChk" Type="DateTime" Precision="0" />
+          <Property Name="RdySrc" Type="DateTime" Precision="0" />
+          <Property Name="DesRel" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="JobHour">
+          <Key>
+            <PropertyRef Name="BaseID" />
+            <PropertyRef Name="Batch" />
+          </Key>
+          <Property Name="BaseID" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Batch" Type="Int32" Nullable="false" />
+          <Property Name="Machine" Type="Int32" />
+          <Property Name="Weld" Type="Int32" />
+          <Property Name="Design" Type="Int32" />
+          <Property Name="Tracker" Type="Int32" />
+          <Property Name="Build" Type="Int32" />
+        </EntityType>
+        <EntityType Name="JobMetric">
+          <Key>
+            <PropertyRef Name="BaseID" />
+            <PropertyRef Name="batch" />
+          </Key>
+          <Property Name="BaseID" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Comp" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ShipDate" Type="DateTime" Precision="0" />
+          <Property Name="Type" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="POValue" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Actual" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Margin" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="batch" Type="Int32" Nullable="false" />
+          <Property Name="ShipMonth" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="Base" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Base" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="picture">
+          <Key>
+            <PropertyRef Name="BaseId" />
+          </Key>
+          <Property Name="BaseId" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Path" Type="String" MaxLength="250" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="JobNumber" />
+          </Key>
+          <Property Name="JobNumber" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ProgramManager" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
+          <Property Name="BuildLeader" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
+          <Property Name="Processor" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
+          <Property Name="KickOff" Type="DateTime" Precision="0" />
+          <Property Name="DataRelease" Type="DateTime" Precision="0" />
+          <Property Name="Folder" Type="DateTime" Precision="0" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PODate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="ActiveJob">
+          <Key>
+            <PropertyRef Name="Batch" />
+            <PropertyRef Name="BaseID" />
+          </Key>
+          <Property Name="Batch" Type="Int32" Nullable="false" />
+          <Property Name="BaseID" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Weld" Type="Int32" />
+          <Property Name="Machine" Type="Int32" />
+          <Property Name="Design" Type="Int32" />
+          <Property Name="Tracker" Type="Int32" />
+          <Property Name="Build" Type="Int32" />
+          <Property Name="Comp" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ShipDate" Type="DateTime" Precision="0" />
+          <Property Name="Type" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="POValue" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Actual" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Margin" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ShipMonth" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Job_batches">
+          <Key>
+            <PropertyRef Name="Batch" />
+            <PropertyRef Name="BaseID" />
+          </Key>
+          <Property Name="BatchDate" Type="DateTime" Precision="0" />
+          <Property Name="Batch" Type="Int32" Nullable="false" />
+          <Property Name="Weld" Type="Int32" />
+          <Property Name="Machine" Type="Int32" />
+          <Property Name="Build" Type="Int32" />
+          <Property Name="Tracker" Type="Int32" />
+          <Property Name="Design" Type="Int32" />
+          <Property Name="BaseID" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Margin_Over_time">
+          <Key>
+            <PropertyRef Name="BaseID" />
+          </Key>
+          <Property Name="BatchDate" Type="DateTime" Precision="0" />
+          <Property Name="BaseID" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Margin" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ShipDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <Association Name="FK_ActionItems_ActionItems">
+          <End Role="ActionItems" Type="Self.ActionItem" Multiplicity="1" />
+          <End Role="ActionItems1" Type="Self.ActionItem" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ActionItems">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ActionItems1">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TestEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ActionItems" EntityType="Self.ActionItem" />
+          <EntitySet Name="Batches" EntityType="Self.Batch" />
+          <EntitySet Name="comments" EntityType="Self.comment" />
+          <EntitySet Name="ImportantDates" EntityType="Self.ImportantDate" />
+          <EntitySet Name="JobHours" EntityType="Self.JobHour" />
+          <EntitySet Name="JobMetrics" EntityType="Self.JobMetric" />
+          <EntitySet Name="Jobs" EntityType="Self.Job" />
+          <EntitySet Name="pictures" EntityType="Self.picture" />
+          <EntitySet Name="Teams" EntityType="Self.Team" />
+          <EntitySet Name="ActiveJobs" EntityType="Self.ActiveJob" />
+          <EntitySet Name="Job_batches" EntityType="Self.Job_batches" />
+          <EntitySet Name="Margin_Over_time" EntityType="Self.Margin_Over_time" />
+          <AssociationSet Name="FK_ActionItems_ActionItems" Association="Self.FK_ActionItems_ActionItems">
+            <End Role="ActionItems" EntitySet="ActionItems" />
+            <End Role="ActionItems1" EntitySet="ActionItems" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WipModelStoreContainer" CdmEntityContainer="TestEntities">
+          <EntitySetMapping Name="ActionItems">
+            <EntityTypeMapping TypeName="WipModel.ActionItem">
+              <MappingFragment StoreEntitySet="ActionItems">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Submitter" ColumnName="Submitter" />
+                <ScalarProperty Name="Asignee" ColumnName="Asignee" />
+                <ScalarProperty Name="Base" ColumnName="Base" />
+                <ScalarProperty Name="Duedate" ColumnName="Duedate" />
+                <ScalarProperty Name="critical" ColumnName="critical" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ActionRequired" ColumnName="ActionRequired" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Batches">
+            <EntityTypeMapping TypeName="WipModel.Batch">
+              <MappingFragment StoreEntitySet="Batches">
+                <ScalarProperty Name="Batch1" ColumnName="Batch" />
+                <ScalarProperty Name="BatchDate" ColumnName="BatchDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="comments">
+            <EntityTypeMapping TypeName="WipModel.comment">
+              <MappingFragment StoreEntitySet="comments">
+                <ScalarProperty Name="baseid" ColumnName="baseid" />
+                <ScalarProperty Name="comment1" ColumnName="comment" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="commenter" ColumnName="commenter" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ImportantDates">
+            <EntityTypeMapping TypeName="WipModel.ImportantDate">
+              <MappingFragment StoreEntitySet="ImportantDates">
+                <ScalarProperty Name="BaseID" ColumnName="BaseID" />
+                <ScalarProperty Name="RecvMaterial" ColumnName="RecvMaterial" />
+                <ScalarProperty Name="StartFab" ColumnName="StartFab" />
+                <ScalarProperty Name="HeatTreat" ColumnName="HeatTreat" />
+                <ScalarProperty Name="StartMachining" ColumnName="StartMachining" />
+                <ScalarProperty Name="StartAssy" ColumnName="StartAssy" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="MachComp" ColumnName="MachComp" />
+                <ScalarProperty Name="RdyChk" ColumnName="RdyChk" />
+                <ScalarProperty Name="RdySrc" ColumnName="RdySrc" />
+                <ScalarProperty Name="DesRel" ColumnName="DesRel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobHours">
+            <EntityTypeMapping TypeName="WipModel.JobHour">
+              <MappingFragment StoreEntitySet="JobHours">
+                <ScalarProperty Name="BaseID" ColumnName="BaseID" />
+                <ScalarProperty Name="Batch" ColumnName="Batch" />
+                <ScalarProperty Name="Machine" ColumnName="Machine" />
+                <ScalarProperty Name="Weld" ColumnName="Weld" />
+                <ScalarProperty Name="Design" ColumnName="Design" />
+                <ScalarProperty Name="Tracker" ColumnName="Tracker" />
+                <ScalarProperty Name="Build" ColumnName="Build" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobMetrics">
+            <EntityTypeMapping TypeName="WipModel.JobMetric">
+              <MappingFragment StoreEntitySet="JobMetrics">
+                <ScalarProperty Name="BaseID" ColumnName="BaseID" />
+                <ScalarProperty Name="Comp" ColumnName="Comp" />
+                <ScalarProperty Name="ShipDate" ColumnName="ShipDate" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="POValue" ColumnName="POValue" />
+                <ScalarProperty Name="Actual" ColumnName="Actual" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Margin" ColumnName="Margin" />
+                <ScalarProperty Name="batch" ColumnName="batch" />
+                <ScalarProperty Name="ShipMonth" ColumnName="ShipMonth" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jobs">
+            <EntityTypeMapping TypeName="WipModel.Job">
+              <MappingFragment StoreEntitySet="Jobs">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Base" ColumnName="Base" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pictures">
+            <EntityTypeMapping TypeName="WipModel.picture">
+              <MappingFragment StoreEntitySet="pictures">
+                <ScalarProperty Name="BaseId" ColumnName="BaseId" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teams">
+            <EntityTypeMapping TypeName="WipModel.Team">
+              <MappingFragment StoreEntitySet="Team">
+                <ScalarProperty Name="JobNumber" ColumnName="JobNumber" />
+                <ScalarProperty Name="ProgramManager" ColumnName="ProgramManager" />
+                <ScalarProperty Name="BuildLeader" ColumnName="BuildLeader" />
+                <ScalarProperty Name="Processor" ColumnName="Processor" />
+                <ScalarProperty Name="KickOff" ColumnName="KickOff" />
+                <ScalarProperty Name="DataRelease" ColumnName="DataRelease" />
+                <ScalarProperty Name="Folder" ColumnName="Folder" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="PODate" ColumnName="PODate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActiveJobs">
+            <EntityTypeMapping TypeName="WipModel.ActiveJob">
+              <MappingFragment StoreEntitySet="ActiveJobs">
+                <ScalarProperty Name="Batch" ColumnName="Batch" />
+                <ScalarProperty Name="BaseID" ColumnName="BaseID" />
+                <ScalarProperty Name="Weld" ColumnName="Weld" />
+                <ScalarProperty Name="Machine" ColumnName="Machine" />
+                <ScalarProperty Name="Design" ColumnName="Design" />
+                <ScalarProperty Name="Tracker" ColumnName="Tracker" />
+                <ScalarProperty Name="Build" ColumnName="Build" />
+                <ScalarProperty Name="Comp" ColumnName="Comp" />
+                <ScalarProperty Name="ShipDate" ColumnName="ShipDate" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="POValue" ColumnName="POValue" />
+                <ScalarProperty Name="Actual" ColumnName="Actual" />
+                <ScalarProperty Name="Margin" ColumnName="Margin" />
+                <ScalarProperty Name="ShipMonth" ColumnName="ShipMonth" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Job_batches">
+            <EntityTypeMapping TypeName="WipModel.Job_batches">
+              <MappingFragment StoreEntitySet="Job_batches">
+                <ScalarProperty Name="BatchDate" ColumnName="BatchDate" />
+                <ScalarProperty Name="Batch" ColumnName="Batch" />
+                <ScalarProperty Name="Weld" ColumnName="Weld" />
+                <ScalarProperty Name="Machine" ColumnName="Machine" />
+                <ScalarProperty Name="Build" ColumnName="Build" />
+                <ScalarProperty Name="Tracker" ColumnName="Tracker" />
+                <ScalarProperty Name="Design" ColumnName="Design" />
+                <ScalarProperty Name="BaseID" ColumnName="BaseID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Margin_Over_time">
+            <EntityTypeMapping TypeName="WipModel.Margin_Over_time">
+              <MappingFragment StoreEntitySet="Margin_Over_time">
+                <ScalarProperty Name="BatchDate" ColumnName="BatchDate" />
+                <ScalarProperty Name="BaseID" ColumnName="BaseID" />
+                <ScalarProperty Name="Margin" ColumnName="Margin" />
+                <ScalarProperty Name="ShipDate" ColumnName="ShipDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -37,6 +37,7 @@
           <Property Name="POValue" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Actual" Type="decimal" Precision="18" Scale="0" />
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Margin" Type="decimal" Precision="18" Scale="2" />
           <Property Name="batch" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Jobs">
@@ -46,13 +47,19 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Base" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Wip.dbo.ActiveJobs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="pictures">
+          <Key>
+            <PropertyRef Name="BaseId" />
+          </Key>
+          <Property Name="BaseId" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Path" Type="nchar" MaxLength="250" />
+        </EntityType>
         <EntityContainer Name="WipModelStoreContainer">
           <EntitySet Name="Batches" EntityType="Self.Batches" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="JobHours" EntityType="Self.JobHours" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="JobMetrics" EntityType="Self.JobMetrics" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Jobs" EntityType="Self.Jobs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pictures" EntityType="Self.pictures" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -70,6 +77,7 @@ warning 6002: The table/view 'Wip.dbo.ActiveJobs' does not have a primary key de
           <EntitySet Name="JobMetrics" EntityType="WipModel.JobMetric" />
           <EntitySet Name="JobHours" EntityType="WipModel.JobHour" />
           <EntitySet Name="Batches" EntityType="WipModel.Batch" />
+          <EntitySet Name="pictures" EntityType="WipModel.picture" />
         </EntityContainer>
         <EntityType Name="JobMetric">
           <Key>
@@ -84,6 +92,7 @@ warning 6002: The table/view 'Wip.dbo.ActiveJobs' does not have a primary key de
           <Property Name="Actual" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="batch" Type="Int32" Nullable="false" />
+          <Property Name="Margin" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="JobHour">
           <Key>
@@ -105,6 +114,13 @@ warning 6002: The table/view 'Wip.dbo.ActiveJobs' does not have a primary key de
           <Property Name="Batch1" Type="Int32" Nullable="false" />
           <Property Name="BatchDate" Type="DateTime" Precision="0" />
         </EntityType>
+        <EntityType Name="picture">
+          <Key>
+            <PropertyRef Name="BaseId" />
+          </Key>
+          <Property Name="BaseId" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Path" Type="String" MaxLength="250" FixedLength="true" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -122,6 +138,7 @@ warning 6002: The table/view 'Wip.dbo.ActiveJobs' does not have a primary key de
           <EntitySetMapping Name="JobMetrics">
             <EntityTypeMapping TypeName="WipModel.JobMetric">
               <MappingFragment StoreEntitySet="JobMetrics">
+                <ScalarProperty Name="Margin" ColumnName="Margin" />
                 <ScalarProperty Name="batch" ColumnName="batch" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Actual" ColumnName="Actual" />
@@ -151,6 +168,14 @@ warning 6002: The table/view 'Wip.dbo.ActiveJobs' does not have a primary key de
               <MappingFragment StoreEntitySet="Batches">
                 <ScalarProperty Name="BatchDate" ColumnName="BatchDate" />
                 <ScalarProperty Name="Batch1" ColumnName="Batch" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pictures">
+            <EntityTypeMapping TypeName="WipModel.picture">
+              <MappingFragment StoreEntitySet="pictures">
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="BaseId" ColumnName="BaseId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

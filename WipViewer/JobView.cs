@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Data.Entity; 
 
 namespace WipViewer
 {
@@ -138,8 +139,8 @@ namespace WipViewer
 
         private void btnAddComment_Click(object sender, EventArgs e)
         {
-            frmComment pgComment = new WipViewer.frmComment(strJobNumber);
-            pgComment.Show(); 
+           // frmComment pgComment = new WipViewer.frmComment(strJobNumber);
+          //  pgComment.Show(); 
 
         }
 
@@ -161,10 +162,10 @@ namespace WipViewer
             dtSrc = dtpSrc.Value.Date;
             dtDesRel = dtpDesRel.Value.Date; 
 
-            //CommentEntities db = new CommentEntities();
+         //   CommentEntities db = new CommentEntities();
          //   ImportantDate iDate = new ImportantDate();
-
-            using (var db = new CommentEntities())
+        
+            using (var db = new TestEntities())
             {
                 ImportantDate iDate = db.ImportantDates.Find(strJobNumber); 
                 if (iDate != null)
