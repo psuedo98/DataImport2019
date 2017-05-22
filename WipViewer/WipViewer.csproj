@@ -175,21 +175,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ds_Comments.xsd</DependentUpon>
     </Compile>
-    <Compile Include="EfComments.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EfComments.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EfComments.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EfComments.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EfComments.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EfComments.edmx</DependentUpon>
-    </Compile>
     <Compile Include="frmComment.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -270,6 +255,12 @@
     <Compile Include="Team.Designer.cs">
       <DependentUpon>Team.cs</DependentUpon>
     </Compile>
+    <Compile Include="team2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="team2.Designer.cs">
+      <DependentUpon>team2.cs</DependentUpon>
+    </Compile>
     <Compile Include="TestModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -328,6 +319,9 @@
     <EmbeddedResource Include="Team.resx">
       <DependentUpon>Team.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="team2.resx">
+      <DependentUpon>team2.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="DataSet1.xsc">
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </None>
@@ -372,10 +366,6 @@
     <None Include="ds_activejobs.xss">
       <DependentUpon>ds_activejobs.xsd</DependentUpon>
     </None>
-    <EntityDeploy Include="EfComments.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EfComments.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <None Include="ds_Comments.xsc">
       <DependentUpon>ds_Comments.xsd</DependentUpon>
     </None>
@@ -386,10 +376,6 @@
     </None>
     <None Include="ds_Comments.xss">
       <DependentUpon>ds_Comments.xsd</DependentUpon>
-    </None>
-    <None Include="EfComments.edmx.diagram">
-      <DependentUpon>EfComments.edmx</DependentUpon>
-      <SubType>Designer</SubType>
     </None>
     <None Include="ImportantDates.xsc">
       <DependentUpon>ImportantDates.xsd</DependentUpon>
@@ -453,16 +439,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="EfComments.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EfComments.edmx</DependentUpon>
-      <LastGenOutput>EfComments.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="EfComments.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EfComments.edmx</DependentUpon>
-      <LastGenOutput>EfComments.cs</LastGenOutput>
-    </Content>
     <Content Include="ICON.ico" />
     <Content Include="TestModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

@@ -72,7 +72,10 @@ namespace DataImport
                             JobHour hours = new JobHour();
 
                             job.Base = xlRange.Cells[i, 1].Value.ToString();
-
+                            if ( job.Base == "BOSE8068 / 1")
+                            {
+                                MessageBox.Show("THISISIT");
+                            }
                             try
                             {
 

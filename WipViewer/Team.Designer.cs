@@ -11,14 +11,14 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing && (components != null))
+        //    {
+        //        components.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
 
         #region Windows Form Designer generated code
 
@@ -239,33 +239,33 @@
             // 
             // Team
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(413, 280);
-            this.Controls.Add(this.dtpPO);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.chkFolder);
-            this.Controls.Add(this.chkRelease);
-            this.Controls.Add(this.chkKickoff);
-            this.Controls.Add(this.btnSubmit);
-            this.Controls.Add(this.cmbProcessor);
-            this.Controls.Add(this.cmdLeader);
-            this.Controls.Add(this.cmbPM);
-            this.Controls.Add(this.dtpFolder);
-            this.Controls.Add(this.dtpRelease);
-            this.Controls.Add(this.dtpKickoff);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Name = "Team";
-            this.ShowInTaskbar = false;
-            this.Text = "Team";
-            this.Load += new System.EventHandler(this.Team_Load);
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            //this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            //this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            //this.ClientSize = new System.Drawing.Size(413, 280);
+            //this.Controls.Add(this.dtpPO);
+            //this.Controls.Add(this.label5);
+            //this.Controls.Add(this.chkFolder);
+            //this.Controls.Add(this.chkRelease);
+            //this.Controls.Add(this.chkKickoff);
+            //this.Controls.Add(this.btnSubmit);
+            //this.Controls.Add(this.cmbProcessor);
+            //this.Controls.Add(this.cmdLeader);
+            //this.Controls.Add(this.cmbPM);
+            //this.Controls.Add(this.dtpFolder);
+            //this.Controls.Add(this.dtpRelease);
+            //this.Controls.Add(this.dtpKickoff);
+            //this.Controls.Add(this.label6);
+            //this.Controls.Add(this.label7);
+            //this.Controls.Add(this.label4);
+            //this.Controls.Add(this.label3);
+            //this.Controls.Add(this.label2);
+            //this.Controls.Add(this.label1);
+            //this.Name = "Team";
+            //this.ShowInTaskbar = false;
+            //this.Text = "Team";
+            //this.Load += new System.EventHandler(this.Team_Load);
+            //this.ResumeLayout(false);
+            //this.PerformLayout();
 
         }
 

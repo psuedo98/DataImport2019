@@ -285,47 +285,47 @@ namespace WipViewer
 
 
 
-                if (check1 == true)
-                {
-                    jobteam1 = db.TeamEFs.Find(strJobNumber);
+                //if (check1 == true)
+                //{
+                //    jobteam1 = db.TeamEFs.Find(strJobNumber);
 
-                    if (jobteam1.ProgramManager != null)
-                    {
-                        lblPm.Text = "Program Manager: " + jobteam1.ProgramManager;
-                    }
+                //    if (jobteam1.ProgramManager != null)
+                //    {
+                //        lblPm.Text = "Program Manager: " + jobteam1.ProgramManager;
+                //    }
 
-                    if (jobteam1.Processor != null)
-                    {
-                        lblProcessor.Text = "Processor: " + jobteam1.Processor;
-                    }
+                //    if (jobteam1.Processor != null)
+                //    {
+                //        lblProcessor.Text = "Processor: " + jobteam1.Processor;
+                //    }
 
-                    if (jobteam1.BuildLeader != null)
-                    {
-                        lblBuldLeader.Text = "Build Leader: " + jobteam1.BuildLeader;
-                    }
+                //    if (jobteam1.BuildLeader != null)
+                //    {
+                //        lblBuldLeader.Text = "Build Leader: " + jobteam1.BuildLeader;
+                //    }
 
-                    if (jobteam1.KickOff != null)
-                    {
-                        lblKickoff.Text = "Job Kicks Off: " + jobteam1.KickOff.Value.ToString("MM-dd-yyyy");
-                    }
+                //    if (jobteam1.KickOff != null)
+                //    {
+                //        lblKickoff.Text = "Job Kicks Off: " + jobteam1.KickOff.Value.ToString("MM-dd-yyyy");
+                //    }
 
-                    if (jobteam1.DataRelease != null)
-                    {
-                        lblData.Text = "Data Received: " + jobteam1.DataRelease.Value.ToString("MM-dd-yyyy");
-                    }
+                //    if (jobteam1.DataRelease != null)
+                //    {
+                //        lblData.Text = "Data Received: " + jobteam1.DataRelease.Value.ToString("MM-dd-yyyy");
+                //    }
 
-                    if (jobteam1.Folder != null)
-                    {
-                        lblFolder.Text = "Folder Received: " + jobteam1.Folder.Value.ToString("MM-dd-yyyy");
+                //    if (jobteam1.Folder != null)
+                //    {
+                //        lblFolder.Text = "Folder Received: " + jobteam1.Folder.Value.ToString("MM-dd-yyyy");
 
-                    }
+                //    }
 
-                    if (jobteam1.Folder != null)
-                    {
-                        lblPoDate.Text = "PO Date: " + jobteam1.PODate.Value.ToString("MM-dd-yyyy");
-                    }
+                //    if (jobteam1.Folder != null)
+                //    {
+                //        lblPoDate.Text = "PO Date: " + jobteam1.PODate.Value.ToString("MM-dd-yyyy");
+                //    }
 
-                }
+                //}
                     
 
 
@@ -572,8 +572,8 @@ namespace WipViewer
 
         private void btnGuys_Click(object sender, EventArgs e)
         {
-            Team frmTeam = new Team(strJobNumber);
-            frmTeam.Show();
+            //Team frmTeam = new Team(strJobNumber);
+            //frmTeam.Show();
 
                       
         }
