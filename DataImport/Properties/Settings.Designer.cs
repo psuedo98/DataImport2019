@@ -32,5 +32,16 @@ namespace DataImport.Properties {
                 return ((string)(this["WipConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=desktop-v09rgin\\sqlexpress;Initial Catalog=Wip;Integrated Security=Tr" +
+            "ue;MultipleActiveResultSets=True;Application Name=EntityFramework")]
+        public string TestEntities {
+            get {
+                return ((string)(this["TestEntities"]));
+            }
+        }
     }
 }

@@ -281,7 +281,7 @@ namespace WipViewer
 
                TestEntities jobteam1 = new TestEntities();
 
-                bool check1 = db.TeamEFs.Any(u => u.JobNumber == strJobNumber);
+                bool check1 = db.Teams.Any(u => u.JobNumber == strJobNumber);
 
 
 
@@ -574,7 +574,8 @@ namespace WipViewer
         {
             //Team frmTeam = new Team(strJobNumber);
             //frmTeam.Show();
-
+            team2 frmTeam = new WipViewer.team2(strJobNumber);
+            frmTeam.Show(); 
                       
         }
 

@@ -13,7 +13,7 @@
         <EntityTypeShape EntityType="WipModel.JobMetric" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WipModel.Job" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WipModel.picture" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WipModel.Team" Width="1.5" PointX="6.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WipModel.Team" Width="1.5" PointX="9.5" PointY="2.875" IsExpanded="true" />
         <EntityTypeShape EntityType="WipModel.ActiveJob" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WipModel.Job_batches" Width="1.5" PointX="2.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WipModel.Margin_Over_time" Width="1.5" PointX="8.75" PointY="5.75" IsExpanded="true" />

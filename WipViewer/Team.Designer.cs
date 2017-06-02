@@ -46,7 +46,7 @@
             this.chkFolder = new System.Windows.Forms.CheckBox();
             this.dtpPO = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
-            this.SuspendLayout();
+           // this.SuspendLayout();
             // 
             // label1
             // 
@@ -139,7 +139,7 @@
             this.cmbPM.Name = "cmbPM";
             this.cmbPM.Size = new System.Drawing.Size(121, 21);
             this.cmbPM.TabIndex = 1;
-            this.cmbPM.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+           // this.cmbPM.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // cmdLeader
             // 
@@ -162,7 +162,7 @@
             this.cmdLeader.Name = "cmdLeader";
             this.cmdLeader.Size = new System.Drawing.Size(121, 21);
             this.cmdLeader.TabIndex = 10;
-            this.cmdLeader.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            //this.cmdLeader.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // cmbProcessor
             // 
@@ -178,7 +178,7 @@
             this.cmbProcessor.Name = "cmbProcessor";
             this.cmbProcessor.Size = new System.Drawing.Size(121, 21);
             this.cmbProcessor.TabIndex = 2;
-            this.cmbProcessor.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
+           // this.cmbProcessor.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
             // 
             // btnSubmit
             // 
@@ -188,7 +188,7 @@
             this.btnSubmit.TabIndex = 8;
             this.btnSubmit.Text = "Submit";
             this.btnSubmit.UseVisualStyleBackColor = true;
-            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
+           // this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
             // chkKickoff
             // 
