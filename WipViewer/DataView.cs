@@ -7,12 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Reflection; 
+using System.Reflection;
 
 
 namespace WipViewer
 {
-   
+
 
 
     public partial class DataView : Form
@@ -20,21 +20,26 @@ namespace WipViewer
         public DataView()
         {
             InitializeComponent();
-            dgvActiveJobs.DoubleBuffered(true); 
+            dgvActiveJobs.DoubleBuffered(true);
         }
 
         private void DataView_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'ds_activejobs.ActiveJobs' table. You can move, or remove it, as needed.
-            this.activeJobsTableAdapter.Fill(this.ds_activejobs.ActiveJobs);
+            // this.ds_activejobs.ActiveJobs.Columns;
+          this.activeJobsTableAdapter.Fill(this.ds_activejobs.ActiveJobs);
             dgvActiveJobs.Columns[3].DefaultCellStyle.Format = "c";
             dgvActiveJobs.Columns[4].DefaultCellStyle.Format = "c";
+            dgvActiveJobs.Columns[6].DefaultCellStyle.Format = "c";
 
             this.KeyPreview = true;
-            this.KeyDown += new KeyEventHandler(DataView_KeyDown); 
+            this.KeyDown += new KeyEventHandler(DataView_KeyDown);
+
+            
 
         }
 
+        
         void DataView_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode.ToString() == "F1")
@@ -47,11 +52,11 @@ namespace WipViewer
                 else
                 {
 
-                    string shipmonth = txtMonthFill.Text;
-                    foreach (DataGridViewRow r in dgvActiveJobs.SelectedRows)
-                    {
-                        r.Cells[12].Value = shipmonth;
-                    }
+                    // string shipmonth = txtMonthFill.Text;
+                    //  foreach (DataGridViewRow r in dgvActiveJobs.SelectedRows)
+                    //   {
+                    //       r.Cells[12].Value = shipmonth;
+                    //    }
                 }
             }
 
@@ -60,17 +65,40 @@ namespace WipViewer
         private void dgvActiveJobs_SelectionChanged(object sender, EventArgs e)
         {
             lblcount.Text = dgvActiveJobs.SelectedRows.Count.ToString() + " Rows";
-            int selectedtotal = 0; 
+            int selectedtotal = 0;
+            int selectedhold = 0;
+            int selectedpending = 0;
             foreach (DataGridViewRow r in dgvActiveJobs.SelectedRows)
             {
 
-                selectedtotal += Convert.ToInt32(r.Cells[3].Value);
-                lblSelection.Text = selectedtotal.ToString("C");
+
+                if (r.Cells[17].Value.ToString() == "Active")
+                {
+                    selectedtotal += Convert.ToInt32(r.Cells[3].Value);
+                    lblSelection.Text = selectedtotal.ToString("C");
+                    lblSelectedPending.Text = selectedpending.ToString("C");
+                    lblSelectedHold.Text = selectedhold.ToString("C"); 
+                 
+                }
+                else if (r.Cells[17].Value.ToString() == "Pending Release")
+                {
+                    selectedpending += Convert.ToInt32(r.Cells[3].Value);
+                    lblSelection.Text = selectedtotal.ToString("C");
+                    lblSelectedPending.Text = selectedpending.ToString("C");
+                    lblSelectedHold.Text = selectedhold.ToString("C");
+                }
+                else if (r.Cells[17].Value.ToString() == "On Hold")
+                {
+                    selectedhold += Convert.ToInt32(r.Cells[3].Value);
+                    lblSelection.Text = selectedtotal.ToString("C");
+                    lblSelectedPending.Text = selectedpending.ToString("C");
+                    lblSelectedHold.Text = selectedhold.ToString("C");
+                }
             }
 
         }
 
-        
+
 
 
         private void btnJobView_Click(object sender, EventArgs e)
@@ -86,7 +114,7 @@ namespace WipViewer
         }
 
 
-    
+
 
         private void dgvActiveJobs_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -103,11 +131,11 @@ namespace WipViewer
             else if (e.KeyChar == (Char)Keys.F1)
             {
                 //string shipmonth = dgvActiveJobs.SelectedRows[0].Cells[12].Value.ToString(); 
-                string shipmonth = txtMonthFill.Text; 
-                foreach(DataGridViewRow r in dgvActiveJobs.SelectedRows)
-                {
-                    r.Cells[12].Value = shipmonth; 
-                }
+                //string shipmonth = txtMonthFill.Text; 
+                //foreach(DataGridViewRow r in dgvActiveJobs.SelectedRows)
+                //{
+                //    r.Cells[12].Value = shipmonth; 
+                //}
             }
             else
             {
@@ -144,23 +172,36 @@ namespace WipViewer
                 int design = 0;
                 int build = 0;
                 int total = 0;
+
+
                 double value = 0;
+                double holdvalue = 0;
+
+
 
                 for (int i = 0; i < dgvActiveJobs.Rows.Count; ++i)
                 {
-                    machine += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[7].Value);
-                    build += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[8].Value);
-                    weld += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[9].Value);
-                    design += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[10].Value);
-                    tracker += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[11].Value);
+                    machine += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[8].Value);
+                    build += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[9].Value);
+                    weld += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[10].Value);
+                    design += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[11].Value);
+                    tracker += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[12].Value);
 
+                    if (dgvActiveJobs.Rows[i].Cells[17].ToString() == "No")
+                    {
 
-                    
-                    value += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                        value += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    }
 
+                    else
+                    {
+                        holdvalue += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    }
 
 
                     lblValue.Text = String.Format("{0:C}", Convert.ToInt32(value));
+                    lblHoldValue.Text = String.Format("{0:C}", Convert.ToInt32(holdvalue));
+
                     lblValue.Visible = true;
 
                     lblMachinehrs.Text = machine.ToString();
@@ -228,21 +269,35 @@ namespace WipViewer
                 int total = 0;
 
                 double value = 0;
+                double holdvalue = 0;
+
+
 
                 for (int i = 0; i < dgvActiveJobs.Rows.Count; ++i)
                 {
-                    machine += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[7].Value);
-                    build += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[8].Value);
-                    weld += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[9].Value);
-                    design += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[10].Value);
-                    tracker += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[11].Value);
+                    machine += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[8].Value);
+                    build += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[9].Value);
+                    weld += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[10].Value);
+                    design += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[11].Value);
+                    tracker += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[12].Value);
 
+                    if (dgvActiveJobs.Rows[i].Cells[17].ToString() == "No")
+                    {
 
-                    value += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                        value += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    }
 
+                    else
+                    {
+                        holdvalue += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    }
 
 
                     lblValue.Text = String.Format("{0:C}", Convert.ToInt32(value));
+                    lblHoldValue.Text = String.Format("{0:C}", Convert.ToInt32(holdvalue));
+
+
+
                     lblValue.Visible = true;
 
                     lblMachinehrs.Text = machine.ToString();
@@ -288,23 +343,38 @@ namespace WipViewer
                 int design = 0;
                 int build = 0;
                 int total = 0;
+
+
                 double value = 0;
+                double holdvalue = 0;
+
+
 
                 for (int i = 0; i < dgvActiveJobs.Rows.Count; ++i)
                 {
-                    machine += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[7].Value);
-                    build += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[8].Value);
-                    weld += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[9].Value);
-                    design += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[10].Value);
-                    tracker += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[11].Value);
+                    machine += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[8].Value);
+                    build += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[9].Value);
+                    weld += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[10].Value);
+                    design += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[11].Value);
+                    tracker += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[12].Value);
 
+                    if (dgvActiveJobs.Rows[i].Cells[17].ToString() == "No")
+                    {
 
-                    
-                    value += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                        value += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    }
 
+                    else
+                    {
+                        holdvalue += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    }
 
 
                     lblValue.Text = String.Format("{0:C}", Convert.ToInt32(value));
+                    lblHoldValue.Text = String.Format("{0:C}", Convert.ToInt32(holdvalue));
+
+
+
                     lblValue.Visible = true;
 
                     lblMachinehrs.Text = machine.ToString();
@@ -358,23 +428,39 @@ namespace WipViewer
                 int design = 0;
                 int build = 0;
                 int total = 0;
+
+
                 double value = 0;
+                double holdvalue = 0;
+
+
 
                 for (int i = 0; i < dgvActiveJobs.Rows.Count; ++i)
                 {
-                    machine += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[7].Value);
-                    build += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[8].Value);
-                    weld += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[9].Value);
-                    design += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[10].Value);
-                    tracker += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[11].Value);
+                    machine += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[8].Value);
+                    build += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[9].Value);
+                    weld += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[10].Value);
+                    design += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[11].Value);
+                    tracker += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[12].Value);
 
+                    if (dgvActiveJobs.Rows[i].Cells[17].ToString() == "No")
+                    {
 
-                    
-                    value += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                        value += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    }
 
+                    else
+                    {
+                        holdvalue += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    }
 
 
                     lblValue.Text = String.Format("{0:C}", Convert.ToInt32(value));
+                    lblHoldValue.Text = String.Format("{0:C}", Convert.ToInt32(holdvalue));
+
+
+
+
                     lblValue.Visible = true;
 
                     lblMachinehrs.Text = machine.ToString();
@@ -421,23 +507,37 @@ namespace WipViewer
                 int design = 0;
                 int build = 0;
                 int total = 0;
+
+
                 double value = 0;
+                double holdvalue = 0;
+
+
 
                 for (int i = 0; i < dgvActiveJobs.Rows.Count; ++i)
                 {
-                    machine += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[7].Value);
-                    build += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[8].Value);
-                    weld += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[9].Value);
-                    design += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[10].Value);
-                    tracker += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[11].Value);
+                    machine += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[8].Value);
+                    build += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[9].Value);
+                    weld += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[10].Value);
+                    design += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[11].Value);
+                    tracker += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[12].Value);
 
+                    if (dgvActiveJobs.Rows[i].Cells[17].ToString() == "No")
+                    {
 
-                    
-                    value += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                        value += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    }
 
+                    else
+                    {
+                        holdvalue += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    }
 
 
                     lblValue.Text = String.Format("{0:C}", Convert.ToInt32(value));
+                    lblHoldValue.Text = String.Format("{0:C}", Convert.ToInt32(holdvalue));
+
+
                     lblValue.Visible = true;
 
                     lblMachinehrs.Text = machine.ToString();
@@ -497,31 +597,65 @@ namespace WipViewer
             btnDecember.BackColor = Color.LightSlateGray;
             btnDecember.ForeColor = Color.Black;
 
-            activeJobsTableAdapter.GetMonth(ds_activejobs.ActiveJobs, 1);
 
+            if (rb2018.Checked == true)
+            {
+                activeJobsTableAdapter.GetMonthNY(ds_activejobs.ActiveJobs, 1);
+            }
+            else
+            {
+                activeJobsTableAdapter.GetMonth(ds_activejobs.ActiveJobs, 1);
+            }
             int machine = 0;
             int tracker = 0;
             int weld = 0;
             int design = 0;
             int build = 0;
             int total = 0;
-         
+            
+            double value = 0;
+            double holdvalue = 0;
+            double pendingvalue = 0;
+
+
+
 
             for (int i = 0; i < dgvActiveJobs.Rows.Count; ++i)
             {
-                machine += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[6].Value);
-                build += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[7].Value);
-                weld += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[8].Value);
-                design += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[9].Value);
-                tracker += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[10].Value);
+                machine += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[8].Value);
+                build += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[9].Value);
+                weld += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[10].Value);
+                design += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[11].Value);
+                tracker += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[12].Value);
 
-                double value = 0;
-                value += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
-                
-                
+                if (dgvActiveJobs.Rows[i].Cells[17].Value.ToString() == "Active")
+                {
 
-                lblValue.Text = String.Format("{0:C}", Convert.ToInt32(value)); 
+                    value += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.LightGray;
+                    dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                }
+
+                else if (dgvActiveJobs.Rows[i].Cells[17].Value.ToString() == "Pending Release")
+                {
+                    pendingvalue += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.Honeydew;
+                    dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                }
+                else if (dgvActiveJobs.Rows[i].Cells[17].Value.ToString() == "On Hold")
+                {
+                    holdvalue += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.Lime;
+                    dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                }
+
+
+                lblPendingValue.Text = String.Format("{0:C}", Convert.ToInt32(pendingvalue));
+                lblValue.Text = String.Format("{0:C}", Convert.ToInt32(value));
+                lblHoldValue.Text = String.Format("{0:C}", Convert.ToInt32(holdvalue));
                 lblValue.Visible = true;
+
+
 
                 lblMachinehrs.Text = machine.ToString();
                 lblMachinehrs.Visible = true;
@@ -538,7 +672,7 @@ namespace WipViewer
                 lblTrackerhrs.Text = tracker.ToString();
                 lblTrackerhrs.Visible = true;
 
-                
+
 
             }
 
@@ -578,8 +712,17 @@ namespace WipViewer
             btnDecember.ForeColor = Color.Black;
 
 
+            if (rb2018.Checked == true)
+            {
+                activeJobsTableAdapter.GetMonthNY(ds_activejobs.ActiveJobs, 2);
+            }
+            else
+            {
+                activeJobsTableAdapter.GetMonth(ds_activejobs.ActiveJobs, 2);
+            }
 
-            activeJobsTableAdapter.GetMonth(ds_activejobs.ActiveJobs, 2);
+
+            // activeJobsTableAdapter.GetMonth(ds_activejobs.ActiveJobs, 2);
 
             int machine = 0;
             int tracker = 0;
@@ -589,19 +732,45 @@ namespace WipViewer
             int total = 0;
 
             double value = 0;
-            
+            double holdvalue = 0;
+            double pendingvalue = 0;
+
+
+
 
             for (int i = 0; i < dgvActiveJobs.Rows.Count; ++i)
             {
-                machine += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[6].Value);
-                build += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[7].Value);
-                weld += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[8].Value);
-                design += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[9].Value);
-                tracker += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[10].Value);
+                machine += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[8].Value);
+                build += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[9].Value);
+                weld += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[10].Value);
+                design += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[11].Value);
+                tracker += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[12].Value);
 
-                value += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                if (dgvActiveJobs.Rows[i].Cells[17].Value.ToString() == "Active")
+                {
 
-                lblValue.Text = String.Format("{0:C}", Convert.ToInt32(value)); 
+                    value += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.LightGray;
+                    dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                }
+
+                else if (dgvActiveJobs.Rows[i].Cells[17].Value.ToString() == "Pending Release")
+                {
+                    pendingvalue += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.Honeydew;
+                    dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                }
+                else if (dgvActiveJobs.Rows[i].Cells[17].Value.ToString() == "On Hold")
+                {
+                    holdvalue += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.Lime;
+                    dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                }
+
+
+                lblPendingValue.Text = String.Format("{0:C}", Convert.ToInt32(pendingvalue));
+                lblValue.Text = String.Format("{0:C}", Convert.ToInt32(value));
+                lblHoldValue.Text = String.Format("{0:C}", Convert.ToInt32(holdvalue));
                 lblValue.Visible = true;
 
                 lblMachinehrs.Text = machine.ToString();
@@ -655,7 +824,16 @@ namespace WipViewer
             btnDecember.BackColor = Color.LightSlateGray;
             btnDecember.ForeColor = Color.Black;
 
-            activeJobsTableAdapter.GetMonth(ds_activejobs.ActiveJobs, 3);
+
+            if (rb2018.Checked == true)
+            {
+                activeJobsTableAdapter.GetMonthNY(ds_activejobs.ActiveJobs, 3);
+            }
+            else
+            {
+                activeJobsTableAdapter.GetMonth(ds_activejobs.ActiveJobs, 3);
+            }
+            //    activeJobsTableAdapter.GetMonth(ds_activejobs.ActiveJobs, 3);
 
             int machine = 0;
             int tracker = 0;
@@ -665,19 +843,45 @@ namespace WipViewer
             int total = 0;
 
             double value = 0;
-            
+            double holdvalue = 0;
+            double pendingvalue = 0;
+
+
+
 
             for (int i = 0; i < dgvActiveJobs.Rows.Count; ++i)
             {
-                machine += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[7].Value);
-                build += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[8].Value);
-                weld += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[9].Value);
-                design += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[10].Value);
-                tracker += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[11].Value);
+                machine += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[8].Value);
+                build += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[9].Value);
+                weld += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[10].Value);
+                design += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[11].Value);
+                tracker += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[12].Value);
 
-                value += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                if (dgvActiveJobs.Rows[i].Cells[17].Value.ToString() == "Active")
+                {
 
-                lblValue.Text = String.Format("{0:C}", Convert.ToInt32(value)); 
+                    value += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.LightGray;
+                    dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                }
+
+                else if (dgvActiveJobs.Rows[i].Cells[17].Value.ToString() == "Pending Release")
+                {
+                    pendingvalue += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.Honeydew;
+                    dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                }
+                else if (dgvActiveJobs.Rows[i].Cells[17].Value.ToString() == "On Hold")
+                {
+                    holdvalue += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.Lime;
+                    dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                }
+
+
+                lblPendingValue.Text = String.Format("{0:C}", Convert.ToInt32(pendingvalue));
+                lblValue.Text = String.Format("{0:C}", Convert.ToInt32(value));
+                lblHoldValue.Text = String.Format("{0:C}", Convert.ToInt32(holdvalue));
                 lblValue.Visible = true;
 
                 lblMachinehrs.Text = machine.ToString();
@@ -731,7 +935,16 @@ namespace WipViewer
             btnDecember.BackColor = Color.LightSlateGray;
             btnDecember.ForeColor = Color.Black;
 
-            activeJobsTableAdapter.GetMonth(ds_activejobs.ActiveJobs, 4);
+            if (rb2018.Checked == true)
+            {
+                activeJobsTableAdapter.GetMonthNY(ds_activejobs.ActiveJobs, 4);
+            }
+            else
+            {
+                activeJobsTableAdapter.GetMonth(ds_activejobs.ActiveJobs, 4);
+            }
+
+            //   activeJobsTableAdapter.GetMonth(ds_activejobs.ActiveJobs, 4);
 
             int machine = 0;
             int tracker = 0;
@@ -741,19 +954,45 @@ namespace WipViewer
             int total = 0;
 
             double value = 0;
+            double holdvalue = 0;
+            double pendingvalue = 0; 
+
            
+
 
             for (int i = 0; i < dgvActiveJobs.Rows.Count; ++i)
             {
-                machine += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[7].Value);
-                build += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[8].Value);
-                weld += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[9].Value);
-                design += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[10].Value);
-                tracker += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[11].Value);
+                machine += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[8].Value);
+                build += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[9].Value);
+                weld += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[10].Value);
+                design += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[11].Value);
+                tracker += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[12].Value);
 
-                value += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                if (dgvActiveJobs.Rows[i].Cells[17].Value.ToString() == "Active")
+                {
 
-                lblValue.Text = String.Format("{0:C}", Convert.ToInt32(value)); 
+                    value += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.LightGray;
+                    dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray; 
+                }
+
+                else if (dgvActiveJobs.Rows[i].Cells[17].Value.ToString() == "Pending Release")
+                {
+                    pendingvalue += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.Honeydew;
+                    dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                }
+                else if (dgvActiveJobs.Rows[i].Cells[17].Value.ToString() == "On Hold")
+                {
+                    holdvalue += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.Lime; 
+                    dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                }
+            
+
+                lblPendingValue.Text = String.Format("{0:C}", Convert.ToInt32(pendingvalue));
+                lblValue.Text = String.Format("{0:C}", Convert.ToInt32(value));
+                lblHoldValue.Text = String.Format("{0:C}", Convert.ToInt32(holdvalue));
                 lblValue.Visible = true;
 
                 lblMachinehrs.Text = machine.ToString();
@@ -806,7 +1045,19 @@ namespace WipViewer
             btnNovember.ForeColor = Color.Black;
             btnDecember.BackColor = Color.LightSlateGray;
             btnDecember.ForeColor = Color.Black;
-            activeJobsTableAdapter.GetMonth(ds_activejobs.ActiveJobs, 5);
+
+
+            if (rb2018.Checked == true)
+            {
+                activeJobsTableAdapter.GetMonthNY(ds_activejobs.ActiveJobs, 5);
+            }
+            else
+            {
+                activeJobsTableAdapter.GetMonth(ds_activejobs.ActiveJobs, 5);
+            }
+
+
+            //   activeJobsTableAdapter.GetMonth(ds_activejobs.ActiveJobs, 5);
 
             int machine = 0;
             int tracker = 0;
@@ -816,20 +1067,47 @@ namespace WipViewer
             int total = 0;
 
             double value = 0;
-           
+            double holdvalue = 0;
+            double pendingvalue = 0;
+
+
+
 
             for (int i = 0; i < dgvActiveJobs.Rows.Count; ++i)
             {
-                machine += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[7].Value);
-                build += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[8].Value);
-                weld += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[9].Value);
-                design += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[10].Value);
-                tracker += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[11].Value);
+                machine += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[8].Value);
+                build += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[9].Value);
+                weld += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[10].Value);
+                design += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[11].Value);
+                tracker += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[12].Value);
 
-                value += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                if (dgvActiveJobs.Rows[i].Cells[17].Value.ToString() == "Active")
+                {
 
-                lblValue.Text = String.Format("{0:C}", Convert.ToInt32(value)); 
+                    value += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.LightGray;
+                    dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                }
+
+                else if (dgvActiveJobs.Rows[i].Cells[17].Value.ToString() == "Pending Release")
+                {
+                    pendingvalue += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.Honeydew;
+                    dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                }
+                else if (dgvActiveJobs.Rows[i].Cells[17].Value.ToString() == "On Hold")
+                {
+                    holdvalue += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.Lime;
+                    dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                }
+
+
+                lblPendingValue.Text = String.Format("{0:C}", Convert.ToInt32(pendingvalue));
+                lblValue.Text = String.Format("{0:C}", Convert.ToInt32(value));
+                lblHoldValue.Text = String.Format("{0:C}", Convert.ToInt32(holdvalue));
                 lblValue.Visible = true;
+                
 
                 lblMachinehrs.Text = machine.ToString();
                 lblMachinehrs.Visible = true;
@@ -882,7 +1160,17 @@ namespace WipViewer
             btnDecember.BackColor = Color.LightSlateGray;
             btnDecember.ForeColor = Color.Black;
 
-            activeJobsTableAdapter.GetMonth(ds_activejobs.ActiveJobs, 6);
+            //  activeJobsTableAdapter.GetMonth(ds_activejobs.ActiveJobs, 6);
+
+
+            if (rb2018.Checked == true)
+            {
+                activeJobsTableAdapter.GetMonthNY(ds_activejobs.ActiveJobs, 6);
+            }
+            else
+            {
+                activeJobsTableAdapter.GetMonth(ds_activejobs.ActiveJobs, 6);
+            }
 
             int machine = 0;
             int tracker = 0;
@@ -892,20 +1180,45 @@ namespace WipViewer
             int total = 0;
 
             double value = 0;
-            
+            double holdvalue = 0;
+            double pendingvalue = 0;
+
+
 
 
             for (int i = 0; i < dgvActiveJobs.Rows.Count; ++i)
             {
-                machine += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[7].Value);
-                build += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[8].Value);
-                weld += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[9].Value);
-                design += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[10].Value);
-                tracker += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[11].Value);
+                machine += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[8].Value);
+                build += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[9].Value);
+                weld += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[10].Value);
+                design += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[11].Value);
+                tracker += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[12].Value);
 
-                value += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                if (dgvActiveJobs.Rows[i].Cells[17].Value.ToString() == "Active")
+                {
 
-                lblValue.Text = String.Format("{0:C}", Convert.ToInt32(value)); 
+                    value += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.LightGray;
+                    dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                }
+
+                else if (dgvActiveJobs.Rows[i].Cells[17].Value.ToString() == "Pending Release")
+                {
+                    pendingvalue += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.Honeydew;
+                    dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                }
+                else if (dgvActiveJobs.Rows[i].Cells[17].Value.ToString() == "On Hold")
+                {
+                    holdvalue += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.Lime;
+                    dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                }
+
+
+                lblPendingValue.Text = String.Format("{0:C}", Convert.ToInt32(pendingvalue));
+                lblValue.Text = String.Format("{0:C}", Convert.ToInt32(value));
+                lblHoldValue.Text = String.Format("{0:C}", Convert.ToInt32(holdvalue));
                 lblValue.Visible = true;
 
                 lblMachinehrs.Text = machine.ToString();
@@ -959,7 +1272,18 @@ namespace WipViewer
             btnDecember.BackColor = Color.LightSlateGray;
             btnDecember.ForeColor = Color.Black;
 
-            activeJobsTableAdapter.GetMonth(ds_activejobs.ActiveJobs, 7);
+            //  activeJobsTableAdapter.GetMonth(ds_activejobs.ActiveJobs, 7);
+
+
+            if (rb2018.Checked == true)
+            {
+                activeJobsTableAdapter.GetMonthNY(ds_activejobs.ActiveJobs, 7);
+            }
+            else
+            {
+                activeJobsTableAdapter.GetMonth(ds_activejobs.ActiveJobs, 7);
+            }
+
 
             int machine = 0;
             int tracker = 0;
@@ -969,19 +1293,45 @@ namespace WipViewer
             int total = 0;
 
             double value = 0;
-            
+            double holdvalue = 0;
+            double pendingvalue = 0;
+
+
+
 
             for (int i = 0; i < dgvActiveJobs.Rows.Count; ++i)
             {
-                machine += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[7].Value);
-                build += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[8].Value);
-                weld += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[9].Value);
-                design += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[10].Value);
-                tracker += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[11].Value);
+                machine += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[8].Value);
+                build += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[9].Value);
+                weld += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[10].Value);
+                design += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[11].Value);
+                tracker += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[12].Value);
 
-                value += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                if (dgvActiveJobs.Rows[i].Cells[17].Value.ToString() == "Active")
+                {
 
-                lblValue.Text = String.Format("{0:C}", Convert.ToInt32(value)); 
+                    value += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.LightGray;
+                    dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                }
+
+                else if (dgvActiveJobs.Rows[i].Cells[17].Value.ToString() == "Pending Release")
+                {
+                    pendingvalue += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.Honeydew;
+                    dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                }
+                else if (dgvActiveJobs.Rows[i].Cells[17].Value.ToString() == "On Hold")
+                {
+                    holdvalue += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.Lime;
+                    dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                }
+
+
+                lblPendingValue.Text = String.Format("{0:C}", Convert.ToInt32(pendingvalue));
+                lblValue.Text = String.Format("{0:C}", Convert.ToInt32(value));
+                lblHoldValue.Text = String.Format("{0:C}", Convert.ToInt32(holdvalue));
                 lblValue.Visible = true;
 
                 lblMachinehrs.Text = machine.ToString();
@@ -1035,7 +1385,18 @@ namespace WipViewer
             btnDecember.BackColor = Color.LightSlateGray;
             btnDecember.ForeColor = Color.Black;
 
-            activeJobsTableAdapter.GetMonth(ds_activejobs.ActiveJobs, 8);
+            //            activeJobsTableAdapter.GetMonth(ds_activejobs.ActiveJobs, 8);
+
+
+            if (rb2018.Checked == true)
+            {
+                activeJobsTableAdapter.GetMonthNY(ds_activejobs.ActiveJobs, 8);
+            }
+            else
+            {
+                activeJobsTableAdapter.GetMonth(ds_activejobs.ActiveJobs, 8);
+            }
+
 
             int machine = 0;
             int tracker = 0;
@@ -1045,20 +1406,45 @@ namespace WipViewer
             int total = 0;
 
             double value = 0;
-            
+            double holdvalue = 0;
+            double pendingvalue = 0;
+
+
 
 
             for (int i = 0; i < dgvActiveJobs.Rows.Count; ++i)
             {
-                machine += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[7].Value);
-                build += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[8].Value);
-                weld += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[9].Value);
-                design += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[10].Value);
-                tracker += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[11].Value);
+                machine += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[8].Value);
+                build += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[9].Value);
+                weld += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[10].Value);
+                design += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[11].Value);
+                tracker += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[12].Value);
 
-                value += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                if (dgvActiveJobs.Rows[i].Cells[17].Value.ToString() == "Active")
+                {
 
-                lblValue.Text = String.Format("{0:C}", Convert.ToInt32(value)); 
+                    value += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.LightGray;
+                    dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                }
+
+                else if (dgvActiveJobs.Rows[i].Cells[17].Value.ToString() == "Pending Release")
+                {
+                    pendingvalue += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.Honeydew;
+                    dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                }
+                else if (dgvActiveJobs.Rows[i].Cells[17].Value.ToString() == "On Hold")
+                {
+                    holdvalue += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.Lime;
+                    dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                }
+
+
+                lblPendingValue.Text = String.Format("{0:C}", Convert.ToInt32(pendingvalue));
+                lblValue.Text = String.Format("{0:C}", Convert.ToInt32(value));
+                lblHoldValue.Text = String.Format("{0:C}", Convert.ToInt32(holdvalue));
                 lblValue.Visible = true;
 
                 lblMachinehrs.Text = machine.ToString();
@@ -1112,7 +1498,18 @@ namespace WipViewer
             btnDecember.BackColor = Color.LightSlateGray;
             btnDecember.ForeColor = Color.Black;
 
-            activeJobsTableAdapter.GetMonth(ds_activejobs.ActiveJobs, 9);
+            // activeJobsTableAdapter.GetMonth(ds_activejobs.ActiveJobs, 9);
+
+
+            if (rb2018.Checked == true)
+            {
+                activeJobsTableAdapter.GetMonthNY(ds_activejobs.ActiveJobs, 9);
+            }
+            else
+            {
+                activeJobsTableAdapter.GetMonth(ds_activejobs.ActiveJobs, 9);
+            }
+
 
             int machine = 0;
             int tracker = 0;
@@ -1122,20 +1519,45 @@ namespace WipViewer
             int total = 0;
 
             double value = 0;
-            
+            double holdvalue = 0;
+            double pendingvalue = 0;
+
+
 
 
             for (int i = 0; i < dgvActiveJobs.Rows.Count; ++i)
             {
-                machine += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[7].Value);
-                build += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[8].Value);
-                weld += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[9].Value);
-                design += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[10].Value);
-                tracker += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[11].Value);
+                machine += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[8].Value);
+                build += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[9].Value);
+                weld += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[10].Value);
+                design += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[11].Value);
+                tracker += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[12].Value);
 
-                value += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                if (dgvActiveJobs.Rows[i].Cells[17].Value.ToString() == "Active")
+                {
 
-                lblValue.Text = String.Format("{0:C}", Convert.ToInt32(value)); 
+                    value += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.LightGray;
+                    dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                }
+
+                else if (dgvActiveJobs.Rows[i].Cells[17].Value.ToString() == "Pending Release")
+                {
+                    pendingvalue += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.Honeydew;
+                    dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                }
+                else if (dgvActiveJobs.Rows[i].Cells[17].Value.ToString() == "On Hold")
+                {
+                    holdvalue += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.Lime;
+                    dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                }
+
+
+                lblPendingValue.Text = String.Format("{0:C}", Convert.ToInt32(pendingvalue));
+                lblValue.Text = String.Format("{0:C}", Convert.ToInt32(value));
+                lblHoldValue.Text = String.Format("{0:C}", Convert.ToInt32(holdvalue));
                 lblValue.Visible = true;
 
                 lblMachinehrs.Text = machine.ToString();
@@ -1189,7 +1611,18 @@ namespace WipViewer
             btnDecember.BackColor = Color.LightSlateGray;
 
             btnDecember.ForeColor = Color.Black;
-            activeJobsTableAdapter.GetMonth(ds_activejobs.ActiveJobs, 10);
+            //  activeJobsTableAdapter.GetMonth(ds_activejobs.ActiveJobs, 10);
+
+
+            if (rb2018.Checked == true)
+            {
+                activeJobsTableAdapter.GetMonthNY(ds_activejobs.ActiveJobs, 10);
+            }
+            else
+            {
+                activeJobsTableAdapter.GetMonth(ds_activejobs.ActiveJobs, 10);
+            }
+
 
             int machine = 0;
             int tracker = 0;
@@ -1199,20 +1632,45 @@ namespace WipViewer
             int total = 0;
 
             double value = 0;
-            
+            double holdvalue = 0;
+            double pendingvalue = 0;
+
+
+
 
             for (int i = 0; i < dgvActiveJobs.Rows.Count; ++i)
             {
-                machine += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[7].Value);
-                build += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[8].Value);
-                weld += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[9].Value);
-                design += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[10].Value);
-                tracker += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[11].Value);
+                machine += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[8].Value);
+                build += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[9].Value);
+                weld += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[10].Value);
+                design += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[11].Value);
+                tracker += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[12].Value);
 
-                value += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                if (dgvActiveJobs.Rows[i].Cells[17].Value.ToString() == "Active")
+                {
 
-                lblValue.Text = String.Format("{0:C}", Convert.ToInt32(value)); 
+                    value += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.LightGray;
+                    dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                }
 
+                else if (dgvActiveJobs.Rows[i].Cells[17].Value.ToString() == "Pending Release")
+                {
+                    pendingvalue += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.Honeydew;
+                    dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                }
+                else if (dgvActiveJobs.Rows[i].Cells[17].Value.ToString() == "On Hold")
+                {
+                    holdvalue += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.Lime;
+                    dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                }
+
+
+                lblPendingValue.Text = String.Format("{0:C}", Convert.ToInt32(pendingvalue));
+                lblValue.Text = String.Format("{0:C}", Convert.ToInt32(value));
+                lblHoldValue.Text = String.Format("{0:C}", Convert.ToInt32(holdvalue));
                 lblValue.Visible = true;
 
                 lblMachinehrs.Text = machine.ToString();
@@ -1266,7 +1724,18 @@ namespace WipViewer
             btnDecember.BackColor = Color.LightSlateGray;
             btnDecember.ForeColor = Color.Black;
 
-            activeJobsTableAdapter.GetMonth(ds_activejobs.ActiveJobs, 11);
+            // activeJobsTableAdapter.GetMonth(ds_activejobs.ActiveJobs, 11);
+
+
+            if (rb2018.Checked == true)
+            {
+                activeJobsTableAdapter.GetMonthNY(ds_activejobs.ActiveJobs, 11);
+            }
+            else
+            {
+                activeJobsTableAdapter.GetMonth(ds_activejobs.ActiveJobs, 11);
+            }
+
 
             int machine = 0;
             int tracker = 0;
@@ -1276,19 +1745,45 @@ namespace WipViewer
             int total = 0;
 
             double value = 0;
-           
+            double holdvalue = 0;
+            double pendingvalue = 0;
+
+
+
 
             for (int i = 0; i < dgvActiveJobs.Rows.Count; ++i)
             {
-                machine += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[7].Value);
-                build += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[8].Value);
-                weld += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[9].Value);
-                design += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[10].Value);
-                tracker += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[11].Value);
+                machine += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[8].Value);
+                build += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[9].Value);
+                weld += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[10].Value);
+                design += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[11].Value);
+                tracker += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[12].Value);
 
-                value += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                if (dgvActiveJobs.Rows[i].Cells[17].Value.ToString() == "Active")
+                {
 
-                lblValue.Text = String.Format("{0:C}", Convert.ToInt32(value)); 
+                    value += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.LightGray;
+                    dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                }
+
+                else if (dgvActiveJobs.Rows[i].Cells[17].Value.ToString() == "Pending Release")
+                {
+                    pendingvalue += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.Honeydew;
+                    dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                }
+                else if (dgvActiveJobs.Rows[i].Cells[17].Value.ToString() == "On Hold")
+                {
+                    holdvalue += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.Lime;
+                    dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                }
+
+
+                lblPendingValue.Text = String.Format("{0:C}", Convert.ToInt32(pendingvalue));
+                lblValue.Text = String.Format("{0:C}", Convert.ToInt32(value));
+                lblHoldValue.Text = String.Format("{0:C}", Convert.ToInt32(holdvalue));
                 lblValue.Visible = true;
 
 
@@ -1343,7 +1838,18 @@ namespace WipViewer
             btnDecember.BackColor = Color.Green;
             btnDecember.ForeColor = Color.White;
 
-            activeJobsTableAdapter.GetMonth(ds_activejobs.ActiveJobs, 12);
+            //      activeJobsTableAdapter.GetMonth(ds_activejobs.ActiveJobs, 12);
+
+
+            if (rb2018.Checked == true)
+            {
+                activeJobsTableAdapter.GetMonthNY(ds_activejobs.ActiveJobs, 12);
+            }
+            else
+            {
+                activeJobsTableAdapter.GetMonth(ds_activejobs.ActiveJobs, 12);
+            }
+
 
             int machine = 0;
             int tracker = 0;
@@ -1353,19 +1859,45 @@ namespace WipViewer
             int total = 0;
 
             double value = 0;
-           
+            double holdvalue = 0;
+            double pendingvalue = 0;
+
+
+
 
             for (int i = 0; i < dgvActiveJobs.Rows.Count; ++i)
             {
-                machine += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[7].Value);
-                build += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[8].Value);
-                weld += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[9].Value);
-                design += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[10].Value);
-                tracker += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[11].Value);
+                machine += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[8].Value);
+                build += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[9].Value);
+                weld += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[10].Value);
+                design += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[11].Value);
+                tracker += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[12].Value);
 
-                value += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                if (dgvActiveJobs.Rows[i].Cells[17].Value.ToString() == "Active")
+                {
 
-                lblValue.Text = String.Format("{0:C}", Convert.ToInt32(value)); 
+                    value += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.LightGray;
+                    dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                }
+
+                else if (dgvActiveJobs.Rows[i].Cells[17].Value.ToString() == "Pending Release")
+                {
+                    pendingvalue += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.Honeydew;
+                    dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                }
+                else if (dgvActiveJobs.Rows[i].Cells[17].Value.ToString() == "On Hold")
+                {
+                    holdvalue += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                    dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.Lime;
+                    dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                }
+
+
+                lblPendingValue.Text = String.Format("{0:C}", Convert.ToInt32(pendingvalue));
+                lblValue.Text = String.Format("{0:C}", Convert.ToInt32(value));
+                lblHoldValue.Text = String.Format("{0:C}", Convert.ToInt32(holdvalue));
                 lblValue.Visible = true;
 
                 lblMachinehrs.Text = machine.ToString();
@@ -1407,26 +1939,38 @@ namespace WipViewer
                 int design = 0;
                 int build = 0;
                 int total = 0;
+
                 double value = 0;
+                double holdvalue = 0;
+
 
                 for (int i = 0; i < dgvActiveJobs.Rows.Count; ++i)
                 {
-                    machine += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[7].Value);
-                    build += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[8].Value);
-                    weld += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[9].Value);
-                    design += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[10].Value);
-                    tracker += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[11].Value);
+                    machine += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[8].Value);
+                    build += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[9].Value);
+                    weld += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[10].Value);
+                    design += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[11].Value);
+                    tracker += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[12].Value);
 
+                    if (dgvActiveJobs.Rows[i].Cells[17].Value.ToString() == "No")
+                    {
 
-                    
+                        value += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                        dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.LightGray;
+                        dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                    }
 
-                    value += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
-
+                    else
+                    {
+                        holdvalue += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                        dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.Honeydew;
+                        dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                    }
 
 
                     lblValue.Text = String.Format("{0:C}", Convert.ToInt32(value));
+                    lblHoldValue.Text = String.Format("{0:C}", Convert.ToInt32(holdvalue));
                     lblValue.Visible = true;
-
                     lblMachinehrs.Text = machine.ToString();
                     lblMachinehrs.Visible = true;
 
@@ -1491,9 +2035,11 @@ namespace WipViewer
             int selectedtotal = new int();
             foreach (DataGridViewRow r in dgvActiveJobs.SelectedRows)
             {
-
-                selectedtotal += Convert.ToInt32(r.Cells[3].Value);
-                lblSelection.Text = selectedtotal.ToString("C");
+                if (r.Cells[17].Value.ToString() == "No")
+                {
+                    selectedtotal += Convert.ToInt32(r.Cells[3].Value);
+                    lblSelection.Text = selectedtotal.ToString("C");
+                }
             }
 
         }
@@ -1502,7 +2048,7 @@ namespace WipViewer
         {
             var content = dgvActiveJobs.SelectedRows[0].Cells[0].Value.ToString();
             var tooltype = dgvActiveJobs.SelectedRows[0].Cells[1].Value.ToString();
-            DateTime shipdate = Convert.ToDateTime(dgvActiveJobs.SelectedRows[0].Cells[6].Value);
+            DateTime shipdate = Convert.ToDateTime(dgvActiveJobs.SelectedRows[0].Cells[7].Value);
 
 
 
@@ -1512,9 +2058,120 @@ namespace WipViewer
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            activeJobsTableAdapter.Fill(ds_activejobs.ActiveJobs); 
+            activeJobsTableAdapter.Fill(ds_activejobs.ActiveJobs);
+        }
+
+        private void rb2018_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblcount_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblSelection_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rb2017_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnVCT_Click(object sender, EventArgs e)
+        {
+            activeJobsTableAdapter.FillVCT(ds_activejobs.ActiveJobs);
+
+            try
+            {
+
+                int machine = 0;
+                int tracker = 0;
+                int weld = 0;
+                int design = 0;
+                int build = 0;
+                int total = 0;
+
+
+                double value = 0;
+                double holdvalue = 0;
+
+
+                for (int i = 0; i < dgvActiveJobs.Rows.Count; ++i)
+                {
+                    machine += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[8].Value);
+                    build += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[9].Value);
+                    weld += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[10].Value);
+                    design += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[11].Value);
+                    tracker += Convert.ToInt32(dgvActiveJobs.Rows[i].Cells[12].Value);
+
+                    if (dgvActiveJobs.Rows[i].Cells[17].Value.ToString() == "No")
+                    {
+
+                        value += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                        dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.LightGray;
+                        dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                    }
+
+                    else
+                    {
+                        holdvalue += Convert.ToDouble(dgvActiveJobs.Rows[i].Cells[3].Value);
+                        dgvActiveJobs.Rows[i].DefaultCellStyle.BackColor = Color.Honeydew;
+                        dgvActiveJobs.Rows[i].Cells[0].Style.BackColor = Color.DarkGray;
+                    }
+
+
+                    lblValue.Text = String.Format("{0:C}", Convert.ToInt32(value));
+                    lblHoldValue.Text = String.Format("{0:C}", Convert.ToInt32(holdvalue));
+                    lblValue.Visible = true;
+
+                    lblMachinehrs.Text = machine.ToString();
+                    lblMachinehrs.Visible = true;
+
+                    lblBuildhrs.Text = build.ToString();
+                    lblBuildhrs.Visible = true;
+
+                    lblWeldhrs.Text = weld.ToString();
+                    lblWeldhrs.Visible = true;
+
+                    lblDesignhrs.Text = design.ToString();
+                    lblDesignhrs.Visible = true;
+
+                    lblTrackerhrs.Text = tracker.ToString();
+                    lblTrackerhrs.Visible = true;
+
+                }
+
+                total = machine + build + weld + design + tracker;
+
+                lblTotal.Text = total.ToString();
+                lblTotal.Visible = true;
+
+            }
+
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void lblValue_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblSelectionHeader_Click(object sender, EventArgs e)
+        {
+
         }
     }
+
+
+
+
 
     public static class ExtensionMethods
     {

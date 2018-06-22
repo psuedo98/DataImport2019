@@ -29,8 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataView));
             this.dgvActiveJobs = new System.Windows.Forms.DataGridView();
             this.baseIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.typeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -38,19 +39,27 @@
             this.pOValueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.actualDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.margin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RemainingRev = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.shipDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.machineDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buildDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.weldDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.designDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.trackerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ShipMonth = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BuildLeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProgramManager = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Processor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QA = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Hold = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.activeJobsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.ds_activejobs = new WipViewer.ds_activejobs();
-            this.btnJobView = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnComment = new System.Windows.Forms.Button();
+            this.btnJobView = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnVCT = new System.Windows.Forms.Button();
+            this.rb2018 = new System.Windows.Forms.RadioButton();
+            this.rb2017 = new System.Windows.Forms.RadioButton();
             this.btnReset = new System.Windows.Forms.Button();
             this.btnLosers = new System.Windows.Forms.Button();
             this.btnOctober = new System.Windows.Forms.Button();
@@ -72,6 +81,10 @@
             this.bthThisMonth = new System.Windows.Forms.Button();
             this.btn90 = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.lblPendingValue = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.lblHoldValue = new System.Windows.Forms.Label();
+            this.lblHoldValueTitle = new System.Windows.Forms.Label();
             this.lblValue = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -87,13 +100,16 @@
             this.lblWeldhrs = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lblMachinehrs = new System.Windows.Forms.Label();
-            this.activeJobsTableAdapter = new WipViewer.ds_activejobsTableAdapters.ActiveJobsTableAdapter();
-            this.lblSelection = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.lblSelectionHeader = new System.Windows.Forms.Label();
-            this.txtMonthFill = new System.Windows.Forms.TextBox();
-            this.lblShipMonth = new System.Windows.Forms.Label();
+            this.lblSelection = new System.Windows.Forms.Label();
             this.lblcount = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.activeJobsTableAdapter = new WipViewer.ds_activejobsTableAdapters.ActiveJobsTableAdapter();
+            this.lblHoldTitle = new System.Windows.Forms.Label();
+            this.lblSelectedPending = new System.Windows.Forms.Label();
+            this.lblSelectedHold = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvActiveJobs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.activeJobsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ds_activejobs)).BeginInit();
@@ -117,27 +133,33 @@
             this.pOValueDataGridViewTextBoxColumn,
             this.actualDataGridViewTextBoxColumn,
             this.margin,
+            this.RemainingRev,
             this.shipDateDataGridViewTextBoxColumn,
             this.machineDataGridViewTextBoxColumn,
             this.buildDataGridViewTextBoxColumn,
             this.weldDataGridViewTextBoxColumn,
             this.designDataGridViewTextBoxColumn,
             this.trackerDataGridViewTextBoxColumn,
-            this.ShipMonth});
+            this.BuildLeader,
+            this.ProgramManager,
+            this.Processor,
+            this.QA,
+            this.Hold});
             this.dgvActiveJobs.DataSource = this.activeJobsBindingSource;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvActiveJobs.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvActiveJobs.DefaultCellStyle = dataGridViewCellStyle8;
+            this.dgvActiveJobs.Dock = System.Windows.Forms.DockStyle.Left;
             this.dgvActiveJobs.Location = new System.Drawing.Point(0, 0);
             this.dgvActiveJobs.Name = "dgvActiveJobs";
             this.dgvActiveJobs.ReadOnly = true;
             this.dgvActiveJobs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvActiveJobs.Size = new System.Drawing.Size(1280, 746);
+            this.dgvActiveJobs.Size = new System.Drawing.Size(1469, 761);
             this.dgvActiveJobs.TabIndex = 0;
             this.dgvActiveJobs.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvActiveJobs_CellContentClick_1);
             this.dgvActiveJobs.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvActiveJobs_CellDoubleClick);
@@ -147,10 +169,10 @@
             // baseIDDataGridViewTextBoxColumn
             // 
             this.baseIDDataGridViewTextBoxColumn.DataPropertyName = "BaseID";
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
-            this.baseIDDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
+            this.baseIDDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle7;
             this.baseIDDataGridViewTextBoxColumn.HeaderText = "Job #";
             this.baseIDDataGridViewTextBoxColumn.Name = "baseIDDataGridViewTextBoxColumn";
             this.baseIDDataGridViewTextBoxColumn.ReadOnly = true;
@@ -192,6 +214,13 @@
             this.margin.HeaderText = "Margin";
             this.margin.Name = "margin";
             this.margin.ReadOnly = true;
+            // 
+            // RemainingRev
+            // 
+            this.RemainingRev.DataPropertyName = "RemainingRev";
+            this.RemainingRev.HeaderText = "RemainingRev";
+            this.RemainingRev.Name = "RemainingRev";
+            this.RemainingRev.ReadOnly = true;
             // 
             // shipDateDataGridViewTextBoxColumn
             // 
@@ -247,12 +276,40 @@
             this.trackerDataGridViewTextBoxColumn.ReadOnly = true;
             this.trackerDataGridViewTextBoxColumn.Width = 69;
             // 
-            // ShipMonth
+            // BuildLeader
             // 
-            this.ShipMonth.DataPropertyName = "ShipMonth";
-            this.ShipMonth.HeaderText = "ShipMonth";
-            this.ShipMonth.Name = "ShipMonth";
-            this.ShipMonth.ReadOnly = true;
+            this.BuildLeader.DataPropertyName = "BuildLeader";
+            this.BuildLeader.HeaderText = "Build Leader";
+            this.BuildLeader.Name = "BuildLeader";
+            this.BuildLeader.ReadOnly = true;
+            // 
+            // ProgramManager
+            // 
+            this.ProgramManager.DataPropertyName = "ProgramManager";
+            this.ProgramManager.HeaderText = "PM";
+            this.ProgramManager.Name = "ProgramManager";
+            this.ProgramManager.ReadOnly = true;
+            // 
+            // Processor
+            // 
+            this.Processor.DataPropertyName = "Processor";
+            this.Processor.HeaderText = "Processor";
+            this.Processor.Name = "Processor";
+            this.Processor.ReadOnly = true;
+            // 
+            // QA
+            // 
+            this.QA.DataPropertyName = "QA";
+            this.QA.HeaderText = "QA";
+            this.QA.Name = "QA";
+            this.QA.ReadOnly = true;
+            // 
+            // Hold
+            // 
+            this.Hold.DataPropertyName = "Hold";
+            this.Hold.HeaderText = "Hold";
+            this.Hold.Name = "Hold";
+            this.Hold.ReadOnly = true;
             // 
             // activeJobsBindingSource
             // 
@@ -264,22 +321,11 @@
             this.ds_activejobs.DataSetName = "ds_activejobs";
             this.ds_activejobs.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // btnJobView
-            // 
-            this.btnJobView.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnJobView.Location = new System.Drawing.Point(25, 3);
-            this.btnJobView.Name = "btnJobView";
-            this.btnJobView.Size = new System.Drawing.Size(126, 27);
-            this.btnJobView.TabIndex = 1;
-            this.btnJobView.Text = "Open Job";
-            this.btnJobView.UseVisualStyleBackColor = true;
-            this.btnJobView.Click += new System.EventHandler(this.btnJobView_Click);
-            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.btnComment);
             this.panel1.Controls.Add(this.btnJobView);
-            this.panel1.Location = new System.Drawing.Point(1430, 4);
+            this.panel1.Location = new System.Drawing.Point(1480, 12);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(171, 62);
             this.panel1.TabIndex = 2;
@@ -296,8 +342,22 @@
             this.btnComment.UseVisualStyleBackColor = true;
             this.btnComment.Click += new System.EventHandler(this.btnComment_Click);
             // 
+            // btnJobView
+            // 
+            this.btnJobView.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnJobView.Location = new System.Drawing.Point(25, 3);
+            this.btnJobView.Name = "btnJobView";
+            this.btnJobView.Size = new System.Drawing.Size(126, 27);
+            this.btnJobView.TabIndex = 1;
+            this.btnJobView.Text = "Open Job";
+            this.btnJobView.UseVisualStyleBackColor = true;
+            this.btnJobView.Click += new System.EventHandler(this.btnJobView_Click);
+            // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.btnVCT);
+            this.panel2.Controls.Add(this.rb2018);
+            this.panel2.Controls.Add(this.rb2017);
             this.panel2.Controls.Add(this.btnReset);
             this.panel2.Controls.Add(this.btnLosers);
             this.panel2.Controls.Add(this.btnOctober);
@@ -318,15 +378,50 @@
             this.panel2.Controls.Add(this.btnLate);
             this.panel2.Controls.Add(this.bthThisMonth);
             this.panel2.Controls.Add(this.btn90);
-            this.panel2.Location = new System.Drawing.Point(1430, 72);
+            this.panel2.Location = new System.Drawing.Point(1475, 89);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(176, 390);
+            this.panel2.Size = new System.Drawing.Size(176, 392);
             this.panel2.TabIndex = 3;
+            // 
+            // btnVCT
+            // 
+            this.btnVCT.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVCT.Location = new System.Drawing.Point(96, 211);
+            this.btnVCT.Name = "btnVCT";
+            this.btnVCT.Size = new System.Drawing.Size(75, 23);
+            this.btnVCT.TabIndex = 21;
+            this.btnVCT.Text = "VCT";
+            this.btnVCT.UseVisualStyleBackColor = true;
+            this.btnVCT.Click += new System.EventHandler(this.btnVCT_Click);
+            // 
+            // rb2018
+            // 
+            this.rb2018.AutoSize = true;
+            this.rb2018.Location = new System.Drawing.Point(96, 297);
+            this.rb2018.Name = "rb2018";
+            this.rb2018.Size = new System.Drawing.Size(49, 17);
+            this.rb2018.TabIndex = 20;
+            this.rb2018.TabStop = true;
+            this.rb2018.Text = "2018";
+            this.rb2018.UseVisualStyleBackColor = true;
+            this.rb2018.CheckedChanged += new System.EventHandler(this.rb2018_CheckedChanged);
+            // 
+            // rb2017
+            // 
+            this.rb2017.AutoSize = true;
+            this.rb2017.Location = new System.Drawing.Point(97, 274);
+            this.rb2017.Name = "rb2017";
+            this.rb2017.Size = new System.Drawing.Size(49, 17);
+            this.rb2017.TabIndex = 19;
+            this.rb2017.TabStop = true;
+            this.rb2017.Text = "2017";
+            this.rb2017.UseVisualStyleBackColor = true;
+            this.rb2017.CheckedChanged += new System.EventHandler(this.rb2017_CheckedChanged);
             // 
             // btnReset
             // 
             this.btnReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReset.Location = new System.Drawing.Point(97, 210);
+            this.btnReset.Location = new System.Drawing.Point(96, 240);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(75, 23);
             this.btnReset.TabIndex = 18;
@@ -546,6 +641,10 @@
             // 
             this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.BackColor = System.Drawing.Color.DodgerBlue;
+            this.panel3.Controls.Add(this.lblPendingValue);
+            this.panel3.Controls.Add(this.label11);
+            this.panel3.Controls.Add(this.lblHoldValue);
+            this.panel3.Controls.Add(this.lblHoldValueTitle);
             this.panel3.Controls.Add(this.lblValue);
             this.panel3.Controls.Add(this.label7);
             this.panel3.Controls.Add(this.label6);
@@ -561,32 +660,75 @@
             this.panel3.Controls.Add(this.lblWeldhrs);
             this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.lblMachinehrs);
-            this.panel3.Location = new System.Drawing.Point(1395, 470);
+            this.panel3.Location = new System.Drawing.Point(1475, 487);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(211, 279);
+            this.panel3.Size = new System.Drawing.Size(366, 272);
             this.panel3.TabIndex = 4;
+            // 
+            // lblPendingValue
+            // 
+            this.lblPendingValue.AutoSize = true;
+            this.lblPendingValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPendingValue.ForeColor = System.Drawing.Color.White;
+            this.lblPendingValue.Location = new System.Drawing.Point(235, 107);
+            this.lblPendingValue.Name = "lblPendingValue";
+            this.lblPendingValue.Size = new System.Drawing.Size(70, 25);
+            this.lblPendingValue.TabIndex = 17;
+            this.lblPendingValue.Text = "label1";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(221, 132);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(102, 29);
+            this.label11.TabIndex = 16;
+            this.label11.Text = "On Hold";
+            // 
+            // lblHoldValue
+            // 
+            this.lblHoldValue.AutoSize = true;
+            this.lblHoldValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHoldValue.ForeColor = System.Drawing.Color.White;
+            this.lblHoldValue.Location = new System.Drawing.Point(237, 161);
+            this.lblHoldValue.Name = "lblHoldValue";
+            this.lblHoldValue.Size = new System.Drawing.Size(70, 25);
+            this.lblHoldValue.TabIndex = 15;
+            this.lblHoldValue.Text = "label1";
+            // 
+            // lblHoldValueTitle
+            // 
+            this.lblHoldValueTitle.AutoSize = true;
+            this.lblHoldValueTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHoldValueTitle.Location = new System.Drawing.Point(196, 76);
+            this.lblHoldValueTitle.Name = "lblHoldValueTitle";
+            this.lblHoldValueTitle.Size = new System.Drawing.Size(152, 29);
+            this.lblHoldValueTitle.TabIndex = 14;
+            this.lblHoldValueTitle.Text = "Pending Rel.";
             // 
             // lblValue
             // 
             this.lblValue.AutoSize = true;
             this.lblValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblValue.ForeColor = System.Drawing.Color.White;
-            this.lblValue.Location = new System.Drawing.Point(7, 251);
+            this.lblValue.Location = new System.Drawing.Point(237, 50);
             this.lblValue.Name = "lblValue";
             this.lblValue.Size = new System.Drawing.Size(70, 25);
             this.lblValue.TabIndex = 13;
             this.lblValue.Text = "label1";
             this.lblValue.Visible = false;
+            this.lblValue.Click += new System.EventHandler(this.lblValue_Click);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(3, 222);
+            this.label7.Location = new System.Drawing.Point(234, 20);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(115, 29);
+            this.label7.Size = new System.Drawing.Size(77, 29);
             this.label7.TabIndex = 12;
-            this.label7.Text = "PO Value";
+            this.label7.Text = "Active";
             // 
             // label6
             // 
@@ -738,24 +880,43 @@
             this.lblMachinehrs.Text = "label1";
             this.lblMachinehrs.Visible = false;
             // 
-            // activeJobsTableAdapter
+            // lblSelectionHeader
             // 
-            this.activeJobsTableAdapter.ClearBeforeFill = true;
+            this.lblSelectionHeader.AutoSize = true;
+            this.lblSelectionHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSelectionHeader.Location = new System.Drawing.Point(1696, 96);
+            this.lblSelectionHeader.Name = "lblSelectionHeader";
+            this.lblSelectionHeader.Size = new System.Drawing.Size(110, 25);
+            this.lblSelectionHeader.TabIndex = 7;
+            this.lblSelectionHeader.Text = "Selection";
+            this.lblSelectionHeader.Click += new System.EventHandler(this.lblSelectionHeader_Click);
             // 
             // lblSelection
             // 
             this.lblSelection.AutoSize = true;
             this.lblSelection.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSelection.Location = new System.Drawing.Point(1286, 117);
+            this.lblSelection.Location = new System.Drawing.Point(1724, 208);
             this.lblSelection.Name = "lblSelection";
             this.lblSelection.Size = new System.Drawing.Size(54, 25);
             this.lblSelection.TabIndex = 5;
             this.lblSelection.Text = "$.00";
+            this.lblSelection.Click += new System.EventHandler(this.lblSelection_Click);
+            // 
+            // lblcount
+            // 
+            this.lblcount.AutoSize = true;
+            this.lblcount.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblcount.Location = new System.Drawing.Point(1721, 131);
+            this.lblcount.Name = "lblcount";
+            this.lblcount.Size = new System.Drawing.Size(60, 24);
+            this.lblcount.TabIndex = 10;
+            this.lblcount.Text = "label8";
+            this.lblcount.Click += new System.EventHandler(this.lblcount_Click);
             // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(1295, 603);
+            this.button1.Location = new System.Drawing.Point(1676, 15);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(62, 41);
             this.button1.TabIndex = 6;
@@ -764,61 +925,81 @@
             this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // lblSelectionHeader
+            // activeJobsTableAdapter
             // 
-            this.lblSelectionHeader.AutoSize = true;
-            this.lblSelectionHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSelectionHeader.Location = new System.Drawing.Point(1286, 54);
-            this.lblSelectionHeader.Name = "lblSelectionHeader";
-            this.lblSelectionHeader.Size = new System.Drawing.Size(110, 25);
-            this.lblSelectionHeader.TabIndex = 7;
-            this.lblSelectionHeader.Text = "Selection";
+            this.activeJobsTableAdapter.ClearBeforeFill = true;
             // 
-            // txtMonthFill
+            // lblHoldTitle
             // 
-            this.txtMonthFill.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMonthFill.Location = new System.Drawing.Point(1286, 254);
-            this.txtMonthFill.Name = "txtMonthFill";
-            this.txtMonthFill.Size = new System.Drawing.Size(125, 29);
-            this.txtMonthFill.TabIndex = 8;
+            this.lblHoldTitle.AutoSize = true;
+            this.lblHoldTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHoldTitle.Location = new System.Drawing.Point(1674, 238);
+            this.lblHoldTitle.Name = "lblHoldTitle";
+            this.lblHoldTitle.Size = new System.Drawing.Size(155, 24);
+            this.lblHoldTitle.TabIndex = 11;
+            this.lblHoldTitle.Text = "Pending Release";
             // 
-            // lblShipMonth
+            // lblSelectedPending
             // 
-            this.lblShipMonth.AutoSize = true;
-            this.lblShipMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblShipMonth.Location = new System.Drawing.Point(1286, 220);
-            this.lblShipMonth.Name = "lblShipMonth";
-            this.lblShipMonth.Size = new System.Drawing.Size(131, 25);
-            this.lblShipMonth.TabIndex = 9;
-            this.lblShipMonth.Text = "Ship Month";
+            this.lblSelectedPending.AutoSize = true;
+            this.lblSelectedPending.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSelectedPending.Location = new System.Drawing.Point(1724, 267);
+            this.lblSelectedPending.Name = "lblSelectedPending";
+            this.lblSelectedPending.Size = new System.Drawing.Size(54, 25);
+            this.lblSelectedPending.TabIndex = 12;
+            this.lblSelectedPending.Text = "$.00";
             // 
-            // lblcount
+            // lblSelectedHold
             // 
-            this.lblcount.AutoSize = true;
-            this.lblcount.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblcount.Location = new System.Drawing.Point(1287, 93);
-            this.lblcount.Name = "lblcount";
-            this.lblcount.Size = new System.Drawing.Size(60, 24);
-            this.lblcount.TabIndex = 10;
-            this.lblcount.Text = "label8";
+            this.lblSelectedHold.AutoSize = true;
+            this.lblSelectedHold.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSelectedHold.Location = new System.Drawing.Point(1724, 326);
+            this.lblSelectedHold.Name = "lblSelectedHold";
+            this.lblSelectedHold.Size = new System.Drawing.Size(54, 25);
+            this.lblSelectedHold.TabIndex = 14;
+            this.lblSelectedHold.Text = "$.00";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(1711, 297);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(81, 24);
+            this.label9.TabIndex = 13;
+            this.label9.Text = "On Hold";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(1721, 180);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(61, 24);
+            this.label8.TabIndex = 15;
+            this.label8.Text = "Active";
             // 
             // DataView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1618, 761);
+            this.ClientSize = new System.Drawing.Size(1904, 761);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.lblSelectedHold);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.lblSelectedPending);
+            this.Controls.Add(this.lblHoldTitle);
             this.Controls.Add(this.lblcount);
-            this.Controls.Add(this.lblShipMonth);
-            this.Controls.Add(this.txtMonthFill);
             this.Controls.Add(this.lblSelectionHeader);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.lblSelection);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
+            this.Controls.Add(this.lblSelection);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dgvActiveJobs);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DataView";
-            this.Text = "DataView";
+            this.Text = "Active Jobs";
             this.Load += new System.EventHandler(this.DataView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvActiveJobs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.activeJobsBindingSource)).EndInit();
@@ -839,7 +1020,6 @@
         private ds_activejobs ds_activejobs;
         private System.Windows.Forms.BindingSource activeJobsBindingSource;
         private ds_activejobsTableAdapters.ActiveJobsTableAdapter activeJobsTableAdapter;
-        private System.Windows.Forms.Button btnJobView;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btn90;
@@ -878,25 +1058,41 @@
         private System.Windows.Forms.Button btnComment;
         private System.Windows.Forms.Label lblValue;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblSelection;
+        private System.Windows.Forms.Label lblSelectionHeader;
+        private System.Windows.Forms.Button btnReset;
+        private System.Windows.Forms.Label lblcount;
+        private System.Windows.Forms.RadioButton rb2018;
+        private System.Windows.Forms.RadioButton rb2017;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnVCT;
+        private System.Windows.Forms.Button btnJobView;
+        private System.Windows.Forms.Label lblHoldTitle;
+        private System.Windows.Forms.Label lblSelectedPending;
+        private System.Windows.Forms.Label lblHoldValue;
+        private System.Windows.Forms.Label lblHoldValueTitle;
+        private System.Windows.Forms.Label lblPendingValue;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label lblSelectedHold;
+        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.DataGridViewTextBoxColumn baseIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn typeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn compDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn pOValueDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn actualDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn margin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RemainingRev;
         private System.Windows.Forms.DataGridViewTextBoxColumn shipDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn machineDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn buildDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn weldDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn designDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn trackerDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ShipMonth;
-        private System.Windows.Forms.Label lblSelection;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label lblSelectionHeader;
-        private System.Windows.Forms.TextBox txtMonthFill;
-        private System.Windows.Forms.Label lblShipMonth;
-        private System.Windows.Forms.Button btnReset;
-        private System.Windows.Forms.Label lblcount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BuildLeader;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProgramManager;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Processor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn QA;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Hold;
+        private System.Windows.Forms.Label label8;
     }
 }

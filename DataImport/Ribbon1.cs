@@ -16,7 +16,7 @@ namespace DataImport
         private void Ribbon1_Load(object sender, RibbonUIEventArgs e)
         {
             SqlConnection conn = new SqlConnection();
-            conn.ConnectionString = @"Data Source=localhost\sqlexpress;Initial Catalog=Wip;Integrated Security=True";
+            conn.ConnectionString = @"Data Source=desktop-v09rgin\sqlexpress;Initial Catalog=Wip;Integrated Security=True";
             conn.Open();
 
             SqlCommand cmd = new SqlCommand();
@@ -59,8 +59,12 @@ namespace DataImport
             db.Batches.Add(batchinfo);
 
 
-            for (int i = 2; i < 600; i++)
+            for (int i = 2; i < 900; i++)
             {
+                if (i==680)
+                {
+                    MessageBox.Show("its 680");
+                }
                 try
                 {
                     if (xlRange.Cells[i, 1] != null && xlRange.Cells[i, 1].Value2 != null)
@@ -91,7 +95,8 @@ namespace DataImport
                                 metrics.BaseID = xlRange.Cells[i, 1].value();
                                 metrics.Type = xlRange.Cells[i, 2].value();
                                 metrics.batch = intID;
-                                metrics.Margin = (int)xlRange.Cells[i, 15].value(); 
+                                metrics.Margin = (int)xlRange.Cells[i, 15].value();
+                                metrics.RemainingRev = (int)xlRange.Cells[i, 16].value(); 
 
 
                                 if (db.Jobs.Any(Job => Job.Base.ToString() == job.Base) == false)
@@ -183,8 +188,8 @@ namespace DataImport
 
         private void btnMenu_Click(object sender, RibbonControlEventArgs e)
         {
-            WipViewer.Main openMenu = new WipViewer.Main();
-           openMenu.Show(); 
+           // WipViewer.Main openMenu = new WipViewer.Main();
+           //openMenu.Show(); 
         }
     }
 }

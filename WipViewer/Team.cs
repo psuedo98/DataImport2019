@@ -23,5 +23,7 @@ namespace WipViewer
         public Nullable<System.DateTime> Folder { get; set; }
         public int id { get; set; }
         public Nullable<System.DateTime> PODate { get; set; }
+        public string QA { get; set; }
+        public string Hold { get; set; }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="WipModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="WipModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ActionItems">
           <Key>
             <PropertyRef Name="ID" />
@@ -17,6 +17,7 @@
           <Property Name="critical" Type="varchar" MaxLength="5" />
           <Property Name="CreateDate" Type="date" />
           <Property Name="ActionRequired" Type="text" />
+          <Property Name="openitem" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Batches">
           <Key>
@@ -24,6 +25,22 @@
           </Key>
           <Property Name="Batch" Type="int" Nullable="false" />
           <Property Name="BatchDate" Type="date" />
+        </EntityType>
+        <EntityType Name="BondActuals">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="BaseID" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="RecvMaterial" Type="date" />
+          <Property Name="StartFab" Type="date" />
+          <Property Name="HeatTreat" Type="date" />
+          <Property Name="StartMachining" Type="date" />
+          <Property Name="StartAssy" Type="date" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MachComp" Type="date" />
+          <Property Name="RdyChk" Type="date" />
+          <Property Name="RdySrc" Type="date" />
+          <Property Name="DesRel" Type="date" />
         </EntityType>
         <EntityType Name="comments">
           <Key>
@@ -34,6 +51,18 @@
           <Property Name="date" Type="date" />
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="commenter" Type="nchar" MaxLength="60" />
+        </EntityType>
+        <EntityType Name="Folders">
+          <Key>
+            <PropertyRef Name="JobNumber" />
+          </Key>
+          <Property Name="JobNumber" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PMFolder" Type="datetime" />
+          <Property Name="WeldFolder" Type="datetime" />
+          <Property Name="MachineFolder" Type="datetime" />
+          <Property Name="BuildFolder" Type="datetime" />
+          <Property Name="ProcessingFolder" Type="datetime" />
         </EntityType>
         <EntityType Name="ImportantDates">
           <Key>
@@ -79,6 +108,7 @@
           <Property Name="Margin" Type="decimal" Precision="18" Scale="2" />
           <Property Name="batch" Type="int" Nullable="false" />
           <Property Name="ShipMonth" Type="varchar" MaxLength="50" />
+          <Property Name="RemainingRev" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="Jobs">
           <Key>
@@ -87,12 +117,90 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Base" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Links">
+          <Key>
+            <PropertyRef Name="BaseID" />
+          </Key>
+          <Property Name="BaseID" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="LinkedLots" Type="nchar" MaxLength="30" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
         <EntityType Name="pictures">
           <Key>
             <PropertyRef Name="BaseId" />
           </Key>
           <Property Name="BaseId" Type="nchar" MaxLength="20" Nullable="false" />
           <Property Name="Path" Type="nchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Reasons">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Detail" Type="ntext" />
+          <Property Name="Type" Type="nchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="RedTag">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="JOB" Type="nchar" MaxLength="15" />
+          <Property Name="Detail" Type="nchar" MaxLength="30" />
+          <Property Name="Initiator" Type="varchar" MaxLength="50" />
+          <Property Name="Dept" Type="nchar" MaxLength="30" />
+          <Property Name="Spec" Type="text" />
+          <Property Name="Condition" Type="text" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Defect" Type="text" />
+          <Property Name="Cause" Type="text" />
+          <Property Name="Instructions" Type="text" />
+          <Property Name="Comment" Type="text" />
+          <Property Name="Reinspection" Type="date" />
+          <Property Name="Cost" Type="int" />
+          <Property Name="InstanceCost" Type="int" />
+          <Property Name="ScrapCost" Type="int" />
+          <Property Name="CAR" Type="varchar" MaxLength="9" />
+          <Property Name="VendorPO" Type="nchar" MaxLength="10" />
+          <Property Name="Disposition" Type="text" />
+        </EntityType>
+        <EntityType Name="Scheduling">
+          <Key>
+            <PropertyRef Name="Base_ID" />
+          </Key>
+          <Property Name="DataHold" Type="date" />
+          <Property Name="StartFab" Type="date" />
+          <Property Name="FinishFab" Type="date" />
+          <Property Name="StartHeat" Type="date" />
+          <Property Name="FinishHeat" Type="date" />
+          <Property Name="StartMach3" Type="date" />
+          <Property Name="FinishMach3" Type="date" />
+          <Property Name="StartMach5" Type="date" />
+          <Property Name="FinishMach5" Type="date" />
+          <Property Name="StartAssembly" Type="date" />
+          <Property Name="FinishAsssembly" Type="date" />
+          <Property Name="StartMachSmall" Type="date" />
+          <Property Name="FinishMachSmall" Type="date" />
+          <Property Name="StartMaterial" Type="date" />
+          <Property Name="FinishMaterial" Type="date" />
+          <Property Name="StartBench" Type="date" />
+          <Property Name="FinishBench" Type="date" />
+          <Property Name="StartPaint" Type="date" />
+          <Property Name="FinishPaint" Type="date" />
+          <Property Name="StartTracker" Type="date" />
+          <Property Name="FinishTracker" Type="date" />
+          <Property Name="StartQa" Type="date" />
+          <Property Name="FinishQa" Type="date" />
+          <Property Name="StartSts" Type="date" />
+          <Property Name="FinishSts" Type="date" />
+          <Property Name="StartCommercial" Type="date" />
+          <Property Name="FinishCommercial" Type="date" />
+          <Property Name="StartDesign" Type="date" />
+          <Property Name="FinishDesign" Type="date" />
+          <Property Name="DesignRelease" Type="date" />
+          <Property Name="Base_ID" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="StartFinalize" Type="date" />
+          <Property Name="FinishFinalize" Type="date" />
         </EntityType>
         <EntityType Name="Team">
           <Key>
@@ -107,12 +215,14 @@
           <Property Name="Folder" Type="date" />
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PODate" Type="date" />
+          <Property Name="QA" Type="nchar" MaxLength="40" />
+          <Property Name="Hold" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Wip.dbo.ActiveJobs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ActiveJobs">
           <Key>
-            <PropertyRef Name="Batch" />
+            
             <PropertyRef Name="BaseID" />
           </Key>
           <Property Name="Batch" Type="int" Nullable="false" />
@@ -129,6 +239,13 @@ warning 6002: The table/view 'Wip.dbo.ActiveJobs' does not have a primary key de
           <Property Name="Actual" Type="decimal" Precision="18" Scale="0" />
           <Property Name="Margin" Type="decimal" Precision="18" Scale="2" />
           <Property Name="ShipMonth" Type="varchar" MaxLength="50" />
+          <Property Name="ProgramManager" Type="nchar" MaxLength="40" />
+          <Property Name="BuildLeader" Type="nchar" MaxLength="40" />
+          <Property Name="Processor" Type="nchar" MaxLength="40" />
+          <Property Name="QA" Type="nchar" MaxLength="40" />
+          <Property Name="RemainingRev" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="age1" Type="int" />
+          <Property Name="Hold" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Wip.dbo.Job_batches' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -172,12 +289,18 @@ warning 6002: The table/view 'Wip.dbo.Margin_Over_time' does not have a primary 
         <EntityContainer Name="WipModelStoreContainer">
           <EntitySet Name="ActionItems" EntityType="Self.ActionItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Batches" EntityType="Self.Batches" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BondActuals" EntityType="Self.BondActuals" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="comments" EntityType="Self.comments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Folders" EntityType="Self.Folders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ImportantDates" EntityType="Self.ImportantDates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="JobHours" EntityType="Self.JobHours" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="JobMetrics" EntityType="Self.JobMetrics" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Jobs" EntityType="Self.Jobs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Links" EntityType="Self.Links" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="pictures" EntityType="Self.pictures" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reasons" EntityType="Self.Reasons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RedTag" EntityType="Self.RedTag" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Scheduling" EntityType="Self.Scheduling" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Team" EntityType="Self.Team" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ActiveJobs" EntityType="Self.ActiveJobs" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -194,7 +317,14 @@ warning 6002: The table/view 'Wip.dbo.Margin_Over_time' does not have a primary 
     [ActiveJobs].[POValue] AS [POValue], 
     [ActiveJobs].[Actual] AS [Actual], 
     [ActiveJobs].[Margin] AS [Margin], 
-    [ActiveJobs].[ShipMonth] AS [ShipMonth]
+    [ActiveJobs].[ShipMonth] AS [ShipMonth], 
+    [ActiveJobs].[ProgramManager] AS [ProgramManager], 
+    [ActiveJobs].[BuildLeader] AS [BuildLeader], 
+    [ActiveJobs].[Processor] AS [Processor], 
+    [ActiveJobs].[QA] AS [QA], 
+    [ActiveJobs].[RemainingRev] AS [RemainingRev], 
+    [ActiveJobs].[age1] AS [age1], 
+    [ActiveJobs].[Hold] AS [Hold]
     FROM [dbo].[ActiveJobs] AS [ActiveJobs]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Job_batches" EntityType="Self.Job_batches" store:Type="Views" store:Schema="dbo">
@@ -222,8 +352,7 @@ warning 6002: The table/view 'Wip.dbo.Margin_Over_time' does not have a primary 
             <End Role="ActionItems1" EntitySet="ActionItems" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WipModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -241,6 +370,7 @@ warning 6002: The table/view 'Wip.dbo.Margin_Over_time' does not have a primary 
           <Property Name="ActionRequired" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ActionItems1" Relationship="Self.FK_ActionItems_ActionItems" FromRole="ActionItems" ToRole="ActionItems1" />
           <NavigationProperty Name="ActionItem1" Relationship="Self.FK_ActionItems_ActionItems" FromRole="ActionItems1" ToRole="ActionItems" />
+          <Property Name="openitem" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="Batch">
           <Key>
@@ -303,6 +433,7 @@ warning 6002: The table/view 'Wip.dbo.Margin_Over_time' does not have a primary 
           <Property Name="Margin" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="batch" Type="Int32" Nullable="false" />
           <Property Name="ShipMonth" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RemainingRev" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="Job">
           <Key>
@@ -331,10 +462,11 @@ warning 6002: The table/view 'Wip.dbo.Margin_Over_time' does not have a primary 
           <Property Name="Folder" Type="DateTime" Precision="0" />
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PODate" Type="DateTime" Precision="0" />
+          <Property Name="QA" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
+          <Property Name="Hold" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ActiveJob">
           <Key>
-            <PropertyRef Name="Batch" />
             <PropertyRef Name="BaseID" />
           </Key>
           <Property Name="Batch" Type="Int32" Nullable="false" />
@@ -351,6 +483,13 @@ warning 6002: The table/view 'Wip.dbo.Margin_Over_time' does not have a primary 
           <Property Name="Actual" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="Margin" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="ShipMonth" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProgramManager" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
+          <Property Name="BuildLeader" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
+          <Property Name="Processor" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
+          <Property Name="QA" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
+          <Property Name="RemainingRev" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="age1" Type="Int32" />
+          <Property Name="Hold" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Job_batches">
           <Key>
@@ -404,7 +543,119 @@ warning 6002: The table/view 'Wip.dbo.Margin_Over_time' does not have a primary 
             <End Role="ActionItems" EntitySet="ActionItems" />
             <End Role="ActionItems1" EntitySet="ActionItems" />
           </AssociationSet>
+          <EntitySet Name="Links" EntityType="WipModel.Link" />
+          <EntitySet Name="BondActuals" EntityType="WipModel.BondActual" />
+          <EntitySet Name="Folders" EntityType="WipModel.Folder" />
+          <EntitySet Name="tblRedTags" EntityType="WipModel.tblRedTag" />
+          <EntitySet Name="Reasons" EntityType="WipModel.Reason" />
+          <EntitySet Name="Schedulings" EntityType="WipModel.Scheduling" />
         </EntityContainer>
+        <EntityType Name="Link">
+          <Key>
+            <PropertyRef Name="BaseID" />
+          </Key>
+          <Property Name="BaseID" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="LinkedLots" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="BondActual">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="BaseID" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="RecvMaterial" Type="DateTime" Precision="0" />
+          <Property Name="StartFab" Type="DateTime" Precision="0" />
+          <Property Name="HeatTreat" Type="DateTime" Precision="0" />
+          <Property Name="StartMachining" Type="DateTime" Precision="0" />
+          <Property Name="StartAssy" Type="DateTime" Precision="0" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="MachComp" Type="DateTime" Precision="0" />
+          <Property Name="RdyChk" Type="DateTime" Precision="0" />
+          <Property Name="RdySrc" Type="DateTime" Precision="0" />
+          <Property Name="DesRel" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Folder">
+          <Key>
+            <PropertyRef Name="JobNumber" />
+          </Key>
+          <Property Name="JobNumber" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PMFolder" Type="DateTime" Precision="3" />
+          <Property Name="WeldFolder" Type="DateTime" Precision="3" />
+          <Property Name="MachineFolder" Type="DateTime" Precision="3" />
+          <Property Name="BuildFolder" Type="DateTime" Precision="3" />
+          <Property Name="ProcessingFolder" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="tblRedTag">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="JOB" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="Detail" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Initiator" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Dept" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Spec" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Condition" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Defect" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Cause" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Instructions" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Reinspection" Type="DateTime" Precision="0" />
+          <Property Name="Cost" Type="Int32" />
+          <Property Name="InstanceCost" Type="Int32" />
+          <Property Name="ScrapCost" Type="Int32" />
+          <Property Name="CAR" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="VendorPO" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Disposition" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Reason">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Scheduling">
+          <Key>
+            <PropertyRef Name="Base_ID" />
+          </Key>
+          <Property Name="DataHold" Type="DateTime" Precision="0" />
+          <Property Name="StartFab" Type="DateTime" Precision="0" />
+          <Property Name="FinishFab" Type="DateTime" Precision="0" />
+          <Property Name="StartHeat" Type="DateTime" Precision="0" />
+          <Property Name="FinishHeat" Type="DateTime" Precision="0" />
+          <Property Name="StartMach3" Type="DateTime" Precision="0" />
+          <Property Name="FinishMach3" Type="DateTime" Precision="0" />
+          <Property Name="StartMach5" Type="DateTime" Precision="0" />
+          <Property Name="FinishMach5" Type="DateTime" Precision="0" />
+          <Property Name="StartAssembly" Type="DateTime" Precision="0" />
+          <Property Name="FinishAsssembly" Type="DateTime" Precision="0" />
+          <Property Name="StartMachSmall" Type="DateTime" Precision="0" />
+          <Property Name="FinishMachSmall" Type="DateTime" Precision="0" />
+          <Property Name="StartMaterial" Type="DateTime" Precision="0" />
+          <Property Name="FinishMaterial" Type="DateTime" Precision="0" />
+          <Property Name="StartBench" Type="DateTime" Precision="0" />
+          <Property Name="FinishBench" Type="DateTime" Precision="0" />
+          <Property Name="StartPaint" Type="DateTime" Precision="0" />
+          <Property Name="FinishPaint" Type="DateTime" Precision="0" />
+          <Property Name="StartTracker" Type="DateTime" Precision="0" />
+          <Property Name="FinishTracker" Type="DateTime" Precision="0" />
+          <Property Name="StartQa" Type="DateTime" Precision="0" />
+          <Property Name="FinishQa" Type="DateTime" Precision="0" />
+          <Property Name="StartSts" Type="DateTime" Precision="0" />
+          <Property Name="FinishSts" Type="DateTime" Precision="0" />
+          <Property Name="StartCommercial" Type="DateTime" Precision="0" />
+          <Property Name="FinishCommercial" Type="DateTime" Precision="0" />
+          <Property Name="StartDesign" Type="DateTime" Precision="0" />
+          <Property Name="FinishDesign" Type="DateTime" Precision="0" />
+          <Property Name="DesignRelease" Type="DateTime" Precision="0" />
+          <Property Name="Base_ID" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="StartFinalize" Type="DateTime" Precision="0" />
+          <Property Name="FinishFinalize" Type="DateTime" Precision="0" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -414,6 +665,7 @@ warning 6002: The table/view 'Wip.dbo.Margin_Over_time' does not have a primary 
           <EntitySetMapping Name="ActionItems">
             <EntityTypeMapping TypeName="WipModel.ActionItem">
               <MappingFragment StoreEntitySet="ActionItems">
+                <ScalarProperty Name="openitem" ColumnName="openitem" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Submitter" ColumnName="Submitter" />
                 <ScalarProperty Name="Asignee" ColumnName="Asignee" />
@@ -477,6 +729,7 @@ warning 6002: The table/view 'Wip.dbo.Margin_Over_time' does not have a primary 
           <EntitySetMapping Name="JobMetrics">
             <EntityTypeMapping TypeName="WipModel.JobMetric">
               <MappingFragment StoreEntitySet="JobMetrics">
+                <ScalarProperty Name="RemainingRev" ColumnName="RemainingRev" />
                 <ScalarProperty Name="BaseID" ColumnName="BaseID" />
                 <ScalarProperty Name="Comp" ColumnName="Comp" />
                 <ScalarProperty Name="ShipDate" ColumnName="ShipDate" />
@@ -509,6 +762,8 @@ warning 6002: The table/view 'Wip.dbo.Margin_Over_time' does not have a primary 
           <EntitySetMapping Name="Teams">
             <EntityTypeMapping TypeName="WipModel.Team">
               <MappingFragment StoreEntitySet="Team">
+                <ScalarProperty Name="Hold" ColumnName="Hold" />
+                <ScalarProperty Name="QA" ColumnName="QA" />
                 <ScalarProperty Name="JobNumber" ColumnName="JobNumber" />
                 <ScalarProperty Name="ProgramManager" ColumnName="ProgramManager" />
                 <ScalarProperty Name="BuildLeader" ColumnName="BuildLeader" />
@@ -524,6 +779,13 @@ warning 6002: The table/view 'Wip.dbo.Margin_Over_time' does not have a primary 
           <EntitySetMapping Name="ActiveJobs">
             <EntityTypeMapping TypeName="WipModel.ActiveJob">
               <MappingFragment StoreEntitySet="ActiveJobs">
+                <ScalarProperty Name="Hold" ColumnName="Hold" />
+                <ScalarProperty Name="age1" ColumnName="age1" />
+                <ScalarProperty Name="RemainingRev" ColumnName="RemainingRev" />
+                <ScalarProperty Name="QA" ColumnName="QA" />
+                <ScalarProperty Name="Processor" ColumnName="Processor" />
+                <ScalarProperty Name="BuildLeader" ColumnName="BuildLeader" />
+                <ScalarProperty Name="ProgramManager" ColumnName="ProgramManager" />
                 <ScalarProperty Name="Batch" ColumnName="Batch" />
                 <ScalarProperty Name="BaseID" ColumnName="BaseID" />
                 <ScalarProperty Name="Weld" ColumnName="Weld" />
@@ -562,6 +824,118 @@ warning 6002: The table/view 'Wip.dbo.Margin_Over_time' does not have a primary 
                 <ScalarProperty Name="BaseID" ColumnName="BaseID" />
                 <ScalarProperty Name="Margin" ColumnName="Margin" />
                 <ScalarProperty Name="ShipDate" ColumnName="ShipDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Links">
+            <EntityTypeMapping TypeName="WipModel.Link">
+              <MappingFragment StoreEntitySet="Links">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LinkedLots" ColumnName="LinkedLots" />
+                <ScalarProperty Name="BaseID" ColumnName="BaseID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BondActuals">
+            <EntityTypeMapping TypeName="WipModel.BondActual">
+              <MappingFragment StoreEntitySet="BondActuals">
+                <ScalarProperty Name="DesRel" ColumnName="DesRel" />
+                <ScalarProperty Name="RdySrc" ColumnName="RdySrc" />
+                <ScalarProperty Name="RdyChk" ColumnName="RdyChk" />
+                <ScalarProperty Name="MachComp" ColumnName="MachComp" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="StartAssy" ColumnName="StartAssy" />
+                <ScalarProperty Name="StartMachining" ColumnName="StartMachining" />
+                <ScalarProperty Name="HeatTreat" ColumnName="HeatTreat" />
+                <ScalarProperty Name="StartFab" ColumnName="StartFab" />
+                <ScalarProperty Name="RecvMaterial" ColumnName="RecvMaterial" />
+                <ScalarProperty Name="BaseID" ColumnName="BaseID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Folders">
+            <EntityTypeMapping TypeName="WipModel.Folder">
+              <MappingFragment StoreEntitySet="Folders">
+                <ScalarProperty Name="ProcessingFolder" ColumnName="ProcessingFolder" />
+                <ScalarProperty Name="BuildFolder" ColumnName="BuildFolder" />
+                <ScalarProperty Name="MachineFolder" ColumnName="MachineFolder" />
+                <ScalarProperty Name="WeldFolder" ColumnName="WeldFolder" />
+                <ScalarProperty Name="PMFolder" ColumnName="PMFolder" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="JobNumber" ColumnName="JobNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblRedTags">
+            <EntityTypeMapping TypeName="WipModel.tblRedTag">
+              <MappingFragment StoreEntitySet="RedTag">
+                <ScalarProperty Name="Disposition" ColumnName="Disposition" />
+                <ScalarProperty Name="VendorPO" ColumnName="VendorPO" />
+                <ScalarProperty Name="CAR" ColumnName="CAR" />
+                <ScalarProperty Name="ScrapCost" ColumnName="ScrapCost" />
+                <ScalarProperty Name="InstanceCost" ColumnName="InstanceCost" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Reinspection" ColumnName="Reinspection" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Instructions" ColumnName="Instructions" />
+                <ScalarProperty Name="Cause" ColumnName="Cause" />
+                <ScalarProperty Name="Defect" ColumnName="Defect" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Condition" ColumnName="Condition" />
+                <ScalarProperty Name="Spec" ColumnName="Spec" />
+                <ScalarProperty Name="Dept" ColumnName="Dept" />
+                <ScalarProperty Name="Initiator" ColumnName="Initiator" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+                <ScalarProperty Name="JOB" ColumnName="JOB" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reasons">
+            <EntityTypeMapping TypeName="WipModel.Reason">
+              <MappingFragment StoreEntitySet="Reasons">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schedulings">
+            <EntityTypeMapping TypeName="WipModel.Scheduling">
+              <MappingFragment StoreEntitySet="Scheduling">
+                <ScalarProperty Name="FinishFinalize" ColumnName="FinishFinalize" />
+                <ScalarProperty Name="StartFinalize" ColumnName="StartFinalize" />
+                <ScalarProperty Name="Base_ID" ColumnName="Base_ID" />
+                <ScalarProperty Name="DesignRelease" ColumnName="DesignRelease" />
+                <ScalarProperty Name="FinishDesign" ColumnName="FinishDesign" />
+                <ScalarProperty Name="StartDesign" ColumnName="StartDesign" />
+                <ScalarProperty Name="FinishCommercial" ColumnName="FinishCommercial" />
+                <ScalarProperty Name="StartCommercial" ColumnName="StartCommercial" />
+                <ScalarProperty Name="FinishSts" ColumnName="FinishSts" />
+                <ScalarProperty Name="StartSts" ColumnName="StartSts" />
+                <ScalarProperty Name="FinishQa" ColumnName="FinishQa" />
+                <ScalarProperty Name="StartQa" ColumnName="StartQa" />
+                <ScalarProperty Name="FinishTracker" ColumnName="FinishTracker" />
+                <ScalarProperty Name="StartTracker" ColumnName="StartTracker" />
+                <ScalarProperty Name="FinishPaint" ColumnName="FinishPaint" />
+                <ScalarProperty Name="StartPaint" ColumnName="StartPaint" />
+                <ScalarProperty Name="FinishBench" ColumnName="FinishBench" />
+                <ScalarProperty Name="StartBench" ColumnName="StartBench" />
+                <ScalarProperty Name="FinishMaterial" ColumnName="FinishMaterial" />
+                <ScalarProperty Name="StartMaterial" ColumnName="StartMaterial" />
+                <ScalarProperty Name="FinishMachSmall" ColumnName="FinishMachSmall" />
+                <ScalarProperty Name="StartMachSmall" ColumnName="StartMachSmall" />
+                <ScalarProperty Name="FinishAsssembly" ColumnName="FinishAsssembly" />
+                <ScalarProperty Name="StartAssembly" ColumnName="StartAssembly" />
+                <ScalarProperty Name="FinishMach5" ColumnName="FinishMach5" />
+                <ScalarProperty Name="StartMach5" ColumnName="StartMach5" />
+                <ScalarProperty Name="FinishMach3" ColumnName="FinishMach3" />
+                <ScalarProperty Name="StartMach3" ColumnName="StartMach3" />
+                <ScalarProperty Name="FinishHeat" ColumnName="FinishHeat" />
+                <ScalarProperty Name="StartHeat" ColumnName="StartHeat" />
+                <ScalarProperty Name="FinishFab" ColumnName="FinishFab" />
+                <ScalarProperty Name="StartFab" ColumnName="StartFab" />
+                <ScalarProperty Name="DataHold" ColumnName="DataHold" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

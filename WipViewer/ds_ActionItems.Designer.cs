@@ -295,6 +295,8 @@ namespace WipViewer {
             
             private global::System.Data.DataColumn columnActionRequired;
             
+            private global::System.Data.DataColumn columnopenitem;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public ActionItemsDataTable() {
@@ -394,6 +396,14 @@ namespace WipViewer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn openitemColumn {
+                get {
+                    return this.columnopenitem;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -429,7 +439,7 @@ namespace WipViewer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ActionItemsRow AddActionItemsRow(string Submitter, string Asignee, string Base, System.DateTime Duedate, string critical, System.DateTime CreateDate, string ActionRequired) {
+            public ActionItemsRow AddActionItemsRow(string Submitter, string Asignee, string Base, System.DateTime Duedate, string critical, System.DateTime CreateDate, string ActionRequired, string openitem) {
                 ActionItemsRow rowActionItemsRow = ((ActionItemsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -439,7 +449,8 @@ namespace WipViewer {
                         Duedate,
                         critical,
                         CreateDate,
-                        ActionRequired};
+                        ActionRequired,
+                        openitem};
                 rowActionItemsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowActionItemsRow);
                 return rowActionItemsRow;
@@ -477,6 +488,7 @@ namespace WipViewer {
                 this.columncritical = base.Columns["critical"];
                 this.columnCreateDate = base.Columns["CreateDate"];
                 this.columnActionRequired = base.Columns["ActionRequired"];
+                this.columnopenitem = base.Columns["openitem"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -498,6 +510,8 @@ namespace WipViewer {
                 base.Columns.Add(this.columnCreateDate);
                 this.columnActionRequired = new global::System.Data.DataColumn("ActionRequired", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnActionRequired);
+                this.columnopenitem = new global::System.Data.DataColumn("openitem", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnopenitem);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnID}, true));
                 this.columnID.AutoIncrement = true;
@@ -511,6 +525,7 @@ namespace WipViewer {
                 this.columnBase.MaxLength = 25;
                 this.columncritical.MaxLength = 5;
                 this.columnActionRequired.MaxLength = 2147483647;
+                this.columnopenitem.MaxLength = 10;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -776,6 +791,22 @@ namespace WipViewer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string openitem {
+                get {
+                    try {
+                        return ((string)(this[this.tableActionItems.openitemColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'openitem\' in table \'ActionItems\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableActionItems.openitemColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsSubmitterNull() {
                 return this.IsNull(this.tableActionItems.SubmitterColumn);
             }
@@ -856,6 +887,18 @@ namespace WipViewer {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetActionRequiredNull() {
                 this[this.tableActionItems.ActionRequiredColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsopenitemNull() {
+                return this.IsNull(this.tableActionItems.openitemColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetopenitemNull() {
+                this[this.tableActionItems.openitemColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -1026,10 +1069,11 @@ namespace WipViewer.ds_ActionItemsTableAdapters {
             tableMapping.ColumnMappings.Add("critical", "critical");
             tableMapping.ColumnMappings.Add("CreateDate", "CreateDate");
             tableMapping.ColumnMappings.Add("ActionRequired", "ActionRequired");
+            tableMapping.ColumnMappings.Add("openitem", "openitem");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[ActionItems] WHERE (([ID] = @Original_ID) AND ((@IsNull_Base = 1 AND [Base] IS NULL) OR ([Base] = @Original_Base)) AND ((@IsNull_Duedate = 1 AND [Duedate] IS NULL) OR ([Duedate] = @Original_Duedate)) AND ((@IsNull_critical = 1 AND [critical] IS NULL) OR ([critical] = @Original_critical)) AND ((@IsNull_CreateDate = 1 AND [CreateDate] IS NULL) OR ([CreateDate] = @Original_CreateDate)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[ActionItems] WHERE (([ID] = @Original_ID) AND ((@IsNull_Base = 1 AND [Base] IS NULL) OR ([Base] = @Original_Base)) AND ((@IsNull_Duedate = 1 AND [Duedate] IS NULL) OR ([Duedate] = @Original_Duedate)) AND ((@IsNull_critical = 1 AND [critical] IS NULL) OR ([critical] = @Original_critical)) AND ((@IsNull_CreateDate = 1 AND [CreateDate] IS NULL) OR ([CreateDate] = @Original_CreateDate)) AND ((@IsNull_openitem = 1 AND [openitem] IS NULL) OR ([openitem] = @Original_openitem)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Base", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Base", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -1040,10 +1084,12 @@ namespace WipViewer.ds_ActionItemsTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_critical", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "critical", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CreateDate", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CreateDate", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CreateDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CreateDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_openitem", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "openitem", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_openitem", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "openitem", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[ActionItems] ([Submitter], [Asignee], [Base], [Duedate], [critical], [ActionRequired], [CreateDate]) VALUES (@Submitter, @Asignee, @Base, @Duedate, @critical, @ActionRequired, @CreateDate);
-SELECT ID, Submitter, Asignee, Base, Duedate, critical, ActionRequired, CreateDate FROM ActionItems WHERE (ID = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[ActionItems] ([Submitter], [Asignee], [Base], [Duedate], [critical], [ActionRequired], [CreateDate], [openitem]) VALUES (@Submitter, @Asignee, @Base, @Duedate, @critical, @ActionRequired, @CreateDate, @openitem);
+SELECT ID, Submitter, Asignee, Base, Duedate, critical, ActionRequired, CreateDate, openitem FROM ActionItems WHERE (ID = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Submitter", global::System.Data.SqlDbType.Text, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Submitter", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Asignee", global::System.Data.SqlDbType.Text, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Asignee", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -1052,10 +1098,11 @@ SELECT ID, Submitter, Asignee, Base, Duedate, critical, ActionRequired, CreateDa
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@critical", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "critical", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ActionRequired", global::System.Data.SqlDbType.Text, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ActionRequired", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CreateDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CreateDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@openitem", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "openitem", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[ActionItems] SET [Submitter] = @Submitter, [Asignee] = @Asignee, [Base] = @Base, [Duedate] = @Duedate, [critical] = @critical, [ActionRequired] = @ActionRequired, [CreateDate] = @CreateDate WHERE (([ID] = @Original_ID) AND ((@IsNull_Base = 1 AND [Base] IS NULL) OR ([Base] = @Original_Base)) AND ((@IsNull_Duedate = 1 AND [Duedate] IS NULL) OR ([Duedate] = @Original_Duedate)) AND ((@IsNull_critical = 1 AND [critical] IS NULL) OR ([critical] = @Original_critical)) AND ((@IsNull_CreateDate = 1 AND [CreateDate] IS NULL) OR ([CreateDate] = @Original_CreateDate)));
-SELECT ID, Submitter, Asignee, Base, Duedate, critical, ActionRequired, CreateDate FROM ActionItems WHERE (ID = @ID)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[ActionItems] SET [Submitter] = @Submitter, [Asignee] = @Asignee, [Base] = @Base, [Duedate] = @Duedate, [critical] = @critical, [ActionRequired] = @ActionRequired, [CreateDate] = @CreateDate, [openitem] = @openitem WHERE (([ID] = @Original_ID) AND ((@IsNull_Base = 1 AND [Base] IS NULL) OR ([Base] = @Original_Base)) AND ((@IsNull_Duedate = 1 AND [Duedate] IS NULL) OR ([Duedate] = @Original_Duedate)) AND ((@IsNull_critical = 1 AND [critical] IS NULL) OR ([critical] = @Original_critical)) AND ((@IsNull_CreateDate = 1 AND [CreateDate] IS NULL) OR ([CreateDate] = @Original_CreateDate)) AND ((@IsNull_openitem = 1 AND [openitem] IS NULL) OR ([openitem] = @Original_openitem)));
+SELECT ID, Submitter, Asignee, Base, Duedate, critical, ActionRequired, CreateDate, openitem FROM ActionItems WHERE (ID = @ID)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Submitter", global::System.Data.SqlDbType.Text, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Submitter", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Asignee", global::System.Data.SqlDbType.Text, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Asignee", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -1064,6 +1111,7 @@ SELECT ID, Submitter, Asignee, Base, Duedate, critical, ActionRequired, CreateDa
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@critical", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "critical", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ActionRequired", global::System.Data.SqlDbType.Text, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ActionRequired", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CreateDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CreateDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@openitem", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "openitem", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Base", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Base", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Base", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Base", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -1073,6 +1121,8 @@ SELECT ID, Submitter, Asignee, Base, Duedate, critical, ActionRequired, CreateDa
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_critical", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "critical", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CreateDate", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CreateDate", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CreateDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CreateDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_openitem", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "openitem", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_openitem", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "openitem", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -1086,18 +1136,28 @@ SELECT ID, Submitter, Asignee, Base, Duedate, critical, ActionRequired, CreateDa
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[4];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT ID, Submitter, Asignee, Base, Duedate, critical, ActionRequired, CreateDat" +
-                "e FROM dbo.ActionItems";
+                "e, openitem FROM dbo.ActionItems";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
             this._commandCollection[1].CommandText = "SELECT ActionRequired, Asignee, Base, CreateDate, Duedate, ID, Submitter, critica" +
-                "l FROM ActionItems WHERE (Base = @strjobnumber)";
+                "l, openitem FROM ActionItems WHERE (Base = @strjobnumber)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@strjobnumber", global::System.Data.SqlDbType.VarChar, 25, global::System.Data.ParameterDirection.Input, 0, 0, "Base", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = "SELECT ID, Submitter, Asignee, Base, Duedate, critical, ActionRequired, CreateDat" +
+                "e, openitem FROM dbo.ActionItems where openitem = \'false\'";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[3].Connection = this.Connection;
+            this._commandCollection[3].CommandText = "SELECT ID, Submitter, Asignee, Base, Duedate, critical, ActionRequired, CreateDat" +
+                "e, openitem FROM dbo.ActionItems where openitem = \'true\' or openitem is null";
+            this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1146,6 +1206,32 @@ SELECT ID, Submitter, Asignee, Base, Duedate, critical, ActionRequired, CreateDa
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillbyClosed(ds_ActionItems.ActionItemsDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[2];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillbyOpen(ds_ActionItems.ActionItemsDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[3];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         public virtual int Update(ds_ActionItems.ActionItemsDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
@@ -1176,7 +1262,7 @@ SELECT ID, Submitter, Asignee, Base, Duedate, critical, ActionRequired, CreateDa
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_ID, string Original_Base, global::System.Nullable<global::System.DateTime> Original_Duedate, string Original_critical, global::System.Nullable<global::System.DateTime> Original_CreateDate) {
+        public virtual int Delete(int Original_ID, string Original_Base, global::System.Nullable<global::System.DateTime> Original_Duedate, string Original_critical, global::System.Nullable<global::System.DateTime> Original_CreateDate, string Original_openitem) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
             if ((Original_Base == null)) {
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
@@ -1210,6 +1296,14 @@ SELECT ID, Submitter, Asignee, Base, Duedate, critical, ActionRequired, CreateDa
                 this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
             }
+            if ((Original_openitem == null)) {
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[10].Value = ((string)(Original_openitem));
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -1230,7 +1324,7 @@ SELECT ID, Submitter, Asignee, Base, Duedate, critical, ActionRequired, CreateDa
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string Submitter, string Asignee, string Base, global::System.Nullable<global::System.DateTime> Duedate, string critical, string ActionRequired, global::System.Nullable<global::System.DateTime> CreateDate) {
+        public virtual int Insert(string Submitter, string Asignee, string Base, global::System.Nullable<global::System.DateTime> Duedate, string critical, string ActionRequired, global::System.Nullable<global::System.DateTime> CreateDate, string openitem) {
             if ((Submitter == null)) {
                 this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -1273,6 +1367,12 @@ SELECT ID, Submitter, Asignee, Base, Duedate, critical, ActionRequired, CreateDa
             else {
                 this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
+            if ((openitem == null)) {
+                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[7].Value = ((string)(openitem));
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -1293,7 +1393,7 @@ SELECT ID, Submitter, Asignee, Base, Duedate, critical, ActionRequired, CreateDa
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string Submitter, string Asignee, string Base, global::System.Nullable<global::System.DateTime> Duedate, string critical, string ActionRequired, global::System.Nullable<global::System.DateTime> CreateDate, int Original_ID, string Original_Base, global::System.Nullable<global::System.DateTime> Original_Duedate, string Original_critical, global::System.Nullable<global::System.DateTime> Original_CreateDate, int ID) {
+        public virtual int Update(string Submitter, string Asignee, string Base, global::System.Nullable<global::System.DateTime> Duedate, string critical, string ActionRequired, global::System.Nullable<global::System.DateTime> CreateDate, string openitem, int Original_ID, string Original_Base, global::System.Nullable<global::System.DateTime> Original_Duedate, string Original_critical, global::System.Nullable<global::System.DateTime> Original_CreateDate, string Original_openitem, int ID) {
             if ((Submitter == null)) {
                 this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -1336,40 +1436,54 @@ SELECT ID, Submitter, Asignee, Base, Duedate, critical, ActionRequired, CreateDa
             else {
                 this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(Original_ID));
-            if ((Original_Base == null)) {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
+            if ((openitem == null)) {
+                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_Base));
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(openitem));
+            }
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_ID));
+            if ((Original_Base == null)) {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(Original_Base));
             }
             if ((Original_Duedate.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((System.DateTime)(Original_Duedate.Value));
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((System.DateTime)(Original_Duedate.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
             }
             if ((Original_critical == null)) {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[14].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_critical));
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((string)(Original_critical));
             }
             if ((Original_CreateDate.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((System.DateTime)(Original_CreateDate.Value));
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((System.DateTime)(Original_CreateDate.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[16].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[16].Value = ((int)(ID));
+            if ((Original_openitem == null)) {
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[18].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((string)(Original_openitem));
+            }
+            this.Adapter.UpdateCommand.Parameters[19].Value = ((int)(ID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -1390,8 +1504,8 @@ SELECT ID, Submitter, Asignee, Base, Duedate, critical, ActionRequired, CreateDa
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string Submitter, string Asignee, string Base, global::System.Nullable<global::System.DateTime> Duedate, string critical, string ActionRequired, global::System.Nullable<global::System.DateTime> CreateDate, int Original_ID, string Original_Base, global::System.Nullable<global::System.DateTime> Original_Duedate, string Original_critical, global::System.Nullable<global::System.DateTime> Original_CreateDate) {
-            return this.Update(Submitter, Asignee, Base, Duedate, critical, ActionRequired, CreateDate, Original_ID, Original_Base, Original_Duedate, Original_critical, Original_CreateDate, Original_ID);
+        public virtual int Update(string Submitter, string Asignee, string Base, global::System.Nullable<global::System.DateTime> Duedate, string critical, string ActionRequired, global::System.Nullable<global::System.DateTime> CreateDate, string openitem, int Original_ID, string Original_Base, global::System.Nullable<global::System.DateTime> Original_Duedate, string Original_critical, global::System.Nullable<global::System.DateTime> Original_CreateDate, string Original_openitem) {
+            return this.Update(Submitter, Asignee, Base, Duedate, critical, ActionRequired, CreateDate, openitem, Original_ID, Original_Base, Original_Duedate, Original_critical, Original_CreateDate, Original_openitem, Original_ID);
         }
     }
     

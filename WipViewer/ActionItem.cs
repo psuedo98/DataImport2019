@@ -22,6 +22,7 @@ namespace WipViewer
         public string critical { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
         public string ActionRequired { get; set; }
+        public string openitem { get; set; }
     
         public virtual ActionItem ActionItems1 { get; set; }
         public virtual ActionItem ActionItem1 { get; set; }

@@ -37,18 +37,25 @@ namespace WipViewer
                 {
                     if (tTeam.ProgramManager != null)
                     {
-                        cmbPM.Text = tTeam.ProgramManager;
+                        cmbPM.Text = tTeam.ProgramManager.Trim();
 
                     }
                     if (tTeam.Processor != null)
                     {
-                        cmbProcessor.Text = tTeam.Processor;
+                        cmbProcessor.Text = tTeam.Processor.Trim();
                     }
 
                     if (tTeam.BuildLeader != null)
                     {
-                        cmbBl.Text = tTeam.BuildLeader;
+                        cmbBl.Text = tTeam.BuildLeader.Trim();
                     }
+
+                    if (tTeam.QA != null)
+                    {
+                        cmbQa.Text = tTeam.QA.Trim(); 
+
+                    }
+                    
 
 
 
@@ -75,6 +82,19 @@ namespace WipViewer
 
                     }
 
+                    if (tTeam.Hold != null)
+                    {
+                        cmbHold.Text = tTeam.Hold.Trim(); 
+                    }
+                    else
+                    {
+                        cmbHold.Text = "Active"; 
+                    }
+
+
+
+
+                    
 
 
 
@@ -114,17 +134,44 @@ namespace WipViewer
 
         public void btnSubmit_Click(object sender, EventArgs e)
         {
+           
+        }
+
+        private void cmbQa_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSubmit2_Click(object sender, EventArgs e)
+        {
             using (var db = new TestEntities())
             {
                 Team tTeam = db.Teams.Find(strjobnumber);
 
                 if (tTeam == null)
                 {
-                    Team tTeam2 = new Team(); 
+                    Team tTeam2 = new Team();
                     tTeam2.JobNumber = strjobnumber;
-                    tTeam2.ProgramManager = cmbPM.SelectedValue.ToString();
-                    tTeam2.BuildLeader = cmbBl.SelectedValue.ToString();
-                    tTeam2.Processor = cmbProcessor.SelectedValue.ToString();
+
+                    if (cmbPM.SelectedIndex != -1)
+                    {
+                        tTeam2.ProgramManager = cmbPM.SelectedItem.ToString();
+                    }
+                    if (cmbProcessor.SelectedIndex != -1)
+                    {
+                        tTeam2.Processor = cmbProcessor.SelectedItem.ToString();
+                    }
+
+                    if (cmbBl.SelectedIndex != -1)
+                    {
+                        tTeam2.BuildLeader = cmbBl.SelectedItem.ToString();
+                    }
+
+                    if (cmbQa.SelectedIndex != -1)
+                    {
+                        tTeam2.QA = cmbQa.SelectedItem.ToString();
+                    }
+
                     if (chkKickoff.Checked == true)
                     {
                         tTeam2.KickOff = dtpKickoff.Value;
@@ -142,10 +189,15 @@ namespace WipViewer
 
                     tTeam2.PODate = dtpPoDate.Value;
 
+                    string hold = "";
+                    hold = cmbHold.Text;
+
+                    tTeam2.Hold = hold; 
+
                     db.Teams.Add(tTeam2);
                     db.SaveChanges();
                     MessageBox.Show("Team Created!");
-                    this.Close(); 
+                    this.Close();
 
                 }
 
@@ -154,8 +206,8 @@ namespace WipViewer
                     tTeam.JobNumber = strjobnumber;
                     tTeam.ProgramManager = Convert.ToString(cmbPM.Text);
                     tTeam.BuildLeader = Convert.ToString(cmbBl.Text);
-                    tTeam.Processor = Convert.ToString(cmbProcessor.Text); 
-
+                    tTeam.Processor = Convert.ToString(cmbProcessor.Text);
+                    tTeam.QA = Convert.ToString(cmbQa.Text);
                     if (chkKickoff.Checked == true)
                     {
                         tTeam.KickOff = dtpKickoff.Value;
@@ -173,10 +225,16 @@ namespace WipViewer
 
                     tTeam.PODate = dtpPoDate.Value;
 
+
+                    string hold = "";
+                    hold = cmbHold.Text;
+
+                    tTeam.Hold = hold;
+
                     db.SaveChanges();
 
                     MessageBox.Show("Team Updated!");
-                    this.Close(); 
+                    this.Close();
                 }
             }
         }

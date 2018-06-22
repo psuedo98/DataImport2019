@@ -307,6 +307,20 @@ namespace WipViewer {
             
             private global::System.Data.DataColumn columnShipMonth;
             
+            private global::System.Data.DataColumn columnProgramManager;
+            
+            private global::System.Data.DataColumn columnBuildLeader;
+            
+            private global::System.Data.DataColumn columnProcessor;
+            
+            private global::System.Data.DataColumn columnQA;
+            
+            private global::System.Data.DataColumn columnRemainingRev;
+            
+            private global::System.Data.DataColumn columnage1;
+            
+            private global::System.Data.DataColumn columnHold;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public ActiveJobsDataTable() {
@@ -454,6 +468,62 @@ namespace WipViewer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ProgramManagerColumn {
+                get {
+                    return this.columnProgramManager;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn BuildLeaderColumn {
+                get {
+                    return this.columnBuildLeader;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ProcessorColumn {
+                get {
+                    return this.columnProcessor;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn QAColumn {
+                get {
+                    return this.columnQA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn RemainingRevColumn {
+                get {
+                    return this.columnRemainingRev;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn age1Column {
+                get {
+                    return this.columnage1;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn HoldColumn {
+                get {
+                    return this.columnHold;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -489,7 +559,28 @@ namespace WipViewer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ActiveJobsRow AddActiveJobsRow(int Batch, string BaseID, int Weld, int Machine, int Design, int Tracker, int Build, decimal Comp, System.DateTime ShipDate, string Type, decimal POValue, decimal Actual, decimal Margin, string ShipMonth) {
+            public ActiveJobsRow AddActiveJobsRow(
+                        int Batch, 
+                        string BaseID, 
+                        int Weld, 
+                        int Machine, 
+                        int Design, 
+                        int Tracker, 
+                        int Build, 
+                        decimal Comp, 
+                        System.DateTime ShipDate, 
+                        string Type, 
+                        decimal POValue, 
+                        decimal Actual, 
+                        decimal Margin, 
+                        string ShipMonth, 
+                        string ProgramManager, 
+                        string BuildLeader, 
+                        string Processor, 
+                        string QA, 
+                        decimal RemainingRev, 
+                        int age1, 
+                        string Hold) {
                 ActiveJobsRow rowActiveJobsRow = ((ActiveJobsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Batch,
@@ -505,7 +596,14 @@ namespace WipViewer {
                         POValue,
                         Actual,
                         Margin,
-                        ShipMonth};
+                        ShipMonth,
+                        ProgramManager,
+                        BuildLeader,
+                        Processor,
+                        QA,
+                        RemainingRev,
+                        age1,
+                        Hold};
                 rowActiveJobsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowActiveJobsRow);
                 return rowActiveJobsRow;
@@ -550,6 +648,13 @@ namespace WipViewer {
                 this.columnActual = base.Columns["Actual"];
                 this.columnMargin = base.Columns["Margin"];
                 this.columnShipMonth = base.Columns["ShipMonth"];
+                this.columnProgramManager = base.Columns["ProgramManager"];
+                this.columnBuildLeader = base.Columns["BuildLeader"];
+                this.columnProcessor = base.Columns["Processor"];
+                this.columnQA = base.Columns["QA"];
+                this.columnRemainingRev = base.Columns["RemainingRev"];
+                this.columnage1 = base.Columns["age1"];
+                this.columnHold = base.Columns["Hold"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -583,6 +688,20 @@ namespace WipViewer {
                 base.Columns.Add(this.columnMargin);
                 this.columnShipMonth = new global::System.Data.DataColumn("ShipMonth", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnShipMonth);
+                this.columnProgramManager = new global::System.Data.DataColumn("ProgramManager", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnProgramManager);
+                this.columnBuildLeader = new global::System.Data.DataColumn("BuildLeader", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBuildLeader);
+                this.columnProcessor = new global::System.Data.DataColumn("Processor", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnProcessor);
+                this.columnQA = new global::System.Data.DataColumn("QA", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnQA);
+                this.columnRemainingRev = new global::System.Data.DataColumn("RemainingRev", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRemainingRev);
+                this.columnage1 = new global::System.Data.DataColumn("age1", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnage1);
+                this.columnHold = new global::System.Data.DataColumn("Hold", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnHold);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnBatch,
                                 this.columnBaseID}, true));
@@ -591,6 +710,12 @@ namespace WipViewer {
                 this.columnBaseID.MaxLength = 20;
                 this.columnType.MaxLength = 30;
                 this.columnShipMonth.MaxLength = 50;
+                this.columnProgramManager.MaxLength = 40;
+                this.columnBuildLeader.MaxLength = 40;
+                this.columnProcessor.MaxLength = 40;
+                this.columnQA.MaxLength = 40;
+                this.columnage1.ReadOnly = true;
+                this.columnHold.MaxLength = 20;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -947,6 +1072,118 @@ namespace WipViewer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string ProgramManager {
+                get {
+                    try {
+                        return ((string)(this[this.tableActiveJobs.ProgramManagerColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ProgramManager\' in table \'ActiveJobs\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableActiveJobs.ProgramManagerColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string BuildLeader {
+                get {
+                    try {
+                        return ((string)(this[this.tableActiveJobs.BuildLeaderColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'BuildLeader\' in table \'ActiveJobs\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableActiveJobs.BuildLeaderColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Processor {
+                get {
+                    try {
+                        return ((string)(this[this.tableActiveJobs.ProcessorColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Processor\' in table \'ActiveJobs\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableActiveJobs.ProcessorColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string QA {
+                get {
+                    try {
+                        return ((string)(this[this.tableActiveJobs.QAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'QA\' in table \'ActiveJobs\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableActiveJobs.QAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal RemainingRev {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableActiveJobs.RemainingRevColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'RemainingRev\' in table \'ActiveJobs\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableActiveJobs.RemainingRevColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int age1 {
+                get {
+                    try {
+                        return ((int)(this[this.tableActiveJobs.age1Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'age1\' in table \'ActiveJobs\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableActiveJobs.age1Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Hold {
+                get {
+                    try {
+                        return ((string)(this[this.tableActiveJobs.HoldColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Hold\' in table \'ActiveJobs\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableActiveJobs.HoldColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsWeldNull() {
                 return this.IsNull(this.tableActiveJobs.WeldColumn);
             }
@@ -1087,6 +1324,90 @@ namespace WipViewer {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetShipMonthNull() {
                 this[this.tableActiveJobs.ShipMonthColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsProgramManagerNull() {
+                return this.IsNull(this.tableActiveJobs.ProgramManagerColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetProgramManagerNull() {
+                this[this.tableActiveJobs.ProgramManagerColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsBuildLeaderNull() {
+                return this.IsNull(this.tableActiveJobs.BuildLeaderColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetBuildLeaderNull() {
+                this[this.tableActiveJobs.BuildLeaderColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsProcessorNull() {
+                return this.IsNull(this.tableActiveJobs.ProcessorColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetProcessorNull() {
+                this[this.tableActiveJobs.ProcessorColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsQANull() {
+                return this.IsNull(this.tableActiveJobs.QAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetQANull() {
+                this[this.tableActiveJobs.QAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsRemainingRevNull() {
+                return this.IsNull(this.tableActiveJobs.RemainingRevColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetRemainingRevNull() {
+                this[this.tableActiveJobs.RemainingRevColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Isage1Null() {
+                return this.IsNull(this.tableActiveJobs.age1Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Setage1Null() {
+                this[this.tableActiveJobs.age1Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsHoldNull() {
+                return this.IsNull(this.tableActiveJobs.HoldColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetHoldNull() {
+                this[this.tableActiveJobs.HoldColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -1263,6 +1584,13 @@ namespace WipViewer.ds_activejobsTableAdapters {
             tableMapping.ColumnMappings.Add("Actual", "Actual");
             tableMapping.ColumnMappings.Add("Margin", "Margin");
             tableMapping.ColumnMappings.Add("ShipMonth", "ShipMonth");
+            tableMapping.ColumnMappings.Add("ProgramManager", "ProgramManager");
+            tableMapping.ColumnMappings.Add("BuildLeader", "BuildLeader");
+            tableMapping.ColumnMappings.Add("Processor", "Processor");
+            tableMapping.ColumnMappings.Add("QA", "QA");
+            tableMapping.ColumnMappings.Add("RemainingRev", "RemainingRev");
+            tableMapping.ColumnMappings.Add("age1", "age1");
+            tableMapping.ColumnMappings.Add("Hold", "Hold");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -1276,38 +1604,57 @@ namespace WipViewer.ds_activejobsTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[5];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[8];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT Batch, BaseID, Weld, Machine, Design, Tracker, Build, Comp, ShipDate, Type" +
-                ", POValue, Actual, Margin, ShipMonth FROM ActiveJobs";
+            this._commandCollection[0].CommandText = "SELECT        Batch, BaseID, Weld, Machine, Design, Tracker, Build, Comp, ShipDat" +
+                "e, Type, POValue, Actual, Margin, ShipMonth, ProgramManager, BuildLeader, Proces" +
+                "sor, QA, RemainingRev, age1, Hold\r\nFROM            ActiveJobs";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "SELECT Actual, BaseID, Batch, Build, Comp, Design, Machine, Margin, POValue, Ship" +
-                "Date, ShipMonth, Tracker, Type, Weld FROM ActiveJobs WHERE (ShipDate BETWEEN @da" +
-                "te1 AND @date2)";
+            this._commandCollection[1].CommandText = "SELECT Actual, BaseID, Batch, Build, BuildLeader, Comp, Design, Hold, Machine, Ma" +
+                "rgin, POValue, Processor, ProgramManager, QA, RemainingRev, ShipDate, ShipMonth," +
+                " Tracker, Type, Weld, age1 FROM ActiveJobs WHERE (ShipDate BETWEEN @date1 AND @d" +
+                "ate2)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date1", global::System.Data.SqlDbType.Date, 3, global::System.Data.ParameterDirection.Input, 0, 0, "ShipDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date2", global::System.Data.SqlDbType.Date, 3, global::System.Data.ParameterDirection.Input, 0, 0, "ShipDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[2].Connection = this.Connection;
-            this._commandCollection[2].CommandText = "SELECT Actual, BaseID, Batch, Build, Comp, Design, Machine, Margin, POValue, Ship" +
-                "Date, ShipMonth, Tracker, Type, Weld FROM ActiveJobs WHERE (Margin < 2)";
+            this._commandCollection[2].CommandText = "SELECT Actual, BaseID, Batch, Build, BuildLeader, Comp, Design, Hold, Machine, Ma" +
+                "rgin, POValue, Processor, ProgramManager, QA, RemainingRev, ShipDate, ShipMonth," +
+                " Tracker, Type, Weld, age1 FROM ActiveJobs";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[3].Connection = this.Connection;
-            this._commandCollection[3].CommandText = "SELECT Actual, BaseID, Batch, Build, Comp, Design, Machine, Margin, POValue, Ship" +
-                "Date, ShipMonth, Tracker, Type, Weld FROM ActiveJobs WHERE (MONTH(ShipDate) = @s" +
-                "month)";
+            this._commandCollection[3].CommandText = "SELECT Actual, BaseID, Batch, Build, BuildLeader, Comp, Design, Hold, Machine, Ma" +
+                "rgin, POValue, Processor, ProgramManager, QA, RemainingRev, ShipDate, ShipMonth," +
+                " Tracker, Type, Weld, age1 FROM ActiveJobs WHERE (Margin < 2)";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@smonth", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[4] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[4].Connection = this.Connection;
-            this._commandCollection[4].CommandText = "SELECT Actual, BaseID, Batch, Build, Comp, Design, Machine, Margin, POValue, Ship" +
-                "Date, ShipMonth, Tracker, Type, Weld FROM ActiveJobs WHERE (ShipDate < @date)";
+            this._commandCollection[4].CommandText = "SELECT Actual, BaseID, Batch, Build, BuildLeader, Comp, Design, Hold, Machine, Ma" +
+                "rgin, POValue, Processor, ProgramManager, QA, RemainingRev, ShipDate, ShipMonth," +
+                " Tracker, Type, Weld, age1 FROM ActiveJobs WHERE (BaseID LIKE \'%VCT%\')";
             this._commandCollection[4].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date", global::System.Data.SqlDbType.Date, 3, global::System.Data.ParameterDirection.Input, 0, 0, "ShipDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[5] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[5].Connection = this.Connection;
+            this._commandCollection[5].CommandText = @"SELECT Actual, BaseID, Batch, Build, BuildLeader, Comp, Design, Hold, Machine, Margin, POValue, Processor, ProgramManager, QA, RemainingRev, ShipDate, ShipMonth, Tracker, Type, Weld, age1 FROM ActiveJobs WHERE (MONTH(ShipDate) = @smonth) AND (YEAR(ShipDate) = '2017')";
+            this._commandCollection[5].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[5].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@smonth", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[6] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[6].Connection = this.Connection;
+            this._commandCollection[6].CommandText = @"SELECT Actual, BaseID, Batch, Build, BuildLeader, Comp, Design, Hold, Machine, Margin, POValue, Processor, ProgramManager, QA, RemainingRev, ShipDate, ShipMonth, Tracker, Type, Weld, age1 FROM ActiveJobs WHERE (MONTH(ShipDate) = @smonth) AND (YEAR(ShipDate) = '2018')";
+            this._commandCollection[6].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[6].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@smonth", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[7] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[7].Connection = this.Connection;
+            this._commandCollection[7].CommandText = "SELECT Actual, BaseID, Batch, Build, BuildLeader, Comp, Design, Hold, Machine, Ma" +
+                "rgin, POValue, Processor, ProgramManager, QA, RemainingRev, ShipDate, ShipMonth," +
+                " Tracker, Type, Weld, age1 FROM ActiveJobs WHERE (ShipDate < @date)";
+            this._commandCollection[7].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date", global::System.Data.SqlDbType.Date, 3, global::System.Data.ParameterDirection.Input, 0, 0, "ShipDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1386,7 +1733,7 @@ namespace WipViewer.ds_activejobsTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int FillLosers(ds_activejobs.ActiveJobsDataTable dataTable) {
+        public virtual int FillBy(ds_activejobs.ActiveJobsDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[2];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -1399,8 +1746,59 @@ namespace WipViewer.ds_activejobsTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int GetMonth(ds_activejobs.ActiveJobsDataTable dataTable, decimal smonth) {
+        public virtual int FillLosers(ds_activejobs.ActiveJobsDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[3];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillVCT(ds_activejobs.ActiveJobsDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[4];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual ds_activejobs.ActiveJobsDataTable GetVCT() {
+            this.Adapter.SelectCommand = this.CommandCollection[4];
+            ds_activejobs.ActiveJobsDataTable dataTable = new ds_activejobs.ActiveJobsDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int GetMonth(ds_activejobs.ActiveJobsDataTable dataTable, decimal smonth) {
+            this.Adapter.SelectCommand = this.CommandCollection[5];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((decimal)(smonth));
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int GetMonthNY(ds_activejobs.ActiveJobsDataTable dataTable, decimal smonth) {
+            this.Adapter.SelectCommand = this.CommandCollection[6];
             this.Adapter.SelectCommand.Parameters[0].Value = ((decimal)(smonth));
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -1414,7 +1812,7 @@ namespace WipViewer.ds_activejobsTableAdapters {
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
         public virtual int LateFill(ds_activejobs.ActiveJobsDataTable dataTable, string date) {
-            this.Adapter.SelectCommand = this.CommandCollection[4];
+            this.Adapter.SelectCommand = this.CommandCollection[7];
             if ((date == null)) {
                 this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
             }

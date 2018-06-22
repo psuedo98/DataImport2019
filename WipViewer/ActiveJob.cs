@@ -28,5 +28,12 @@ namespace WipViewer
         public Nullable<decimal> Actual { get; set; }
         public Nullable<decimal> Margin { get; set; }
         public string ShipMonth { get; set; }
+        public string ProgramManager { get; set; }
+        public string BuildLeader { get; set; }
+        public string Processor { get; set; }
+        public string QA { get; set; }
+        public Nullable<decimal> RemainingRev { get; set; }
+        public Nullable<int> age1 { get; set; }
+        public string Hold { get; set; }
     }
 }

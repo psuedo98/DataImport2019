@@ -39,6 +39,8 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Margin" Type="decimal" Precision="18" Scale="2" />
           <Property Name="batch" Type="int" Nullable="false" />
+          <Property Name="ShipMonth" Type="varchar" MaxLength="50" />
+          <Property Name="RemainingRev" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="Jobs">
           <Key>
@@ -93,6 +95,8 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="batch" Type="Int32" Nullable="false" />
           <Property Name="Margin" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ShipMonth" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RemainingRev" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="JobHour">
           <Key>
@@ -138,6 +142,8 @@
           <EntitySetMapping Name="JobMetrics">
             <EntityTypeMapping TypeName="WipModel.JobMetric">
               <MappingFragment StoreEntitySet="JobMetrics">
+                <ScalarProperty Name="RemainingRev" ColumnName="RemainingRev" />
+                <ScalarProperty Name="ShipMonth" ColumnName="ShipMonth" />
                 <ScalarProperty Name="Margin" ColumnName="Margin" />
                 <ScalarProperty Name="batch" ColumnName="batch" />
                 <ScalarProperty Name="ID" ColumnName="ID" />

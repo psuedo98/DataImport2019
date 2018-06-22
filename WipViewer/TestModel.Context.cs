@@ -37,5 +37,11 @@ namespace WipViewer
         public virtual DbSet<ActiveJob> ActiveJobs { get; set; }
         public virtual DbSet<Job_batches> Job_batches { get; set; }
         public virtual DbSet<Margin_Over_time> Margin_Over_time { get; set; }
+        public virtual DbSet<Link> Links { get; set; }
+        public virtual DbSet<BondActual> BondActuals { get; set; }
+        public virtual DbSet<Folder> Folders { get; set; }
+        public virtual DbSet<tblRedTag> tblRedTags { get; set; }
+        public virtual DbSet<Reason> Reasons { get; set; }
+        public virtual DbSet<Scheduling> Schedulings { get; set; }
     }
 }

@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <assemblyIdentity name="TestAddin, PublicKeyToken=cb7ac5e68ae7afe4" />
+  <loaderSettings generateLogFile="true" shadowCopyEnabled="false" privileges="user" minOfficeVersionSupported="16" />
+</configuration>

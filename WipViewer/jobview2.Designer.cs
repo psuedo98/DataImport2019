@@ -30,24 +30,18 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(jobview2));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.commentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.commenter = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.commentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dsComments = new WipViewer.dsComments();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.batchDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.designDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.weldDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.machineDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buildDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.trackerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.jobbatchesBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.jobBatchesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.jobBatches = new WipViewer.JobBatches();
             this.job_batchesTableAdapter = new WipViewer.JobBatchesTableAdapters.Job_batchesTableAdapter();
-            this.pbJob = new System.Windows.Forms.PictureBox();
             this.lblJobNumber = new System.Windows.Forms.Label();
             this.lblTooltype = new System.Windows.Forms.Label();
             this.lblShipdate = new System.Windows.Forms.Label();
@@ -91,27 +85,46 @@
             this.lblComments = new System.Windows.Forms.Label();
             this.lblActionitems = new System.Windows.Forms.Label();
             this.dgvActionItems = new System.Windows.Forms.DataGridView();
-            this.actionItemsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.ds_ActionItems = new WipViewer.ds_ActionItems();
-            this.actionItemsTableAdapter = new WipViewer.ds_ActionItemsTableAdapters.ActionItemsTableAdapter();
             this.asigneeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.openitem = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ActionRequired = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.createDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.duedateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.submitterDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.critical = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.actionItemsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.ds_ActionItems = new WipViewer.ds_ActionItems();
+            this.btnRfq = new System.Windows.Forms.Button();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.btnHistory = new System.Windows.Forms.Button();
+            this.btnComments = new System.Windows.Forms.Button();
+            this.btnSchedule = new System.Windows.Forms.Button();
+            this.btnFolders = new System.Windows.Forms.Button();
+            this.ds_Comments1 = new WipViewer.ds_Comments();
+            this.lblPMFolder = new System.Windows.Forms.Label();
+            this.lblProcessorFolder = new System.Windows.Forms.Label();
+            this.lblWeldFolder = new System.Windows.Forms.Label();
+            this.lblBuildFolder = new System.Windows.Forms.Label();
+            this.lblMachineFolder = new System.Windows.Forms.Label();
+            this.actionItemsTableAdapter = new WipViewer.ds_ActionItemsTableAdapters.ActionItemsTableAdapter();
+            this.pbLight = new System.Windows.Forms.PictureBox();
+            this.pbJob = new System.Windows.Forms.PictureBox();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.btnRA = new System.Windows.Forms.Button();
+            this.btnAQP = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.commentsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsComments)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.jobbatchesBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.jobBatchesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.jobBatches)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbJob)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvActionItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.actionItemsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ds_ActionItems)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ds_Comments1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbJob)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -125,7 +138,8 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dateDataGridViewTextBoxColumn,
             this.commentDataGridViewTextBoxColumn,
-            this.commenter});
+            this.commenter,
+            this.dataGridViewTextBoxColumn1});
             this.dataGridView1.DataSource = this.commentsBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(670, 91);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(6);
@@ -151,10 +165,9 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.commentDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.commentDataGridViewTextBoxColumn.HeaderText = "comment";
-            this.commentDataGridViewTextBoxColumn.MaxInputLength = 240;
             this.commentDataGridViewTextBoxColumn.Name = "commentDataGridViewTextBoxColumn";
             this.commentDataGridViewTextBoxColumn.ReadOnly = true;
-            this.commentDataGridViewTextBoxColumn.Width = 500;
+            this.commentDataGridViewTextBoxColumn.Width = 800;
             // 
             // commenter
             // 
@@ -165,6 +178,15 @@
             this.commenter.ReadOnly = true;
             this.commenter.Width = 180;
             // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "id";
+            this.dataGridViewTextBoxColumn1.HeaderText = "id";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Visible = false;
+            this.dataGridViewTextBoxColumn1.Width = 54;
+            // 
             // commentsBindingSource
             // 
             this.commentsBindingSource.DataMember = "comments";
@@ -174,81 +196,6 @@
             // 
             this.dsComments.DataSetName = "dsComments";
             this.dsComments.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // dataGridView2
-            // 
-            this.dataGridView2.AllowUserToAddRows = false;
-            this.dataGridView2.AllowUserToDeleteRows = false;
-            this.dataGridView2.AutoGenerateColumns = false;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.batchDateDataGridViewTextBoxColumn,
-            this.designDataGridViewTextBoxColumn,
-            this.weldDataGridViewTextBoxColumn,
-            this.machineDataGridViewTextBoxColumn,
-            this.buildDataGridViewTextBoxColumn,
-            this.trackerDataGridViewTextBoxColumn});
-            this.dataGridView2.DataSource = this.jobbatchesBindingSource1;
-            this.dataGridView2.Location = new System.Drawing.Point(15, 651);
-            this.dataGridView2.Margin = new System.Windows.Forms.Padding(6);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.ReadOnly = true;
-            this.dataGridView2.Size = new System.Drawing.Size(684, 170);
-            this.dataGridView2.TabIndex = 1;
-            // 
-            // batchDateDataGridViewTextBoxColumn
-            // 
-            this.batchDateDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.batchDateDataGridViewTextBoxColumn.DataPropertyName = "BatchDate";
-            this.batchDateDataGridViewTextBoxColumn.HeaderText = "BatchDate";
-            this.batchDateDataGridViewTextBoxColumn.Name = "batchDateDataGridViewTextBoxColumn";
-            this.batchDateDataGridViewTextBoxColumn.ReadOnly = true;
-            this.batchDateDataGridViewTextBoxColumn.Width = 137;
-            // 
-            // designDataGridViewTextBoxColumn
-            // 
-            this.designDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.designDataGridViewTextBoxColumn.DataPropertyName = "Design";
-            this.designDataGridViewTextBoxColumn.HeaderText = "Design";
-            this.designDataGridViewTextBoxColumn.Name = "designDataGridViewTextBoxColumn";
-            this.designDataGridViewTextBoxColumn.ReadOnly = true;
-            this.designDataGridViewTextBoxColumn.Width = 104;
-            // 
-            // weldDataGridViewTextBoxColumn
-            // 
-            this.weldDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.weldDataGridViewTextBoxColumn.DataPropertyName = "Weld";
-            this.weldDataGridViewTextBoxColumn.HeaderText = "Weld";
-            this.weldDataGridViewTextBoxColumn.Name = "weldDataGridViewTextBoxColumn";
-            this.weldDataGridViewTextBoxColumn.ReadOnly = true;
-            this.weldDataGridViewTextBoxColumn.Width = 86;
-            // 
-            // machineDataGridViewTextBoxColumn
-            // 
-            this.machineDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.machineDataGridViewTextBoxColumn.DataPropertyName = "Machine";
-            this.machineDataGridViewTextBoxColumn.HeaderText = "Machine";
-            this.machineDataGridViewTextBoxColumn.Name = "machineDataGridViewTextBoxColumn";
-            this.machineDataGridViewTextBoxColumn.ReadOnly = true;
-            this.machineDataGridViewTextBoxColumn.Width = 119;
-            // 
-            // buildDataGridViewTextBoxColumn
-            // 
-            this.buildDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.buildDataGridViewTextBoxColumn.DataPropertyName = "Build";
-            this.buildDataGridViewTextBoxColumn.HeaderText = "Build";
-            this.buildDataGridViewTextBoxColumn.Name = "buildDataGridViewTextBoxColumn";
-            this.buildDataGridViewTextBoxColumn.ReadOnly = true;
-            this.buildDataGridViewTextBoxColumn.Width = 85;
-            // 
-            // trackerDataGridViewTextBoxColumn
-            // 
-            this.trackerDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.trackerDataGridViewTextBoxColumn.DataPropertyName = "Tracker";
-            this.trackerDataGridViewTextBoxColumn.HeaderText = "Tracker";
-            this.trackerDataGridViewTextBoxColumn.Name = "trackerDataGridViewTextBoxColumn";
-            this.trackerDataGridViewTextBoxColumn.ReadOnly = true;
-            this.trackerDataGridViewTextBoxColumn.Width = 110;
             // 
             // jobbatchesBindingSource1
             // 
@@ -268,16 +215,6 @@
             // job_batchesTableAdapter
             // 
             this.job_batchesTableAdapter.ClearBeforeFill = true;
-            // 
-            // pbJob
-            // 
-            this.pbJob.Location = new System.Drawing.Point(15, 16);
-            this.pbJob.Margin = new System.Windows.Forms.Padding(6);
-            this.pbJob.Name = "pbJob";
-            this.pbJob.Size = new System.Drawing.Size(578, 329);
-            this.pbJob.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbJob.TabIndex = 2;
-            this.pbJob.TabStop = false;
             // 
             // lblJobNumber
             // 
@@ -573,7 +510,7 @@
             // 
             // btnGuys
             // 
-            this.btnGuys.Location = new System.Drawing.Point(963, 11);
+            this.btnGuys.Location = new System.Drawing.Point(1109, 11);
             this.btnGuys.Name = "btnGuys";
             this.btnGuys.Size = new System.Drawing.Size(116, 38);
             this.btnGuys.TabIndex = 31;
@@ -734,21 +671,90 @@
             // 
             // dgvActionItems
             // 
+            this.dgvActionItems.AllowUserToAddRows = false;
+            this.dgvActionItems.AllowUserToDeleteRows = false;
             this.dgvActionItems.AutoGenerateColumns = false;
             this.dgvActionItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvActionItems.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.asigneeDataGridViewTextBoxColumn,
+            this.openitem,
             this.ActionRequired,
             this.createDateDataGridViewTextBoxColumn,
             this.duedateDataGridViewTextBoxColumn,
             this.submitterDataGridViewTextBoxColumn,
-            this.critical});
+            this.critical,
+            this.ID});
             this.dgvActionItems.DataSource = this.actionItemsBindingSource;
             this.dgvActionItems.Location = new System.Drawing.Point(670, 327);
             this.dgvActionItems.Name = "dgvActionItems";
+            this.dgvActionItems.ReadOnly = true;
+            this.dgvActionItems.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvActionItems.Size = new System.Drawing.Size(1080, 201);
             this.dgvActionItems.TabIndex = 47;
+            this.dgvActionItems.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvActionItems_CellClick1);
             this.dgvActionItems.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvActionItems_CellContentClick);
+            // 
+            // asigneeDataGridViewTextBoxColumn
+            // 
+            this.asigneeDataGridViewTextBoxColumn.DataPropertyName = "Asignee";
+            this.asigneeDataGridViewTextBoxColumn.HeaderText = "Asignee";
+            this.asigneeDataGridViewTextBoxColumn.Name = "asigneeDataGridViewTextBoxColumn";
+            this.asigneeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.asigneeDataGridViewTextBoxColumn.Width = 180;
+            // 
+            // openitem
+            // 
+            this.openitem.DataPropertyName = "openitem";
+            this.openitem.HeaderText = "Open?";
+            this.openitem.Name = "openitem";
+            this.openitem.ReadOnly = true;
+            // 
+            // ActionRequired
+            // 
+            this.ActionRequired.DataPropertyName = "ActionRequired";
+            this.ActionRequired.HeaderText = "ActionRequired";
+            this.ActionRequired.Name = "ActionRequired";
+            this.ActionRequired.ReadOnly = true;
+            this.ActionRequired.Width = 320;
+            // 
+            // createDateDataGridViewTextBoxColumn
+            // 
+            this.createDateDataGridViewTextBoxColumn.DataPropertyName = "CreateDate";
+            this.createDateDataGridViewTextBoxColumn.HeaderText = "CreateDate";
+            this.createDateDataGridViewTextBoxColumn.Name = "createDateDataGridViewTextBoxColumn";
+            this.createDateDataGridViewTextBoxColumn.ReadOnly = true;
+            this.createDateDataGridViewTextBoxColumn.Width = 180;
+            // 
+            // duedateDataGridViewTextBoxColumn
+            // 
+            this.duedateDataGridViewTextBoxColumn.DataPropertyName = "Duedate";
+            this.duedateDataGridViewTextBoxColumn.HeaderText = "Duedate";
+            this.duedateDataGridViewTextBoxColumn.Name = "duedateDataGridViewTextBoxColumn";
+            this.duedateDataGridViewTextBoxColumn.ReadOnly = true;
+            this.duedateDataGridViewTextBoxColumn.Width = 180;
+            // 
+            // submitterDataGridViewTextBoxColumn
+            // 
+            this.submitterDataGridViewTextBoxColumn.DataPropertyName = "Submitter";
+            this.submitterDataGridViewTextBoxColumn.HeaderText = "Submitter";
+            this.submitterDataGridViewTextBoxColumn.Name = "submitterDataGridViewTextBoxColumn";
+            this.submitterDataGridViewTextBoxColumn.ReadOnly = true;
+            this.submitterDataGridViewTextBoxColumn.Width = 180;
+            // 
+            // critical
+            // 
+            this.critical.DataPropertyName = "critical";
+            this.critical.HeaderText = "critical";
+            this.critical.Name = "critical";
+            this.critical.ReadOnly = true;
+            this.critical.Visible = false;
+            // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
             // 
             // actionItemsBindingSource
             // 
@@ -761,61 +767,187 @@
             this.ds_ActionItems.DataSetName = "ds_ActionItems";
             this.ds_ActionItems.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
+            // btnRfq
+            // 
+            this.btnRfq.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRfq.Location = new System.Drawing.Point(964, 11);
+            this.btnRfq.Margin = new System.Windows.Forms.Padding(6);
+            this.btnRfq.Name = "btnRfq";
+            this.btnRfq.Size = new System.Drawing.Size(136, 38);
+            this.btnRfq.TabIndex = 48;
+            this.btnRfq.Text = "Heat Treat";
+            this.btnRfq.UseVisualStyleBackColor = true;
+            this.btnRfq.Click += new System.EventHandler(this.btnRfq_Click);
+            // 
+            // btnHistory
+            // 
+            this.btnHistory.Location = new System.Drawing.Point(421, 404);
+            this.btnHistory.Name = "btnHistory";
+            this.btnHistory.Size = new System.Drawing.Size(172, 69);
+            this.btnHistory.TabIndex = 49;
+            this.btnHistory.Text = "View Job History";
+            this.btnHistory.UseVisualStyleBackColor = true;
+            this.btnHistory.Click += new System.EventHandler(this.btnHistory_Click);
+            // 
+            // btnComments
+            // 
+            this.btnComments.Location = new System.Drawing.Point(421, 479);
+            this.btnComments.Name = "btnComments";
+            this.btnComments.Size = new System.Drawing.Size(172, 69);
+            this.btnComments.TabIndex = 50;
+            this.btnComments.Text = "View Comment History";
+            this.btnComments.UseVisualStyleBackColor = true;
+            this.btnComments.Click += new System.EventHandler(this.btnComments_Click);
+            // 
+            // btnSchedule
+            // 
+            this.btnSchedule.Location = new System.Drawing.Point(421, 554);
+            this.btnSchedule.Name = "btnSchedule";
+            this.btnSchedule.Size = new System.Drawing.Size(172, 69);
+            this.btnSchedule.TabIndex = 51;
+            this.btnSchedule.Text = "View/Edit Schedule";
+            this.btnSchedule.UseVisualStyleBackColor = true;
+            this.btnSchedule.Click += new System.EventHandler(this.btnSchedule_Click);
+            // 
+            // btnFolders
+            // 
+            this.btnFolders.Location = new System.Drawing.Point(421, 629);
+            this.btnFolders.Name = "btnFolders";
+            this.btnFolders.Size = new System.Drawing.Size(172, 69);
+            this.btnFolders.TabIndex = 52;
+            this.btnFolders.Text = "Update Folders";
+            this.btnFolders.UseVisualStyleBackColor = true;
+            this.btnFolders.Click += new System.EventHandler(this.btnFolders_Click);
+            // 
+            // ds_Comments1
+            // 
+            this.ds_Comments1.DataSetName = "ds_Comments";
+            this.ds_Comments1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // lblPMFolder
+            // 
+            this.lblPMFolder.AutoSize = true;
+            this.lblPMFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPMFolder.Location = new System.Drawing.Point(16, 648);
+            this.lblPMFolder.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lblPMFolder.Name = "lblPMFolder";
+            this.lblPMFolder.Size = new System.Drawing.Size(129, 25);
+            this.lblPMFolder.TabIndex = 53;
+            this.lblPMFolder.Text = "PMFOLDER";
+            // 
+            // lblProcessorFolder
+            // 
+            this.lblProcessorFolder.AutoSize = true;
+            this.lblProcessorFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProcessorFolder.Location = new System.Drawing.Point(16, 673);
+            this.lblProcessorFolder.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lblProcessorFolder.Name = "lblProcessorFolder";
+            this.lblProcessorFolder.Size = new System.Drawing.Size(170, 25);
+            this.lblProcessorFolder.TabIndex = 54;
+            this.lblProcessorFolder.Text = "ProcessorFolder";
+            // 
+            // lblWeldFolder
+            // 
+            this.lblWeldFolder.AutoSize = true;
+            this.lblWeldFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWeldFolder.Location = new System.Drawing.Point(16, 698);
+            this.lblWeldFolder.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lblWeldFolder.Name = "lblWeldFolder";
+            this.lblWeldFolder.Size = new System.Drawing.Size(122, 25);
+            this.lblWeldFolder.TabIndex = 55;
+            this.lblWeldFolder.Text = "WeldFolder";
+            // 
+            // lblBuildFolder
+            // 
+            this.lblBuildFolder.AutoSize = true;
+            this.lblBuildFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBuildFolder.Location = new System.Drawing.Point(16, 748);
+            this.lblBuildFolder.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lblBuildFolder.Name = "lblBuildFolder";
+            this.lblBuildFolder.Size = new System.Drawing.Size(121, 25);
+            this.lblBuildFolder.TabIndex = 57;
+            this.lblBuildFolder.Text = "BuildFolder";
+            // 
+            // lblMachineFolder
+            // 
+            this.lblMachineFolder.AutoSize = true;
+            this.lblMachineFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMachineFolder.Location = new System.Drawing.Point(16, 723);
+            this.lblMachineFolder.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lblMachineFolder.Name = "lblMachineFolder";
+            this.lblMachineFolder.Size = new System.Drawing.Size(155, 25);
+            this.lblMachineFolder.TabIndex = 56;
+            this.lblMachineFolder.Text = "MachineFolder";
+            // 
             // actionItemsTableAdapter
             // 
             this.actionItemsTableAdapter.ClearBeforeFill = true;
             // 
-            // asigneeDataGridViewTextBoxColumn
+            // pbLight
             // 
-            this.asigneeDataGridViewTextBoxColumn.DataPropertyName = "Asignee";
-            this.asigneeDataGridViewTextBoxColumn.HeaderText = "Asignee";
-            this.asigneeDataGridViewTextBoxColumn.Name = "asigneeDataGridViewTextBoxColumn";
-            this.asigneeDataGridViewTextBoxColumn.Width = 180;
+            this.pbLight.Image = global::WipViewer.Properties.Resources.light_red_flash;
+            this.pbLight.InitialImage = ((System.Drawing.Image)(resources.GetObject("pbLight.InitialImage")));
+            this.pbLight.Location = new System.Drawing.Point(1583, 91);
+            this.pbLight.Name = "pbLight";
+            this.pbLight.Size = new System.Drawing.Size(206, 217);
+            this.pbLight.TabIndex = 58;
+            this.pbLight.TabStop = false;
+            this.pbLight.Visible = false;
+            this.pbLight.Click += new System.EventHandler(this.pbLight_Click);
             // 
-            // ActionRequired
+            // pbJob
             // 
-            this.ActionRequired.DataPropertyName = "ActionRequired";
-            this.ActionRequired.HeaderText = "ActionRequired";
-            this.ActionRequired.Name = "ActionRequired";
-            this.ActionRequired.Width = 320;
-            // 
-            // createDateDataGridViewTextBoxColumn
-            // 
-            this.createDateDataGridViewTextBoxColumn.DataPropertyName = "CreateDate";
-            this.createDateDataGridViewTextBoxColumn.HeaderText = "CreateDate";
-            this.createDateDataGridViewTextBoxColumn.Name = "createDateDataGridViewTextBoxColumn";
-            this.createDateDataGridViewTextBoxColumn.Width = 180;
-            // 
-            // duedateDataGridViewTextBoxColumn
-            // 
-            this.duedateDataGridViewTextBoxColumn.DataPropertyName = "Duedate";
-            this.duedateDataGridViewTextBoxColumn.HeaderText = "Duedate";
-            this.duedateDataGridViewTextBoxColumn.Name = "duedateDataGridViewTextBoxColumn";
-            this.duedateDataGridViewTextBoxColumn.Width = 180;
-            // 
-            // submitterDataGridViewTextBoxColumn
-            // 
-            this.submitterDataGridViewTextBoxColumn.DataPropertyName = "Submitter";
-            this.submitterDataGridViewTextBoxColumn.HeaderText = "Submitter";
-            this.submitterDataGridViewTextBoxColumn.Name = "submitterDataGridViewTextBoxColumn";
-            this.submitterDataGridViewTextBoxColumn.Width = 180;
-            // 
-            // critical
-            // 
-            this.critical.DataPropertyName = "critical";
-            this.critical.HeaderText = "critical";
-            this.critical.Name = "critical";
-            this.critical.Visible = false;
+            this.pbJob.Location = new System.Drawing.Point(15, 16);
+            this.pbJob.Margin = new System.Windows.Forms.Padding(6);
+            this.pbJob.Name = "pbJob";
+            this.pbJob.Size = new System.Drawing.Size(578, 329);
+            this.pbJob.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbJob.TabIndex = 2;
+            this.pbJob.TabStop = false;
+            this.pbJob.Click += new System.EventHandler(this.pbjob_click);
             // 
             // bindingSource1
             // 
             this.bindingSource1.CurrentChanged += new System.EventHandler(this.bindingSource1_CurrentChanged);
+            // 
+            // btnRA
+            // 
+            this.btnRA.Location = new System.Drawing.Point(421, 704);
+            this.btnRA.Name = "btnRA";
+            this.btnRA.Size = new System.Drawing.Size(172, 61);
+            this.btnRA.TabIndex = 59;
+            this.btnRA.Text = "Risk Assessment";
+            this.btnRA.UseVisualStyleBackColor = true;
+            this.btnRA.Click += new System.EventHandler(this.btnRA_Click);
+            // 
+            // btnAQP
+            // 
+            this.btnAQP.Location = new System.Drawing.Point(421, 771);
+            this.btnAQP.Name = "btnAQP";
+            this.btnAQP.Size = new System.Drawing.Size(172, 61);
+            this.btnAQP.TabIndex = 60;
+            this.btnAQP.Text = "AQP";
+            this.btnAQP.UseVisualStyleBackColor = true;
+            this.btnAQP.Click += new System.EventHandler(this.btnAQP_Click);
             // 
             // jobview2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1784, 841);
+            this.Controls.Add(this.btnAQP);
+            this.Controls.Add(this.btnRA);
+            this.Controls.Add(this.pbLight);
+            this.Controls.Add(this.lblBuildFolder);
+            this.Controls.Add(this.lblMachineFolder);
+            this.Controls.Add(this.lblWeldFolder);
+            this.Controls.Add(this.lblProcessorFolder);
+            this.Controls.Add(this.lblPMFolder);
+            this.Controls.Add(this.btnFolders);
+            this.Controls.Add(this.btnSchedule);
+            this.Controls.Add(this.btnComments);
+            this.Controls.Add(this.btnHistory);
+            this.Controls.Add(this.btnRfq);
             this.Controls.Add(this.dgvActionItems);
             this.Controls.Add(this.lblActionitems);
             this.Controls.Add(this.lblComments);
@@ -858,9 +990,9 @@
             this.Controls.Add(this.lblTooltype);
             this.Controls.Add(this.lblJobNumber);
             this.Controls.Add(this.pbJob);
-            this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.dataGridView1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "jobview2";
             this.Text = " ";
@@ -868,14 +1000,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.commentsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsComments)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.jobbatchesBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.jobBatchesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.jobBatches)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbJob)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvActionItems)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.actionItemsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ds_ActionItems)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ds_Comments1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbJob)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -889,7 +1022,6 @@
         private dsComments dsComments;
         private System.Windows.Forms.BindingSource commentsBindingSource;
         private dsCommentsTableAdapters.commentsTableAdapter commentsTableAdapter;
-        private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.BindingSource jobBatchesBindingSource;
         private JobBatches jobBatches;
         private System.Windows.Forms.BindingSource jobbatchesBindingSource1;
@@ -921,12 +1053,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnUpdatePicture;
         private System.Windows.Forms.OpenFileDialog ofdPicture;
-        private System.Windows.Forms.DataGridViewTextBoxColumn batchDateDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn designDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn weldDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn machineDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn buildDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn trackerDataGridViewTextBoxColumn;
         private System.Windows.Forms.Button btnGuys;
         private System.Windows.Forms.Label lblPm;
         private System.Windows.Forms.Label lblProcessor;
@@ -934,9 +1060,6 @@
         private System.Windows.Forms.Label lblBuldLeader;
         private System.Windows.Forms.Label lblData;
         private System.Windows.Forms.Label lblFolder;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn commentDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn commenter;
         private System.Windows.Forms.Label lblPoDate;
         private System.Windows.Forms.CheckBox chkDes;
         private System.Windows.Forms.CheckBox checkBox1;
@@ -949,11 +1072,32 @@
         private System.Windows.Forms.BindingSource actionItemsBindingSource;
         private ds_ActionItemsTableAdapters.ActionItemsTableAdapter actionItemsTableAdapter;
         private System.Windows.Forms.DataGridView dgvActionItems;
+        private System.Windows.Forms.Button btnRfq;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.DataGridViewTextBoxColumn asigneeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn openitem;
         private System.Windows.Forms.DataGridViewTextBoxColumn ActionRequired;
         private System.Windows.Forms.DataGridViewTextBoxColumn createDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn duedateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn submitterDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn critical;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.Button btnHistory;
+        private System.Windows.Forms.Button btnComments;
+        private System.Windows.Forms.Button btnSchedule;
+        private System.Windows.Forms.Button btnFolders;
+        private ds_Comments ds_Comments1;
+        private System.Windows.Forms.Label lblPMFolder;
+        private System.Windows.Forms.Label lblProcessorFolder;
+        private System.Windows.Forms.Label lblWeldFolder;
+        private System.Windows.Forms.Label lblBuildFolder;
+        private System.Windows.Forms.Label lblMachineFolder;
+        private System.Windows.Forms.PictureBox pbLight;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn commentDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn commenter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.Button btnRA;
+        private System.Windows.Forms.Button btnAQP;
     }
 }

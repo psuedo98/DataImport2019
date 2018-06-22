@@ -24,5 +24,6 @@ namespace WipViewer
         public Nullable<decimal> Margin { get; set; }
         public int batch { get; set; }
         public string ShipMonth { get; set; }
+        public Nullable<decimal> RemainingRev { get; set; }
     }
 }

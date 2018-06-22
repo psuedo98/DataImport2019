@@ -26,7 +26,8 @@ namespace DataImport.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost\\sqlexpress;Initial Catalog=Wip;Integrated Security=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=desktop-v09rgin\\sqlexpress;Initial Catalog=Wip;Integrated Security=Tr" +
+            "ue")]
         public string WipConnectionString {
             get {
                 return ((string)(this["WipConnectionString"]));
