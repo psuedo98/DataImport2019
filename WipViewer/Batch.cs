@@ -16,5 +16,6 @@ namespace WipViewer
     {
         public int Batch1 { get; set; }
         public Nullable<System.DateTime> BatchDate { get; set; }
+        public System.DateTime BatchTime { get; set; }
     }
 }

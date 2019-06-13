@@ -35,13 +35,7 @@
             this.testGridSyncfusionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewClosedJobToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.actionItemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.commentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.schedulingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.machiningToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.shippingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.shToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.teamReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.accountingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.completedJobsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.marginReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,22 +43,29 @@
             this.materialReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.materialByVendorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.laborTicketDetailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.qualityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.costOfQualityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.redTagSummaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.purchasingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sofiasnotHermansReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lineItemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.onTimeDeliveryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.problemJobsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.laborTicketDetailToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.hoursByDeptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openLaborTicketsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gLLaborToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.actionItemReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rFQToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.qCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redTagToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createNewRedTagToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openRedTagToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.inventoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showInventorySystemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.meetingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newMeetingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.suppliersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showSupplierSystemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.redTagSystemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.actualsReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -75,7 +76,10 @@
             this.fileToolStripMenuItem,
             this.reportsToolStripMenuItem,
             this.rFQToolStripMenuItem,
-            this.qCToolStripMenuItem});
+            this.qCToolStripMenuItem,
+            this.inventoryToolStripMenuItem,
+            this.meetingsToolStripMenuItem,
+            this.suppliersToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(904, 24);
@@ -116,70 +120,26 @@
             // reportsToolStripMenuItem
             // 
             this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.actionItemsToolStripMenuItem,
             this.commentsToolStripMenuItem,
-            this.schedulingToolStripMenuItem,
             this.accountingToolStripMenuItem,
-            this.qualityToolStripMenuItem,
             this.purchasingToolStripMenuItem,
             this.problemJobsToolStripMenuItem,
-            this.laborTicketDetailToolStripMenuItem1});
+            this.laborTicketDetailToolStripMenuItem1,
+            this.hoursByDeptToolStripMenuItem,
+            this.openLaborTicketsToolStripMenuItem,
+            this.gLLaborToolStripMenuItem,
+            this.actionItemReportToolStripMenuItem,
+            this.actualsReportToolStripMenuItem});
             this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
             this.reportsToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.reportsToolStripMenuItem.Text = "Reports";
             // 
-            // actionItemsToolStripMenuItem
-            // 
-            this.actionItemsToolStripMenuItem.Name = "actionItemsToolStripMenuItem";
-            this.actionItemsToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.actionItemsToolStripMenuItem.Text = "Action Items";
-            this.actionItemsToolStripMenuItem.Click += new System.EventHandler(this.actionItemsToolStripMenuItem_Click);
-            // 
             // commentsToolStripMenuItem
             // 
             this.commentsToolStripMenuItem.Name = "commentsToolStripMenuItem";
-            this.commentsToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.commentsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.commentsToolStripMenuItem.Text = "Comments";
             this.commentsToolStripMenuItem.Click += new System.EventHandler(this.commentsToolStripMenuItem_Click);
-            // 
-            // schedulingToolStripMenuItem
-            // 
-            this.schedulingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.machiningToolStripMenuItem,
-            this.shippingToolStripMenuItem,
-            this.shToolStripMenuItem,
-            this.teamReportToolStripMenuItem});
-            this.schedulingToolStripMenuItem.Name = "schedulingToolStripMenuItem";
-            this.schedulingToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.schedulingToolStripMenuItem.Text = "Scheduling";
-            // 
-            // machiningToolStripMenuItem
-            // 
-            this.machiningToolStripMenuItem.Name = "machiningToolStripMenuItem";
-            this.machiningToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
-            this.machiningToolStripMenuItem.Text = "Machining";
-            this.machiningToolStripMenuItem.Click += new System.EventHandler(this.machiningToolStripMenuItem_Click);
-            // 
-            // shippingToolStripMenuItem
-            // 
-            this.shippingToolStripMenuItem.Name = "shippingToolStripMenuItem";
-            this.shippingToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
-            this.shippingToolStripMenuItem.Text = "Shipping";
-            this.shippingToolStripMenuItem.Click += new System.EventHandler(this.shippingToolStripMenuItem_Click);
-            // 
-            // shToolStripMenuItem
-            // 
-            this.shToolStripMenuItem.Name = "shToolStripMenuItem";
-            this.shToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
-            this.shToolStripMenuItem.Text = "Shipping Report";
-            this.shToolStripMenuItem.Click += new System.EventHandler(this.shToolStripMenuItem_Click);
-            // 
-            // teamReportToolStripMenuItem
-            // 
-            this.teamReportToolStripMenuItem.Name = "teamReportToolStripMenuItem";
-            this.teamReportToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
-            this.teamReportToolStripMenuItem.Text = "Team Report";
-            this.teamReportToolStripMenuItem.Click += new System.EventHandler(this.teamReportToolStripMenuItem_Click);
             // 
             // accountingToolStripMenuItem
             // 
@@ -191,7 +151,7 @@
             this.materialByVendorToolStripMenuItem,
             this.laborTicketDetailToolStripMenuItem});
             this.accountingToolStripMenuItem.Name = "accountingToolStripMenuItem";
-            this.accountingToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.accountingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.accountingToolStripMenuItem.Text = "Accounting";
             // 
             // completedJobsToolStripMenuItem
@@ -236,30 +196,6 @@
             this.laborTicketDetailToolStripMenuItem.Text = "Labor Ticket Detail";
             this.laborTicketDetailToolStripMenuItem.Click += new System.EventHandler(this.laborTicketDetailToolStripMenuItem_Click);
             // 
-            // qualityToolStripMenuItem
-            // 
-            this.qualityToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.costOfQualityToolStripMenuItem,
-            this.redTagSummaryToolStripMenuItem,
-            this.redTagSystemToolStripMenuItem});
-            this.qualityToolStripMenuItem.Name = "qualityToolStripMenuItem";
-            this.qualityToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.qualityToolStripMenuItem.Text = "Quality";
-            // 
-            // costOfQualityToolStripMenuItem
-            // 
-            this.costOfQualityToolStripMenuItem.Name = "costOfQualityToolStripMenuItem";
-            this.costOfQualityToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.costOfQualityToolStripMenuItem.Text = "Cost of Quality";
-            this.costOfQualityToolStripMenuItem.Click += new System.EventHandler(this.costOfQualityToolStripMenuItem_Click);
-            // 
-            // redTagSummaryToolStripMenuItem
-            // 
-            this.redTagSummaryToolStripMenuItem.Name = "redTagSummaryToolStripMenuItem";
-            this.redTagSummaryToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.redTagSummaryToolStripMenuItem.Text = "Red Tag Summary";
-            this.redTagSummaryToolStripMenuItem.Click += new System.EventHandler(this.redTagSummaryToolStripMenuItem_Click);
-            // 
             // purchasingToolStripMenuItem
             // 
             this.purchasingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -267,7 +203,7 @@
             this.lineItemsToolStripMenuItem,
             this.onTimeDeliveryToolStripMenuItem});
             this.purchasingToolStripMenuItem.Name = "purchasingToolStripMenuItem";
-            this.purchasingToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.purchasingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.purchasingToolStripMenuItem.Text = "Purchasing";
             // 
             // sofiasnotHermansReportToolStripMenuItem
@@ -294,16 +230,44 @@
             // problemJobsToolStripMenuItem
             // 
             this.problemJobsToolStripMenuItem.Name = "problemJobsToolStripMenuItem";
-            this.problemJobsToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.problemJobsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.problemJobsToolStripMenuItem.Text = "Problem Jobs";
             this.problemJobsToolStripMenuItem.Click += new System.EventHandler(this.problemJobsToolStripMenuItem_Click);
             // 
             // laborTicketDetailToolStripMenuItem1
             // 
             this.laborTicketDetailToolStripMenuItem1.Name = "laborTicketDetailToolStripMenuItem1";
-            this.laborTicketDetailToolStripMenuItem1.Size = new System.Drawing.Size(172, 22);
+            this.laborTicketDetailToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.laborTicketDetailToolStripMenuItem1.Text = "Labor Ticket Detail";
             this.laborTicketDetailToolStripMenuItem1.Click += new System.EventHandler(this.laborTicketDetailToolStripMenuItem1_Click);
+            // 
+            // hoursByDeptToolStripMenuItem
+            // 
+            this.hoursByDeptToolStripMenuItem.Name = "hoursByDeptToolStripMenuItem";
+            this.hoursByDeptToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.hoursByDeptToolStripMenuItem.Text = "Hours By Dept";
+            this.hoursByDeptToolStripMenuItem.Click += new System.EventHandler(this.hoursByDeptToolStripMenuItem_Click);
+            // 
+            // openLaborTicketsToolStripMenuItem
+            // 
+            this.openLaborTicketsToolStripMenuItem.Name = "openLaborTicketsToolStripMenuItem";
+            this.openLaborTicketsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openLaborTicketsToolStripMenuItem.Text = "Open Labor Tickets";
+            this.openLaborTicketsToolStripMenuItem.Click += new System.EventHandler(this.openLaborTicketsToolStripMenuItem_Click);
+            // 
+            // gLLaborToolStripMenuItem
+            // 
+            this.gLLaborToolStripMenuItem.Name = "gLLaborToolStripMenuItem";
+            this.gLLaborToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.gLLaborToolStripMenuItem.Text = "GL Labor";
+            this.gLLaborToolStripMenuItem.Click += new System.EventHandler(this.gLLaborToolStripMenuItem_Click);
+            // 
+            // actionItemReportToolStripMenuItem
+            // 
+            this.actionItemReportToolStripMenuItem.Name = "actionItemReportToolStripMenuItem";
+            this.actionItemReportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.actionItemReportToolStripMenuItem.Text = "Action Item Report";
+            this.actionItemReportToolStripMenuItem.Click += new System.EventHandler(this.actionItemReportToolStripMenuItem_Click);
             // 
             // rFQToolStripMenuItem
             // 
@@ -342,6 +306,51 @@
             this.openRedTagToolStripMenuItem.Text = "Open Red Tag";
             this.openRedTagToolStripMenuItem.Click += new System.EventHandler(this.openRedTagToolStripMenuItem_Click);
             // 
+            // inventoryToolStripMenuItem
+            // 
+            this.inventoryToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showInventorySystemToolStripMenuItem});
+            this.inventoryToolStripMenuItem.Name = "inventoryToolStripMenuItem";
+            this.inventoryToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
+            this.inventoryToolStripMenuItem.Text = "Inventory";
+            // 
+            // showInventorySystemToolStripMenuItem
+            // 
+            this.showInventorySystemToolStripMenuItem.Name = "showInventorySystemToolStripMenuItem";
+            this.showInventorySystemToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.showInventorySystemToolStripMenuItem.Text = "Show Inventory System";
+            this.showInventorySystemToolStripMenuItem.Click += new System.EventHandler(this.showInventorySystemToolStripMenuItem_Click);
+            // 
+            // meetingsToolStripMenuItem
+            // 
+            this.meetingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newMeetingToolStripMenuItem});
+            this.meetingsToolStripMenuItem.Name = "meetingsToolStripMenuItem";
+            this.meetingsToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
+            this.meetingsToolStripMenuItem.Text = "Meetings";
+            // 
+            // newMeetingToolStripMenuItem
+            // 
+            this.newMeetingToolStripMenuItem.Name = "newMeetingToolStripMenuItem";
+            this.newMeetingToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.newMeetingToolStripMenuItem.Text = "New Meeting";
+            this.newMeetingToolStripMenuItem.Click += new System.EventHandler(this.newMeetingToolStripMenuItem_Click);
+            // 
+            // suppliersToolStripMenuItem
+            // 
+            this.suppliersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showSupplierSystemToolStripMenuItem});
+            this.suppliersToolStripMenuItem.Name = "suppliersToolStripMenuItem";
+            this.suppliersToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
+            this.suppliersToolStripMenuItem.Text = "Suppliers";
+            // 
+            // showSupplierSystemToolStripMenuItem
+            // 
+            this.showSupplierSystemToolStripMenuItem.Name = "showSupplierSystemToolStripMenuItem";
+            this.showSupplierSystemToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.showSupplierSystemToolStripMenuItem.Text = "Show Supplier System";
+            this.showSupplierSystemToolStripMenuItem.Click += new System.EventHandler(this.showSupplierSystemToolStripMenuItem_Click);
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
@@ -352,12 +361,12 @@
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
-            // redTagSystemToolStripMenuItem
+            // actualsReportToolStripMenuItem
             // 
-            this.redTagSystemToolStripMenuItem.Name = "redTagSystemToolStripMenuItem";
-            this.redTagSystemToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.redTagSystemToolStripMenuItem.Text = "Red Tag System";
-            this.redTagSystemToolStripMenuItem.Click += new System.EventHandler(this.redTagSystemToolStripMenuItem_Click);
+            this.actualsReportToolStripMenuItem.Name = "actualsReportToolStripMenuItem";
+            this.actualsReportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.actualsReportToolStripMenuItem.Text = "Actuals Report";
+            this.actualsReportToolStripMenuItem.Click += new System.EventHandler(this.actualsReportToolStripMenuItem_Click);
             // 
             // Main
             // 
@@ -384,27 +393,18 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewAllActiveJobsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem actionItemsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem commentsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rFQToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem schedulingToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem machiningToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem shippingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem accountingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem completedJobsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem marginReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem outsourceReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem materialReportToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.ToolStripMenuItem shToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem teamReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem qCToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem redTagToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem createNewRedTagToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openRedTagToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem qualityToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem costOfQualityToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem redTagSummaryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem purchasingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sofiasnotHermansReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem materialByVendorToolStripMenuItem;
@@ -415,7 +415,17 @@
         private System.Windows.Forms.ToolStripMenuItem viewClosedJobToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem laborTicketDetailToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem laborTicketDetailToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem redTagSystemToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem hoursByDeptToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openLaborTicketsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gLLaborToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem inventoryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showInventorySystemToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem meetingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newMeetingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem actionItemReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem suppliersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showSupplierSystemToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem actualsReportToolStripMenuItem;
     }
 }
 

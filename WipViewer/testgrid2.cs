@@ -56,9 +56,15 @@ namespace WipViewer
 
             cd.Categorizer = new CustomCategorizer();
             this.gc1.TableDescriptor.GroupedColumns.Add(cd);
-         //   this.gc1.QueryCellText += gc1_QueryCellText; 
+            //   this.gc1.QueryCellText += gc1_QueryCellText; 
 
             //Summary Columns 
+
+            TestEntities db = new TestEntities();
+            DateTime maxbatch = db.Batches.Max(p => p.BatchTime);
+
+
+            lblTimeStamp.Text = "Data Accurate as of: " + maxbatch.ToString(); 
 
             #region summary columns
 
@@ -201,7 +207,7 @@ namespace WipViewer
 
 
 
-
+          
 
 
 
@@ -405,8 +411,10 @@ namespace WipViewer
                 string type = el.GetRecord().GetValue("Type").ToString();
                 string shipdate = el.GetRecord().GetValue("ShipDate").ToString();
 
-                testjobview ts1 = new testjobview(job, type, shipdate);
-                ts1.Show();
+                JobView4 jobView4 = new JobView4(job, type, shipdate);
+               jobView4.Show(); 
+               // testjobview ts1 = new testjobview(job, type, shipdate);
+               // ts1.Show();
 
 
 
@@ -831,6 +839,11 @@ namespace WipViewer
                 gc1.TableDescriptor.ConditionalFormats.Remove(f1);
                 gc1.TableDescriptor.ConditionalFormats.Remove(f2);
             }
+        }
+
+        private void lblTimeStamp_Click(object sender, EventArgs e)
+        {
+
         }
     }
     }

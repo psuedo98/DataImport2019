@@ -19,7 +19,7 @@ namespace WipViewer
 
         private void ActionItemReport_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'ds_ActionItems.ActionItems' table. You can move, or remove it, as needed.
+            
             this.actionItemsTableAdapter.FillbyOpen(this.ds_ActionItems.ActionItems);
 
             

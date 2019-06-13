@@ -30,5 +30,7 @@ namespace DataImport
         public virtual DbSet<JobHour> JobHours { get; set; }
         public virtual DbSet<Batch> Batches { get; set; }
         public virtual DbSet<picture> pictures { get; set; }
+        public virtual DbSet<ActualsRep> ActualsReps { get; set; }
+        public virtual DbSet<Kickoff> Kickoffs { get; set; }
     }
 }

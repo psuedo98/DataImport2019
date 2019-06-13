@@ -14,7 +14,10 @@ namespace WipViewer
     public partial class frmComment : Form
     {
 
-        jobview2 _owner; 
+        jobview2 _owner;
+        testjobview _owner1;
+        JobView4 __owner;
+      
 
         public frmComment(jobview2 owner, string jobnumber)
         {
@@ -24,9 +27,33 @@ namespace WipViewer
             strJobNumber = jobnumber;
         }
 
+        public frmComment(JobView4 owner, string jobnumber)
+        {
+            InitializeComponent();
+            __owner = owner;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmComment_FormClosing);
+            strJobNumber = jobnumber;
+        }
+
+
+        public frmComment(testjobview owner, string jobnumber)
+        {
+            InitializeComponent();
+            _owner1 = owner;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmComment_FormClosing);
+            strJobNumber = jobnumber;
+        }
+
         private void frmComment_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _owner.PerformRefresh();
+            if (_owner != null)
+            {
+                _owner.PerformRefresh();
+            }
+            else if( __owner != null)
+            {
+                __owner.PerformRefresh();
+            }
         }
 
         public string strJobNumber;

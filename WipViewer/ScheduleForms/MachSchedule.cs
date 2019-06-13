@@ -89,6 +89,27 @@ namespace WipViewer.ScheduleForms
                 case "laborticketdetail_dept":
                     crp1.ReportSource = "R:\\wipviewer2017\\Reports\\laborticketdetail_dept.rpt";
                     break;
+                case "laborhoursdept":
+                    crp1.ReportSource = "R:\\wipviewer2017\\Reports\\laborticket_hoursReport.rpt";
+                    break;
+                case "openlabortickets":
+                    crp1.ReportSource = "R:\\wipviewer2017\\Reports\\OpenLaborTicketReport_W_Buckets.rpt";
+                    break;
+                case "gltickets":
+                    crp1.ReportSource = "R:\\wipviewer2017\\Reports\\OpenLaborTicketReport_W_Buckets_GL.rpt";
+                    break;
+                case "inventoryreport":
+                    crp1.ReportSource = "R:\\wipviewer2017\\Reports\\InventoryReport.rpt";
+                    break;
+                case "actionitem":
+                    crp1.ReportSource = "R:\\wipviewer2017\\Reports\\ActionItem.rpt";
+                    break;
+                case "supplier":
+                    crp1.ReportSource = "R:\\wipviewer2017\\Reports\\supplierreporttest.rpt";
+                    break;
+                case "actualsreport":
+                    crp1.ReportSource = "R:\\wipviewer2017\\Reports\\ActualsBuckets.rpt";
+                    break; 
 
 
 

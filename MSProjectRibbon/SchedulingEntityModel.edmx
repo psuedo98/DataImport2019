@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SchedulingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Jobs">
+          <Key>
+            <PropertyRef Name="Base" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Base" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Schedule_Actual">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="job" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="designstart" Type="date" />
+          <Property Name="designend" Type="date" />
+          <Property Name="processingstart" Type="date" />
+          <Property Name="processingend" Type="date" />
+          <Property Name="weldstart" Type="date" />
+          <Property Name="weldend" Type="date" />
+          <Property Name="machinestart" Type="date" />
+          <Property Name="machineend" Type="date" />
+          <Property Name="assemblystart" Type="date" />
+          <Property Name="assemblyend" Type="date" />
+          <Property Name="qastart" Type="date" />
+          <Property Name="qaend" Type="date" />
+          <Property Name="createdate" Type="datetime" />
+          <Property Name="materialstart" Type="date" />
+          <Property Name="materialend" Type="date" />
+        </EntityType>
+        <EntityType Name="Schedule_Baseline">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="job" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="designstart" Type="date" />
+          <Property Name="designend" Type="date" />
+          <Property Name="processingstart" Type="date" />
+          <Property Name="processingend" Type="date" />
+          <Property Name="weldstart" Type="date" />
+          <Property Name="weldend" Type="date" />
+          <Property Name="machinestart" Type="date" />
+          <Property Name="machineend" Type="date" />
+          <Property Name="assemblystart" Type="date" />
+          <Property Name="assemblyend" Type="date" />
+          <Property Name="qastart" Type="date" />
+          <Property Name="qaend" Type="date" />
+          <Property Name="createdate" Type="datetime" />
+          <Property Name="materialstart" Type="date" />
+          <Property Name="materialend" Type="date" />
+        </EntityType>
+        <EntityContainer Name="SchedulingModelStoreContainer">
+          <EntitySet Name="Jobs" EntityType="Self.Jobs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Schedule_Actual" EntityType="Self.Schedule_Actual" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Schedule_Baseline" EntityType="Self.Schedule_Baseline" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SchedulingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="Base" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Base" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Schedule_Actual">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="job" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="designstart" Type="DateTime" Precision="0" />
+          <Property Name="designend" Type="DateTime" Precision="0" />
+          <Property Name="processingstart" Type="DateTime" Precision="0" />
+          <Property Name="processingend" Type="DateTime" Precision="0" />
+          <Property Name="weldstart" Type="DateTime" Precision="0" />
+          <Property Name="weldend" Type="DateTime" Precision="0" />
+          <Property Name="machinestart" Type="DateTime" Precision="0" />
+          <Property Name="machineend" Type="DateTime" Precision="0" />
+          <Property Name="assemblystart" Type="DateTime" Precision="0" />
+          <Property Name="assemblyend" Type="DateTime" Precision="0" />
+          <Property Name="qastart" Type="DateTime" Precision="0" />
+          <Property Name="qaend" Type="DateTime" Precision="0" />
+          <Property Name="createdate" Type="DateTime" Precision="3" />
+          <Property Name="materialstart" Type="DateTime" Precision="0" />
+          <Property Name="materialend" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Schedule_Baseline">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="job" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="designstart" Type="DateTime" Precision="0" />
+          <Property Name="designend" Type="DateTime" Precision="0" />
+          <Property Name="processingstart" Type="DateTime" Precision="0" />
+          <Property Name="processingend" Type="DateTime" Precision="0" />
+          <Property Name="weldstart" Type="DateTime" Precision="0" />
+          <Property Name="weldend" Type="DateTime" Precision="0" />
+          <Property Name="machinestart" Type="DateTime" Precision="0" />
+          <Property Name="machineend" Type="DateTime" Precision="0" />
+          <Property Name="assemblystart" Type="DateTime" Precision="0" />
+          <Property Name="assemblyend" Type="DateTime" Precision="0" />
+          <Property Name="qastart" Type="DateTime" Precision="0" />
+          <Property Name="qaend" Type="DateTime" Precision="0" />
+          <Property Name="createdate" Type="DateTime" Precision="3" />
+          <Property Name="materialstart" Type="DateTime" Precision="0" />
+          <Property Name="materialend" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityContainer Name="SchedulingEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Jobs" EntityType="Self.Job" />
+          <EntitySet Name="Schedule_Actual" EntityType="Self.Schedule_Actual" />
+          <EntitySet Name="Schedule_Baseline" EntityType="Self.Schedule_Baseline" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SchedulingModelStoreContainer" CdmEntityContainer="SchedulingEntities">
+          <EntitySetMapping Name="Jobs">
+            <EntityTypeMapping TypeName="SchedulingModel.Job">
+              <MappingFragment StoreEntitySet="Jobs">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Base" ColumnName="Base" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schedule_Actual">
+            <EntityTypeMapping TypeName="SchedulingModel.Schedule_Actual">
+              <MappingFragment StoreEntitySet="Schedule_Actual">
+                <ScalarProperty Name="materialend" ColumnName="materialend" />
+                <ScalarProperty Name="materialstart" ColumnName="materialstart" />
+                <ScalarProperty Name="createdate" ColumnName="createdate" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="job" ColumnName="job" />
+                <ScalarProperty Name="designstart" ColumnName="designstart" />
+                <ScalarProperty Name="designend" ColumnName="designend" />
+                <ScalarProperty Name="processingstart" ColumnName="processingstart" />
+                <ScalarProperty Name="processingend" ColumnName="processingend" />
+                <ScalarProperty Name="weldstart" ColumnName="weldstart" />
+                <ScalarProperty Name="weldend" ColumnName="weldend" />
+                <ScalarProperty Name="machinestart" ColumnName="machinestart" />
+                <ScalarProperty Name="machineend" ColumnName="machineend" />
+                <ScalarProperty Name="assemblystart" ColumnName="assemblystart" />
+                <ScalarProperty Name="assemblyend" ColumnName="assemblyend" />
+                <ScalarProperty Name="qastart" ColumnName="qastart" />
+                <ScalarProperty Name="qaend" ColumnName="qaend" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schedule_Baseline">
+            <EntityTypeMapping TypeName="SchedulingModel.Schedule_Baseline">
+              <MappingFragment StoreEntitySet="Schedule_Baseline">
+                <ScalarProperty Name="materialend" ColumnName="materialend" />
+                <ScalarProperty Name="materialstart" ColumnName="materialstart" />
+                <ScalarProperty Name="createdate" ColumnName="createdate" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="job" ColumnName="job" />
+                <ScalarProperty Name="designstart" ColumnName="designstart" />
+                <ScalarProperty Name="designend" ColumnName="designend" />
+                <ScalarProperty Name="processingstart" ColumnName="processingstart" />
+                <ScalarProperty Name="processingend" ColumnName="processingend" />
+                <ScalarProperty Name="weldstart" ColumnName="weldstart" />
+                <ScalarProperty Name="weldend" ColumnName="weldend" />
+                <ScalarProperty Name="machinestart" ColumnName="machinestart" />
+                <ScalarProperty Name="machineend" ColumnName="machineend" />
+                <ScalarProperty Name="assemblystart" ColumnName="assemblystart" />
+                <ScalarProperty Name="assemblyend" ColumnName="assemblyend" />
+                <ScalarProperty Name="qastart" ColumnName="qastart" />
+                <ScalarProperty Name="qaend" ColumnName="qaend" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -3,6 +3,7 @@ using System.Windows.Forms;
 
 
 
+
 namespace WipViewer
 {
     public partial class Main : Form
@@ -10,11 +11,7 @@ namespace WipViewer
         public Main()
         {
             InitializeComponent();
-
-           // Xceed.Grid.Licenser.LicenseKey = "GRD42-YWAYK-TBW4A-NXCA";
-
-           
-
+            
         }
 
         private void openJobToolStripMenuItem_Click(object sender, EventArgs e)
@@ -26,7 +23,7 @@ namespace WipViewer
         {
             DataView activedata = new DataView();
             activedata.Show(); 
-
+            
              
 
         }
@@ -242,6 +239,8 @@ namespace WipViewer
 
         private void viewClosedJobToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            OpenJob oj1 = new OpenJob();
+            oj1.Show(); 
 
         }
 
@@ -264,6 +263,61 @@ namespace WipViewer
             redtag2 rt2 = new redtag2();
             rt2.Show();  
 
+        }
+
+        private void hoursByDeptToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string reporttype = "laborhoursdept";
+            ScheduleForms.MachSchedule mach = new ScheduleForms.MachSchedule(reporttype);
+            mach.Show(); 
+           
+        }
+
+        private void openLaborTicketsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string reporttype = "openlabortickets";
+            ScheduleForms.MachSchedule mach = new ScheduleForms.MachSchedule(reporttype);
+            mach.Show();
+        }
+
+        private void gLLaborToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string reporttype = "gltickets";
+            ScheduleForms.MachSchedule mach = new ScheduleForms.MachSchedule(reporttype);
+            mach.Show();
+        }
+
+        private void showInventorySystemToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            InventoryMain inventoryMain = new InventoryMain();
+            inventoryMain.Show(); 
+        }
+
+        private void newMeetingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Meeting meeting = new Meeting(); 
+
+        }
+
+        private void actionItemReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string reporttype = "actionitem";
+            ScheduleForms.MachSchedule mach = new ScheduleForms.MachSchedule(reporttype);
+            mach.Show();
+        }
+
+        private void showSupplierSystemToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SupplierDB supp = new SupplierDB();
+            supp.Show(); 
+
+        }
+
+        private void actualsReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string reporttype = "actualsreport";
+            ScheduleForms.MachSchedule mach = new ScheduleForms.MachSchedule(reporttype);
+            mach.Show();
         }
     }
 }

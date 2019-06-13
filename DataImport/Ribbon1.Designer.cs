@@ -39,6 +39,11 @@
             this.btmImport = this.Factory.CreateRibbonButton();
             this.btnData = this.Factory.CreateRibbonButton();
             this.btnMenu = this.Factory.CreateRibbonButton();
+            this.btnKickoff = this.Factory.CreateRibbonButton();
+            this.button1 = this.Factory.CreateRibbonButton();
+            this.button2 = this.Factory.CreateRibbonButton();
+            this.button3 = this.Factory.CreateRibbonButton();
+            this.button4 = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
             this.SuspendLayout();
@@ -55,6 +60,11 @@
             this.group1.Items.Add(this.btmImport);
             this.group1.Items.Add(this.btnData);
             this.group1.Items.Add(this.btnMenu);
+            this.group1.Items.Add(this.btnKickoff);
+            this.group1.Items.Add(this.button1);
+            this.group1.Items.Add(this.button2);
+            this.group1.Items.Add(this.button4);
+            this.group1.Items.Add(this.button3);
             this.group1.Label = "Job WIP ";
             this.group1.Name = "group1";
             // 
@@ -75,6 +85,34 @@
             this.btnMenu.Label = "Open Menu";
             this.btnMenu.Name = "btnMenu";
             this.btnMenu.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btnMenu_Click);
+            // 
+            // btnKickoff
+            // 
+            this.btnKickoff.Label = "Kickoff";
+            this.btnKickoff.Name = "btnKickoff";
+            this.btnKickoff.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btnKickoff_Click);
+            // 
+            // button1
+            // 
+            this.button1.Label = "Vis Import";
+            this.button1.Name = "button1";
+            // 
+            // button2
+            // 
+            this.button2.Label = "VCT Import";
+            this.button2.Name = "button2";
+            // 
+            // button3
+            // 
+            this.button3.Label = "Populate Performance Tracker";
+            this.button3.Name = "button3";
+            this.button3.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button3_Click);
+            // 
+            // button4
+            // 
+            this.button4.Label = "Job Cost Ratio";
+            this.button4.Name = "button4";
+            this.button4.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button4_Click);
             // 
             // Ribbon1
             // 
@@ -97,6 +135,11 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btmImport;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnData;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnMenu;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton btnKickoff;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton button1;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton button2;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton button4;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton button3;
     }
 
     partial class ThisRibbonCollection

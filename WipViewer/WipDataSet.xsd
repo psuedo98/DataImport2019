@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="WipDataSet" targetNamespace="http://tempuri.org/WipDataSet.xsd" xmlns:mstns="http://tempuri.org/WipDataSet.xsd" xmlns="http://tempuri.org/WipDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="WipConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="WipConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.WipViewer.Properties.Settings.GlobalReference.Default.WipConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="Margin_Over_timeTableAdapter" GeneratorDataComponentClassName="Margin_Over_timeTableAdapter" Name="Margin_Over_time" UserDataComponentName="Margin_Over_timeTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="WipConnectionString (Settings)" DbObjectName="Wip.dbo.Margin_Over_time" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT BatchDate, BaseID, Margin, ShipDate FROM dbo.Margin_Over_time</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="BatchDate" DataSetColumn="BatchDate" />
+              <Mapping SourceColumn="BaseID" DataSetColumn="BaseID" />
+              <Mapping SourceColumn="Margin" DataSetColumn="Margin" />
+              <Mapping SourceColumn="ShipDate" DataSetColumn="ShipDate" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="WipDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="WipDataSet" msprop:Generator_UserDSName="WipDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Margin_Over_time" msprop:Generator_TableClassName="Margin_Over_timeDataTable" msprop:Generator_TableVarName="tableMargin_Over_time" msprop:Generator_TablePropName="Margin_Over_time" msprop:Generator_RowDeletingName="Margin_Over_timeRowDeleting" msprop:Generator_RowChangingName="Margin_Over_timeRowChanging" msprop:Generator_RowEvHandlerName="Margin_Over_timeRowChangeEventHandler" msprop:Generator_RowDeletedName="Margin_Over_timeRowDeleted" msprop:Generator_UserTableName="Margin_Over_time" msprop:Generator_RowChangedName="Margin_Over_timeRowChanged" msprop:Generator_RowEvArgName="Margin_Over_timeRowChangeEvent" msprop:Generator_RowClassName="Margin_Over_timeRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="BatchDate" msprop:Generator_ColumnVarNameInTable="columnBatchDate" msprop:Generator_ColumnPropNameInRow="BatchDate" msprop:Generator_ColumnPropNameInTable="BatchDateColumn" msprop:Generator_UserColumnName="BatchDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="BaseID" msprop:Generator_ColumnVarNameInTable="columnBaseID" msprop:Generator_ColumnPropNameInRow="BaseID" msprop:Generator_ColumnPropNameInTable="BaseIDColumn" msprop:Generator_UserColumnName="BaseID">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Margin" msprop:Generator_ColumnVarNameInTable="columnMargin" msprop:Generator_ColumnPropNameInRow="Margin" msprop:Generator_ColumnPropNameInTable="MarginColumn" msprop:Generator_UserColumnName="Margin" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ShipDate" msprop:Generator_ColumnVarNameInTable="columnShipDate" msprop:Generator_ColumnPropNameInRow="ShipDate" msprop:Generator_ColumnPropNameInTable="ShipDateColumn" msprop:Generator_UserColumnName="ShipDate" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

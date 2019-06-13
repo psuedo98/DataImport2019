@@ -14,6 +14,7 @@ namespace WipViewer
     public partial class ActionItems : Form
     {
         jobview2 _owner;
+        JobView4 _owner2;    
         public string strjobnumber; 
         public ActionItems()
         {
@@ -30,9 +31,19 @@ namespace WipViewer
 
         }
 
+        public ActionItems(JobView4 owner, string jobnumber)
+        {
+
+            strjobnumber = jobnumber;
+            _owner2 = owner;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmActionItems_FormClosing);
+            InitializeComponent();
+
+        }
+
         private void frmActionItems_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _owner.PerformRefresh();
+           // _owner.PerformRefresh();
         }
 
         private void ActionItems_Load(object sender, EventArgs e)
@@ -98,7 +109,7 @@ namespace WipViewer
 
             finally
             {
-              //  MessageBox.Show("Action item saved. GET TO WORK " + asignee);
+               MessageBox.Show("Action item saved. GET TO WORK " + asignee);
                 this.Close(); 
 
             }

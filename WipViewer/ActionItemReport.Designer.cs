@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvActionItems = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.baseDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -75,9 +75,9 @@
             this.dgvActionItems.Location = new System.Drawing.Point(12, 12);
             this.dgvActionItems.Name = "dgvActionItems";
             this.dgvActionItems.ReadOnly = true;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvActionItems.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvActionItems.Size = new System.Drawing.Size(957, 547);
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvActionItems.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvActionItems.Size = new System.Drawing.Size(1210, 547);
             this.dgvActionItems.TabIndex = 0;
             this.dgvActionItems.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvActionItems_CellClick1);
             this.dgvActionItems.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvActionItems_CellContentClick);
@@ -201,7 +201,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(981, 621);
+            this.ClientSize = new System.Drawing.Size(1234, 621);
             this.Controls.Add(this.btnAll);
             this.Controls.Add(this.btnClosed);
             this.Controls.Add(this.btnOpen);

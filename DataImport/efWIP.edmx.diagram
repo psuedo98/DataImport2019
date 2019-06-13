@@ -8,8 +8,10 @@
         <EntityTypeShape EntityType="WipModel.Job" Width="1.5" PointX="1.5" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="WipModel.JobMetric" Width="1.5" PointX="3.375" PointY="0.75" />
         <EntityTypeShape EntityType="WipModel.JobHour" Width="1.5" PointX="5.5" PointY="0.75" />
-        <EntityTypeShape EntityType="WipModel.Batch" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="WipModel.Batch" Width="1.5" PointX="1" PointY="2.875" />
         <EntityTypeShape EntityType="WipModel.picture" Width="1.5" PointX="7.625" PointY="0.75" />
+        <EntityTypeShape EntityType="WipModel.ActualsRep" Width="1.5" PointX="9.875" PointY="1.375" />
+        <EntityTypeShape EntityType="WipModel.Kickoff" Width="1.5" PointX="0.75" PointY="5.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

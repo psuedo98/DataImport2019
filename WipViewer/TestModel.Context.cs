@@ -43,5 +43,10 @@ namespace WipViewer
         public virtual DbSet<tblRedTag> tblRedTags { get; set; }
         public virtual DbSet<Reason> Reasons { get; set; }
         public virtual DbSet<Scheduling> Schedulings { get; set; }
+        public virtual DbSet<NewestActual> NewestActuals { get; set; }
+        public virtual DbSet<NewestBaseline> NewestBaselines { get; set; }
+        public virtual DbSet<SupplierDirect> SupplierDirects { get; set; }
+        public virtual DbSet<SupplierMain> SupplierMains { get; set; }
+        public virtual DbSet<Kickoff> Kickoffs { get; set; }
     }
 }

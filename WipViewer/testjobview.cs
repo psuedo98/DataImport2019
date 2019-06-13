@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Syncfusion.Windows.Forms;
 using Syncfusion.Windows.Forms.Grid;
 using System.IO;
 
@@ -18,6 +13,7 @@ namespace WipViewer
         public string strJobNumber;
 
         public Image image;
+        
 
         #region "API Definition"
       
@@ -44,13 +40,13 @@ namespace WipViewer
         /// </summary>
         private void SampleCustomization()
         {
-            //string[] drives = System.IO.Directory.GetLogicalDrives();
-            //foreach (string drv in drives)
-            //    //    this.comboBox1.Items.Add(drv);
-            //    //       this.comboBox1.SelectedIndex = 0;
+            string[] drives = System.IO.Directory.GetLogicalDrives();
+            foreach (string drv in drives)
+            this.comboBox1.Items.Add(drv);
+            this.comboBox1.SelectedIndex = 0;
 
             //    //add a custom cell control
-               gridControl1.CellModels.Add("TreeCell", new TreeCellModel(gridControl1.Model));
+            gridControl1.CellModels.Add("TreeCell", new TreeCellModel(gridControl1.Model));
 
             //make the imagelist available thru the tablestyle
             gridControl1.TableStyle.ImageList = this.imageList2;
@@ -70,12 +66,12 @@ namespace WipViewer
 
 
             strPath = "r:\\wipviewer2017\\jobfiles\\" + strPath;
-        //    this.comboBox1.Text = strPath; 
+     this.comboBox1.Text = strPath; 
             
 
             //create a sample data for a virtual grid
 
-          //  this.comboBox1.SelectedItem.Equals(); 
+   //     this.comboBox1.SelectedItem.Equals(); 
            externalData = new CollapsibleDataSource(strPath);
             externalData.InitData(); //initializes an external datasource
             externalData.CollapseData(); // c
@@ -134,38 +130,11 @@ namespace WipViewer
 
             g2.TableModel.ReadOnly = false;
 
-            //g3.TableDescriptor.VisibleColumns.Remove("Base");
-            //g3.TableDescriptor.VisibleColumns.Remove("id");
-            //g3.TableDescriptor.VisibleColumns.Remove("critical");
-            //g3.TableDescriptor.VisibleColumns.Remove("openitem");
-
             g2.TableDescriptor.Columns[1].HeaderText = "Comment";
 
             g2.TableDescriptor.Columns["date"].Appearance.AnyRecordFieldCell.Format = "MM/dd/yyyy";
 
             margin_Over_timeTableAdapter.BaseQuery(this.marginOverTime.Margin_Over_time, strJobNumber);
-
-
-
-
-            //g1.TableDe
-            // g1.
-
-
-
-
-
-            //   oleDbSelectCommand.CommandText = "SELECT JobMetrics.Margin, JobMetrics.BaseID, JobMetrics.batch, Batches.BatchDate FROM JobMetrics INNER JOIN Batches ON JobMetrics.batch = Batches.Batch WHERE(JobMetrics.BaseId = '" + content + "')";
-
-
-            //  MessageBox.Show(oleDbSelectCommand.CommandText.ToString()); 
-            //   oleDbSelectCommand.ToString(); 
-
-            //       oleDbSelectCommand.Parameters.AddWithValue("baseid", content);
-
-            //  oleDbConnection1.Open(); 
-            //oleDbSelectCommand.Parameters.Add("baseid", SqlDbType.VarChar).Value = content;
-
 
 
 
@@ -180,7 +149,7 @@ namespace WipViewer
                 picture findpic = db.pictures.Find(strJobNumber);
                 // Margin_Over_time mot = db.Margin_Over_time.Find(strJobNumber); 
 
-                
+               // rbcMain
 
                 if (findpic != null)
                 {
@@ -218,6 +187,31 @@ namespace WipViewer
 
                 #region LabelChecks
 
+                string strJob = strJobNumber.Replace("/", "_").Replace(" ", "");
+                string path = "R:\\wipviewer2017\\jobfiles\\" + strJob + "\\riskassessment.xlsx";
+
+                if (File.Exists(path) == true)
+                {
+                   
+                }
+                else
+                {
+                    btnRA.BackColor = Color.Red;
+                    btnRA.Enabled = false; 
+                }
+
+                path = "R:\\wipviewer2017\\jobfiles\\" + strJob + "\\aqp.xlsx";
+
+                if (File.Exists(path) == true)
+                {
+                    
+                }
+                else
+                {
+                    btnAQP.BackColor = Color.Red;
+                    btnAQP.Enabled = false; 
+                }
+
                 if (check1 == true)
                 {
                     jobteam1 = db.Teams.Find(strJobNumber);
@@ -240,23 +234,7 @@ namespace WipViewer
                     }
                     else { lblBl.Text = "BUILD LEADER NOT SET"; }
 
-                    if (jobteam1.KickOff != null)
-                    {
-                        lblKickoff.Text = "Job Kicks off: " + jobteam1.KickOff.Value.ToString("MM-dd-yyyy");
-                    }
-                    else { lblKickoff.Text = "NO JOB KICKOFF DATE SET"; }
-
-                    if (jobteam1.DataRelease != null)
-                    {
-                        lblData.Text = "Data Received: " + jobteam1.DataRelease.Value.ToString("MM-dd-yyyy");
-                    }
-                    else { lblData.Text = "NO DATA RELEASE DATE SET"; }
-
-                    if (jobteam1.Folder != null)
-                    {
-                        lblFolder.Text = "Folder Received: " + jobteam1.Folder.Value.ToString("MM-dd-yyyy");
-                    }
-                    else { lblFolder.Text = "FOLDER NOT RECEIVED"; }
+                   
 
                     if (jobteam1.PODate != null)
                     {
@@ -269,13 +247,13 @@ namespace WipViewer
 
 
 
+                    
+
+                    ActiveJob aj1 = db.ActiveJobs.Find(strJobNumber);
+                    #region agechecks
 
 
-                    ActiveJob aj1 = db.ActiveJobs.Find(strJobNumber); 
-
-
-
-                   if (aj1.age1 <= 30)
+                    if (aj1.age1 <= 30)
                     {
 
                         DateTime testdate = Convert.ToDateTime(db.Margin_Over_time.Where(cc4 => cc4.BaseID == strJobNumber).Select(cc4 => cc4.BatchDate).Min());
@@ -315,23 +293,7 @@ namespace WipViewer
                         cc1.PrimaryXAxis.DateTimeRange = new Syncfusion.Windows.Forms.Chart.ChartDateTimeRange(testdate, testdate2, 3, Syncfusion.Windows.Forms.Chart.ChartDateTimeIntervalType.Months);
                     }
 
-
-                    //  Double testdate2 = db.Margin_Over_time.Where(cc4 => cc4.BaseID == strJobNumber).Select(cc4 => cc4.BatchDate).Max().Value.ToOADate();
-                    // Double testdate = db.Margin_Over_time.Where(cc4 => cc4.BaseID == strJobNumber).Select(cc4 => cc4.BatchDate).Min().Value.ToOADate();
-
-
-                    //DateTime testdate = Convert.ToDateTime(db.Margin_Over_time.Where(cc4 => cc4.BaseID == strJobNumber).Select(cc4 => cc4.BatchDate).Min());
-                    //DateTime testdate2 = Convert.ToDateTime(db.Margin_Over_time.Where(cc4 => cc4.BaseID == strJobNumber).Select(cc4 => cc4.BatchDate).Max());   
-                    //cc1.PrimaryXAxis.DateTimeRange = new Syncfusion.Windows.Forms.Chart.ChartDateTimeRange(testdate, testdate2, 2, Syncfusion.Windows.Forms.Chart.ChartDateTimeIntervalType.Weeks); 
-                    //cc1.PrimaryXAxis.Range.Min = testdate;
-                    //cc1.PrimaryXAxis.Range.Max = testdate2;
-
-                    //cc1.PrimaryXAxis.IntervalType = Syncfusion.Windows.Forms.Chart.ChartDateTimeIntervalType.Months;
-                    //cc1.PrimaryXAxis.Range.Interval = 14;
-
-                    //    cc1.PrimaryXAxis.DateTimeRange = new 
-
-
+                    #endregion
 
 
 
@@ -371,30 +333,12 @@ namespace WipViewer
 
         }
 
-        private void lbl1_Click(object sender, EventArgs e)
-        {
+      
 
-        }
+      
 
-        private void is1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dsCommentsBindingSource_CurrentChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void g1_CellClick(object sender, Syncfusion.Windows.Forms.Grid.GridCellClickEventArgs e)
-        {
-
-        }
-
-        private void g2_TableControlCellClick(object sender, Syncfusion.Windows.Forms.Grid.Grouping.GridTableControlCellClickEventArgs e)
-        {
-
-        }
+        
+       
 
         void GridQueryCellInfo(object sender, GridQueryCellInfoEventArgs e)
         {
@@ -483,11 +427,6 @@ namespace WipViewer
 
 
 
-        private void is3_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void gridControl1_CellDoubleClick(object sender, GridCellClickEventArgs e)
         {
             if (e.RowIndex > 0 && e.ColIndex == 1)
@@ -512,10 +451,7 @@ namespace WipViewer
         }
 
 
-        private void chartControl1_Click_1(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void btnPicture_Click(object sender, EventArgs e)
         {
@@ -572,6 +508,106 @@ namespace WipViewer
             generate.Show();
 
         }
+
+        private void btnRA_Click(object sender, EventArgs e)
+        {
+            string strJob = strJobNumber.Replace("/", "_").Replace(" ", "");
+
+            string path = "R:\\wipviewer2017\\jobfiles\\" + strJob + "\\riskassessment.xlsx";
+
+         
+
+            if (File.Exists(path) == true)
+            {
+                System.Diagnostics.Process.Start(path);
+            }
+          
+           
+        }
+
+        private void btnAQP_Click(object sender, EventArgs e)
+        {
+            string strJob = strJobNumber.Replace("/", "_").Replace(" ", "");
+
+            string path = "R:\\wipviewer2017\\jobfiles\\" + strJob + "\\aqp.xlsx";
+
+            if (File.Exists(path) == true)
+            {
+                System.Diagnostics.Process.Start(path);
+            }
+            
+
+        }
+
+       
+
+        private void btnUpload_Click(object sender, EventArgs e)
+        {
+          if(openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+
+                string strJob = strJobNumber.Replace("/", "_").Replace(" ", "");
+                string path = "R:\\wipviewer2017\\jobfiles\\" + strJob + "\\" + openFileDialog1.SafeFileName;
+               
+                File.Copy(openFileDialog1.FileName, path);
+             //   MessageBox.Show(openFileDialog1.FileName.ToString());
+            }
+        }
+
+        private void btnComment_Click(object sender, EventArgs e)
+        {
+            frmComment pgComment = new WipViewer.frmComment(this, strJobNumber);
+            pgComment.Show();
+        }
+
+        private void btnOpen_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnTeams_Click(object sender, EventArgs e)
+        {
+            team2 frmTeam = new WipViewer.team2(strJobNumber);
+            frmTeam.Show();
+        }
+
+       
+
+        private void PicButton_Click(object sender, EventArgs e)
+        {
+            ofdPicture.ShowDialog();
+            string strPicture = ofdPicture.FileName.ToString();
+            is3.Images.Add(Image.FromFile(strPicture));
+
+            string jobfilename = strJobNumber.Trim();
+            jobfilename = jobfilename.Replace(@"/", "-");
+            File.Copy(ofdPicture.FileName, "R:\\wippictures\\" + jobfilename + ".jpg", true);
+
+            using (var db = new TestEntities())
+            {
+                picture jobPicture = db.pictures.Find(strJobNumber);
+                if (jobPicture != null)
+                {
+
+                    jobPicture.BaseId = strJobNumber;
+                    jobPicture.Path = "R:\\wippictures\\" + jobfilename + ".jpg";
+                    db.SaveChanges();
+                    MessageBox.Show("Picture Updated. GREAT JOB!!");
+
+                }
+                else
+                {
+                    picture pic2 = new picture();
+                    pic2.BaseId = strJobNumber;
+                    pic2.Path = "R:\\wippictures\\" + jobfilename + ".jpg";
+                    db.pictures.Add(pic2);
+                    db.SaveChanges();
+                    MessageBox.Show("Image Saved. GREAT JOB!!");
+                }
+            }
+        }
+
+     
     }
 }
 

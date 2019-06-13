@@ -5,9 +5,8 @@ using System.Windows.Forms;
 using System.IO;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
-using excel = Microsoft.Office.Interop.Excel; 
-
-
+using excel = Microsoft.Office.Interop.Excel;
+using System.Diagnostics;
 
 namespace WipViewer
 {
@@ -81,6 +80,8 @@ namespace WipViewer
             commentsTableAdapter.fillComments(dsComments.comments, strJobNumber);
 
             this.Text = strJobNumber;
+
+            
 
 
             //check for red tag 
@@ -170,19 +171,114 @@ namespace WipViewer
 
 
 
-            for (int i = 0; i < dgvActionItems.RowCount; i++ )
-            {
-
-                if (Convert.ToString(dgvActionItems.Rows[i].Cells[5].Value) == "true")
-                {
-
-                    dgvActionItems.Rows[i].DefaultCellStyle = style;
-                }
-            }
+           
             using (var db = new TestEntities())
             {
                 ImportantDate iDate = db.ImportantDates.Find(strJobNumber);
-                picture findpic = db.pictures.Find(strJobNumber); 
+                picture findpic = db.pictures.Find(strJobNumber);
+
+                NewestBaseline baseline = db.NewestBaselines.Find(strJobNumber);
+                NewestActual actual = db.NewestActuals.Find(strJobNumber); 
+
+                if (baseline != null)
+                {
+                   
+
+                    // lblMachineEndBase.Text = Convert.ToString(baseline.machineend);
+
+                    DateTime processingstart = Convert.ToDateTime(baseline.processingstart).Date;
+                    string processingstart1 = processingstart.ToString("d");
+                    lblProcessingStartBase.Text = processingstart1;
+
+                    // lblProcessingStartBase.Text = Convert.ToString(baseline.processingstart);
+
+                    DateTime processingend = Convert.ToDateTime(baseline.processingend).Date;
+                    string processingend1 = processingend.ToString("d");
+                    lblProcessingEndBase.Text = processingend1;
+
+                    DateTime materialstart = Convert.ToDateTime(baseline.materialstart).Date;
+                    string materialstart1 = materialstart.ToString("d");
+                    lblMaterialOrderBase.Text = materialstart1;
+
+                    DateTime materialend = Convert.ToDateTime(baseline.materialend).Date;
+                    string materialend1 = materialend.ToString("d");
+                    lblMaterialReceivedBase.Text = materialend1;
+
+                    DateTime machinestart = Convert.ToDateTime(baseline.machinestart).Date;
+                    string machinestart1 = machinestart.ToString("d");
+                    lblMachineStartBase.Text = machinestart1;
+
+                    DateTime machineend = Convert.ToDateTime(baseline.machineend).Date;
+                    string machineend1 = machineend.ToString("d");
+                    lblMachineEndBase.Text = machineend1;
+
+                    DateTime fabstart = Convert.ToDateTime(baseline.weldstart).Date;
+                    string fabstart1 = fabstart.ToString("d");
+                    lblFabStartBase.Text = fabstart1;
+
+                    DateTime fabend = Convert.ToDateTime(baseline.weldend).Date;
+                    string fabend1 = fabend.ToString("d");
+                    lblFabFinishBase.Text = fabend1;
+
+                    DateTime assemblystart = Convert.ToDateTime(baseline.assemblystart).Date;
+                    string assemblystart1 = assemblystart.ToString("d");
+                    lblAssemblyStartBase.Text = assemblystart1;
+
+                    DateTime assemblyend  = Convert.ToDateTime(baseline.assemblyend).Date;
+                    string assemblyend1 = assemblyend.ToString("d");
+                    lblAssemblyFinishBase.Text = assemblyend1;
+                }
+
+                if (actual != null)
+                {
+                    DateTime processingstart = Convert.ToDateTime(actual.processingstart).Date;
+                    string processingstart1 = processingstart.ToString("d");
+                    lblProcessingStartAct.Text = processingstart1;
+
+                    DateTime processingend = Convert.ToDateTime(actual.processingend).Date;
+                    string processingsend1 = processingend.ToString("d");
+                    lblProcessingEndAct.Text = processingsend1;
+
+                    DateTime materialstart = Convert.ToDateTime(actual.materialstart).Date;
+                    string materialstart1 = materialstart.ToString("d");
+                    lblMaterialOrderAct.Text = materialstart1;
+
+                    DateTime materialfinish = Convert.ToDateTime(actual.materialend).Date;
+                    string materialfinish1 = materialfinish.ToString("d");
+                    lblMaterialReceivedAct.Text = materialfinish1; 
+
+                   
+
+                    DateTime machinestart = Convert.ToDateTime(actual.machinestart).Date;
+                    string machinestart1 = machinestart.ToString("d");
+                    lblMachineStartAct.Text = machinestart1;
+
+                    DateTime machineend = Convert.ToDateTime(actual.machineend).Date;
+                    string machineend1 = machineend.ToString("d");
+                    lblMachineEndAct.Text = machineend1;
+
+                   DateTime fabstart = Convert.ToDateTime(actual.weldstart).Date;
+                    string fabstart1 = fabstart.ToString("d");
+                    lblFabStartAct.Text = fabstart1;
+
+                    DateTime fabend = Convert.ToDateTime(actual.weldend).Date;
+                    string fabend1 = fabend.ToString("d");
+                    lblFabFinishAct.Text = fabend1;
+
+                    DateTime assemblystart = Convert.ToDateTime(actual.assemblystart).Date;
+                    string assemblystart1 = assemblystart.ToString("d");
+                  lblAssemblyStartAct.Text = assemblystart1;
+
+                    DateTime assemblyfinish = Convert.ToDateTime(actual.assemblyend).Date;
+                    string assemblyfinish1 = assemblyfinish.ToString("d");
+                   lblAssemblyFinishAct.Text = assemblyfinish1;
+
+
+
+
+                }
+
+
 
                 if (findpic != null)
                 {
@@ -204,143 +300,7 @@ namespace WipViewer
                     pbJob.Image = Image.FromFile(@"r:\wippictures\na.jpg");
                     
                 }
-                if (iDate != null)
-                {
-                    if (iDate.StartAssy != null)
-                    {
-                        dtpAssy.Value = iDate.StartAssy.Value;
-                    }
-
-                    else
-
-                    {
-                    //    dtpAssy.Value = DateTime.Now;
-                        lblStartAssembly.BackColor = Color.Red;
-                        lblStartAssembly.ForeColor = Color.White;
-                    }
-                   
-                    if (iDate.DesRel != null)
-                    {
-                        dtpDesRel.Value = iDate.DesRel.Value;
-                    }
-
-                    else
-                    {
-                       // dtpDesRel.Value = DateTime.Now;
-                        lblDesignRelease.BackColor = Color.Red;
-                        lblDesignRelease.ForeColor = Color.White;
-                    }
-
-                   
-                    if (iDate.StartFab != null)
-                    {
-                        dtpFab.Value = iDate.StartFab.Value;
-                    }
-
-                    else
-                    {
-                    //    dtpFab.Value = DateTime.Now;
-                        lblStartFab.BackColor = Color.Red;
-                        lblStartFab.ForeColor = Color.White;
-                    }
-                   
-                    if (iDate.HeatTreat != null)
-                    {
-                        dtpHt.Value = iDate.HeatTreat.Value;
-                    }
-
-                    else
-                    {
-                    //    dtpHt.Value = DateTime.Now;
-                        lblHeatTreat.BackColor = Color.Red;
-                        lblHeatTreat.ForeColor = Color.White;
-                    }
-
-                   if (iDate.StartMachining !=null)
-                    {
-                        dtpMachine.Value = iDate.StartMachining.Value;
-                    }
-
-                   else
-                    {
-                  //      dtpMachine.Value = DateTime.Now;
-                        lblStartMachining.BackColor = Color.Red;
-                        lblStartMachining.ForeColor = Color.White;
-                    }
-
-                   
-                    if (iDate.RecvMaterial != null)
-                    {
-                        dtpMaterial.Value = iDate.RecvMaterial.Value;
-                    }
-                    else
-                    {
-                   //     dtpMaterial.Value = DateTime.Now;
-                        lblRecvMaterial.BackColor = Color.Red;
-                        lblRecvMaterial.ForeColor = Color.White;
-                    }
-
-                    if (iDate.MachComp != null)
-                    {
-                        dtpMachineComp.Value = iDate.MachComp.Value;
-                    }
-                    else
-                    {
-                   //     dtpMachineComp.Value = DateTime.Now;
-                        lblMachineComplete.BackColor = Color.Red;
-                        lblMachineComplete.ForeColor = Color.White;
-                    }
-                    
-                    if (iDate.RdyChk !=null)
-                    {
-                        dtpRdyChk.Value = iDate.RdyChk.Value;
-                    }
-                    else
-                    {
-                  //      dtpRdyChk.Value = DateTime.Now;
-                        lblRdyCheck.BackColor = Color.Red;
-                        lblRdyCheck.ForeColor = Color.White;
-                    }
-
-                    if (iDate.RdySrc !=null)
-                    {
-                        dtpSrc.Value = iDate.RdySrc.Value;
-                    }
-                    else
-                    {
-                  //      dtpSrc.Value = DateTime.Now;
-                        lblRdySource.BackColor = Color.Red;
-                        lblRdySource.ForeColor = Color.White;
-
-                    }
-                 
-                   
-                   // dtpSrc.Value = iDate.RdySrc.Value; 
-
-
-                }
-                else
-                {
-                    lblStartAssembly.BackColor = Color.Red;
-                    lblStartAssembly.ForeColor = Color.White;
-                    lblDesignRelease.BackColor = Color.Red;
-                    lblDesignRelease.ForeColor = Color.White;
-                    lblStartFab.BackColor = Color.Red;
-                    lblStartFab.ForeColor = Color.White;
-                    lblHeatTreat.BackColor = Color.Red;
-                    lblHeatTreat.ForeColor = Color.White;
-                    lblStartMachining.BackColor = Color.Red;
-                    lblStartMachining.ForeColor = Color.White;
-                    lblRecvMaterial.BackColor = Color.Red;
-                    lblRecvMaterial.ForeColor = Color.White;
-                    lblMachineComplete.BackColor = Color.Red;
-                    lblMachineComplete.ForeColor = Color.White;
-                    lblRdyCheck.BackColor = Color.Red;
-                    lblRdyCheck.ForeColor = Color.White;
-                    lblRdySource.BackColor = Color.Red;
-                    lblRdySource.ForeColor = Color.White;
-                }
-
+               
                 //db.SaveChanges();
                 //MessageBox.Show("Dates Saved. GREAT JOB!");
 
@@ -349,9 +309,7 @@ namespace WipViewer
                 // dataGridView1.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
                 dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
 
-                dgvActionItems.Columns[1].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-                dgvActionItems.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
-
+            
 
 
                 //TestEntities jobteam1 = new TestEntities();
@@ -382,21 +340,7 @@ namespace WipViewer
                         lblBuldLeader.Text = "Build Leader: " + jobteam1.BuildLeader;
                     }
 
-                    if (jobteam1.KickOff != null)
-                    {
-                        lblKickoff.Text = "Job Kicks Off: " + jobteam1.KickOff.Value.ToString("MM-dd-yyyy");
-                    }
-
-                    if (jobteam1.DataRelease != null)
-                    {
-                        lblData.Text = "Data Received: " + jobteam1.DataRelease.Value.ToString("MM-dd-yyyy");
-                    }
-
-                    if (jobteam1.Folder != null)
-                    {
-                        lblFolder.Text = "Folder Received: " + jobteam1.Folder.Value.ToString("MM-dd-yyyy");
-
-                    }
+                  
 
                     if (jobteam1.Folder != null)
                     {
@@ -405,67 +349,14 @@ namespace WipViewer
 
                 }
 
-                Folder fFolder = db.Folders.Find(strJobNumber.Substring(0,15));
+                //Folder fFolder = db.Folders.Find(strJobNumber.Substring(0,15));
 
 
 
 
                 //      bool check2 = db.Folders.Any(u => u.JobNumber.Substring(0,15) == strJobNumber.Substring(0,15)); 
 
-                if (fFolder != null)
-
-                {
-                    if (fFolder.PMFolder != null)
-                    {
-                        lblPMFolder.Text = "PM Folder: " + fFolder.PMFolder.Value.ToString("MM/dd/yyyy");  
-                    }
-
-                    else
-                    {
-                        lblPMFolder.Text = "PM Folder Not Received";
-                    }
-
-                    if (fFolder.ProcessingFolder != null)
-                    {
-                        lblProcessorFolder.Text = "Processor Folder: " + fFolder.ProcessingFolder.Value.ToString("MM/dd/yyyy");
-                    }
-
-                    else
-                    {
-                        lblProcessorFolder.Text = "Processor Folder Not Received";
-                    }
-
-                    if (fFolder.WeldFolder != null)
-                    {
-                        lblWeldFolder.Text = "Weld Folder: " + fFolder.WeldFolder.Value.ToString("MM/dd/yyyy");
-                    }
-
-                    else
-                    {
-                        lblWeldFolder.Text = "Weld Folder Not Received";
-                    }
-
-                    if (fFolder.MachineFolder != null)
-                    {
-                        lblMachineFolder.Text = "Machine Folder" + fFolder.MachineFolder.Value.ToString("MM/dd/yyyy"); 
-                    }
-
-                    else
-                    {
-                        lblMachineFolder.Text = "Machine Folder Not Received";
-
-                    }
-
-                    if (fFolder.BuildFolder != null)
-                    {
-                        lblBuildFolder.Text = "Build Folder: " + fFolder.BuildFolder.Value.ToString("MM/dd/yyyy"); 
-                    }
-
-                    else
-                    {
-                        lblBuildFolder.Text = "Build Folder Not Received"; 
-                    }
-                }
+            
 
 
             }
@@ -490,7 +381,7 @@ namespace WipViewer
             actionItemsTableAdapter.FillBy(ds_ActionItems.ActionItems, strJobNumber);
             // this.commentsTableAdapter.Fill(); 
             this.dataGridView1.Refresh();
-            this.dgvActionItems.Refresh(); 
+            
 
             
         }
@@ -540,151 +431,7 @@ namespace WipViewer
            bdesrel = true;
         }
 
-        private void btnDates_Click(object sender, EventArgs e)
-        {
-            if (bmaterial == true)
-            {
-                dtMaterial = dtpMaterial.Value.Date;
-            }
-            else
-            {
-                dtMaterial = null; 
-                 
-            }
-
-            if (bfab == true)
-            {
-                dtFabrication = dtpFab.Value.Date;
-            }
-            else
-            {
-                dtFabrication = null; 
-            }
-
-            if (bht == true)
-            {
-                dtHeat = dtpHt.Value.Date;
-            }
-            else
-            {
-                dtHeat = null; 
-            }
-
-            if (bsmach == true)
-            {
-                dtMachining = dtpMachine.Value.Date;
-            }
-            else
-            {
-                dtMachining = null; 
-            }
-            if (bassy == true)
-            {
-                dtAssembly = dtpAssy.Value.Date;
-            }
-            else
-            {
-                dtAssembly = null; 
-            }
-
-            if (bmachcomp == true)
-            {
-                dtMachComplete = dtpMachineComp.Value.Date;
-            }
-            else
-            {
-                dtMachComplete = null; 
-            }
-
-            if (bchk == true)
-            {
-                dtCheck = dtpRdyChk.Value.Date;
-            }
-            else
-            {
-                dtCheck = null; 
-            }
-
-            if (bsrc == true)
-            {
-                dtSrc = dtpSrc.Value.Date;
-            }
-            else
-            {
-                dtSrc = null; 
-            }
-
-            if (bdesrel == true)
-            {
-                dtDesRel = dtpDesRel.Value.Date;
-            }
-
-            else
-            {
-                dtDesRel = null; 
-            }
-            using (var db = new TestEntities())
-            {
-                ImportantDate iDate = db.ImportantDates.Find(strJobNumber);
-                if (iDate != null)
-                {
-                    iDate.BaseID = strJobNumber;
-                    iDate.RecvMaterial = dtMaterial;
-                    iDate.StartFab = dtFabrication;
-                    iDate.HeatTreat = dtHeat;
-                    iDate.StartMachining = dtMachining;
-                    iDate.StartAssy = dtAssembly;
-                    iDate.MachComp = dtMachComplete;
-                    iDate.RdyChk = dtCheck;
-                    iDate.RdySrc = dtSrc;
-                    iDate.DesRel = dtDesRel;
-                    db.SaveChanges();
-                    MessageBox.Show("Dates Updates. GREAT JOB!");
-
-                }
-                else
-                {
-                    try
-                    {
-                        ImportantDate iDate2 = new ImportantDate();
-                        iDate2.BaseID = strJobNumber;
-                        iDate2.RecvMaterial = dtMaterial;
-                        iDate2.StartFab = dtFabrication;
-                        iDate2.HeatTreat = dtHeat;
-                        iDate2.StartMachining = dtMachining;
-                        iDate2.StartAssy = dtAssembly;
-                        iDate2.MachComp = dtMachComplete;
-                        iDate2.RdyChk = dtCheck;
-                        iDate2.RdySrc = dtSrc;
-                        iDate2.DesRel = dtDesRel;
-                        
-                        db.ImportantDates.Add(iDate2);
-                        db.SaveChanges();
-                        MessageBox.Show("Dates Saved. GREAT JOB!");
-                    }
-
-                    catch (DbEntityValidationException f)
-                    {
-                        foreach (var eve in f.EntityValidationErrors)
-                        {
-                            Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                                eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                            foreach (var ve in eve.ValidationErrors)
-                            {
-                                Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                                    ve.PropertyName, ve.ErrorMessage);
-                            }
-                        }
-                        throw;
-                    }
-
-                }
-
-                
-               
-
-            }
-        }
+      
 
         private void btnUpdatePicture_Click(object sender, EventArgs e)
         {
@@ -836,21 +583,20 @@ namespace WipViewer
             }
 
             int index = e.RowIndex;
-            dgvActionItems.Rows[index].Selected = true;
+           
         }
 
         private void dgvComments(object sender, DataGridViewCellEventArgs e)
         {
-            var id = dgvActionItems.SelectedRows[0].Cells[7].Value;
-
+        
             DialogResult result = MessageBox.Show("Close Action Item?", "Close Action Item?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
                 TestEntities db1 = new TestEntities();
-                ActionItem action = db1.ActionItems.Find(id);
+             
 
-                action.openitem = "false";
+                
 
                 db1.SaveChanges();
 
@@ -870,16 +616,14 @@ namespace WipViewer
 
         private void dgvActionItems_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            var id = dgvActionItems.SelectedRows[0].Cells[7].Value; 
-
+            
             DialogResult result = MessageBox.Show("Close Action Item?", "Close Action Item?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
                 TestEntities db1 = new TestEntities();
-                ActionItem action = db1.ActionItems.Find(id);
+           
 
-                action.openitem = "false";
 
                 db1.SaveChanges();
 
@@ -987,6 +731,49 @@ namespace WipViewer
 
 
             //   File.Open(path,FileMode.Open);
+        }
+
+        private void btnStatus_Click(object sender, EventArgs e)
+        {
+            string strJob = strJobNumber.Replace("/", "_").Replace(" ", "");
+
+            string path = "R:\\wipviewer2017\\jobfiles\\" + strJob + "\\status.pdf";
+
+            //  excel.Application ap1 = new excel.Application();
+            //    excel.Workbook wb = ap1.Workbooks.Open(path);
+
+            System.Diagnostics.Process.Start(path);
+
+
+            //   File.Open(path,FileMode.Open)
+        }
+
+        private void btnStatusImport_Click(object sender, EventArgs e)
+        {
+            
+
+            if (ofdStatus.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                string filename = ofdStatus.FileName;
+                string strJob = strJobNumber.Replace("/", "_").Replace(" ", "");
+                
+                string path = "R:\\wipviewer2017\\jobfiles\\" + strJob + "\\status.pdf";
+                File.Copy(filename, path); 
+          
+            }
+        }
+
+        private void btnViewProject_Click(object sender, EventArgs e)
+        {
+            //string path = "R:\\wipviewer2017\\prjfiles\\" + strJobNumber + ".pdf";
+            string strJob = strJobNumber.Replace("/", "_").Replace(" ", "");
+            string path = "R:\\wipviewer2017\\prjfiles\\" + strJob + ".pdf"; 
+
+            if (File.Exists(path))
+            {
+                // This path is a file
+                Process.Start(path);      
+            }
         }
     }
 }

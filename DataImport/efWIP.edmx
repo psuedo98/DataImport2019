@@ -5,12 +5,39 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="WipModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ActualsRep">
+          <Key>
+            <PropertyRef Name="BaseID" />
+          </Key>
+          <Property Name="BaseID" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Design" Type="nchar" MaxLength="10" />
+          <Property Name="Planning" Type="nchar" MaxLength="10" />
+          <Property Name="Waterjet" Type="nchar" MaxLength="10" />
+          <Property Name="Weld" Type="nchar" MaxLength="10" />
+          <Property Name="Nc" Type="nchar" MaxLength="10" />
+          <Property Name="Machining" Type="nchar" MaxLength="10" />
+          <Property Name="Assy" Type="nchar" MaxLength="10" />
+          <Property Name="Inspection" Type="nchar" MaxLength="10" />
+          <Property Name="ServiceCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="LaborCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="BurdenCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="MaterialCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="DesignCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PlanningCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="WaterJetCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="WeldCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="NcCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="MachiningCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="AssyCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="InspectionCost" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
         <EntityType Name="Batches">
           <Key>
             <PropertyRef Name="Batch" />
           </Key>
           <Property Name="Batch" Type="int" Nullable="false" />
           <Property Name="BatchDate" Type="date" />
+          <Property Name="BatchTime" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="JobHours">
           <Key>
@@ -41,6 +68,8 @@
           <Property Name="batch" Type="int" Nullable="false" />
           <Property Name="ShipMonth" Type="varchar" MaxLength="50" />
           <Property Name="RemainingRev" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Projected" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ContractDate" Type="date" />
         </EntityType>
         <EntityType Name="Jobs">
           <Key>
@@ -48,6 +77,33 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Base" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kickoff">
+          <Key>
+            <PropertyRef Name="BaseID" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Planning" Type="int" />
+          <Property Name="Design" Type="int" />
+          <Property Name="Waterjet" Type="int" />
+          <Property Name="Weld" Type="int" />
+          <Property Name="NC" Type="int" />
+          <Property Name="Convetional" Type="int" />
+          <Property Name="Outsource" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Assy" Type="int" />
+          <Property Name="Inspection" Type="int" />
+          <Property Name="Shipping" Type="int" />
+          <Property Name="PlanningEst" Type="int" />
+          <Property Name="DesignEst" Type="int" />
+          <Property Name="WaterjetEst" Type="int" />
+          <Property Name="WeldEst" Type="int" />
+          <Property Name="NCEst" Type="int" />
+          <Property Name="ConventionalEst" Type="int" />
+          <Property Name="OutsourceEst" Type="int" />
+          <Property Name="AssemblyEst" Type="int" />
+          <Property Name="InspectionEst" Type="int" />
+          <Property Name="ShippingEst" Type="int" />
+          <Property Name="BaseID" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="pictures">
           <Key>
@@ -57,10 +113,12 @@
           <Property Name="Path" Type="nchar" MaxLength="250" />
         </EntityType>
         <EntityContainer Name="WipModelStoreContainer">
+          <EntitySet Name="ActualsRep" EntityType="Self.ActualsRep" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Batches" EntityType="Self.Batches" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="JobHours" EntityType="Self.JobHours" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="JobMetrics" EntityType="Self.JobMetrics" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Jobs" EntityType="Self.Jobs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kickoff" EntityType="Self.Kickoff" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="pictures" EntityType="Self.pictures" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -80,6 +138,8 @@
           <EntitySet Name="JobHours" EntityType="WipModel.JobHour" />
           <EntitySet Name="Batches" EntityType="WipModel.Batch" />
           <EntitySet Name="pictures" EntityType="WipModel.picture" />
+          <EntitySet Name="ActualsReps" EntityType="WipModel.ActualsRep" />
+          <EntitySet Name="Kickoffs" EntityType="WipModel.Kickoff" />
         </EntityContainer>
         <EntityType Name="JobMetric">
           <Key>
@@ -97,6 +157,8 @@
           <Property Name="Margin" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="ShipMonth" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="RemainingRev" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Projected" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ContractDate" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="JobHour">
           <Key>
@@ -117,6 +179,7 @@
           </Key>
           <Property Name="Batch1" Type="Int32" Nullable="false" />
           <Property Name="BatchDate" Type="DateTime" Precision="0" />
+          <Property Name="BatchTime" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="picture">
           <Key>
@@ -124,6 +187,59 @@
           </Key>
           <Property Name="BaseId" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
           <Property Name="Path" Type="String" MaxLength="250" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ActualsRep">
+          <Key>
+            <PropertyRef Name="BaseID" />
+          </Key>
+          <Property Name="BaseID" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Design" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Planning" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Waterjet" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Weld" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Nc" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Machining" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Assy" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Inspection" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ServiceCost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="LaborCost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="BurdenCost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="MaterialCost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DesignCost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PlanningCost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="WaterJetCost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="WeldCost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="NcCost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="MachiningCost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AssyCost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="InspectionCost" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Kickoff">
+          <Key>
+            <PropertyRef Name="BaseID" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Planning" Type="Int32" />
+          <Property Name="Design" Type="Int32" />
+          <Property Name="Waterjet" Type="Int32" />
+          <Property Name="Weld" Type="Int32" />
+          <Property Name="NC" Type="Int32" />
+          <Property Name="Convetional" Type="Int32" />
+          <Property Name="Outsource" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Assy" Type="Int32" />
+          <Property Name="Inspection" Type="Int32" />
+          <Property Name="Shipping" Type="Int32" />
+          <Property Name="PlanningEst" Type="Int32" />
+          <Property Name="DesignEst" Type="Int32" />
+          <Property Name="WaterjetEst" Type="Int32" />
+          <Property Name="WeldEst" Type="Int32" />
+          <Property Name="NCEst" Type="Int32" />
+          <Property Name="ConventionalEst" Type="Int32" />
+          <Property Name="OutsourceEst" Type="Int32" />
+          <Property Name="AssemblyEst" Type="Int32" />
+          <Property Name="InspectionEst" Type="Int32" />
+          <Property Name="ShippingEst" Type="Int32" />
+          <Property Name="BaseID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -142,6 +258,8 @@
           <EntitySetMapping Name="JobMetrics">
             <EntityTypeMapping TypeName="WipModel.JobMetric">
               <MappingFragment StoreEntitySet="JobMetrics">
+                <ScalarProperty Name="ContractDate" ColumnName="ContractDate" />
+                <ScalarProperty Name="Projected" ColumnName="Projected" />
                 <ScalarProperty Name="RemainingRev" ColumnName="RemainingRev" />
                 <ScalarProperty Name="ShipMonth" ColumnName="ShipMonth" />
                 <ScalarProperty Name="Margin" ColumnName="Margin" />
@@ -172,6 +290,7 @@
           <EntitySetMapping Name="Batches">
             <EntityTypeMapping TypeName="WipModel.Batch">
               <MappingFragment StoreEntitySet="Batches">
+                <ScalarProperty Name="BatchTime" ColumnName="BatchTime" />
                 <ScalarProperty Name="BatchDate" ColumnName="BatchDate" />
                 <ScalarProperty Name="Batch1" ColumnName="Batch" />
               </MappingFragment>
@@ -182,6 +301,61 @@
               <MappingFragment StoreEntitySet="pictures">
                 <ScalarProperty Name="Path" ColumnName="Path" />
                 <ScalarProperty Name="BaseId" ColumnName="BaseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActualsReps">
+            <EntityTypeMapping TypeName="WipModel.ActualsRep">
+              <MappingFragment StoreEntitySet="ActualsRep">
+                <ScalarProperty Name="InspectionCost" ColumnName="InspectionCost" />
+                <ScalarProperty Name="AssyCost" ColumnName="AssyCost" />
+                <ScalarProperty Name="MachiningCost" ColumnName="MachiningCost" />
+                <ScalarProperty Name="NcCost" ColumnName="NcCost" />
+                <ScalarProperty Name="WeldCost" ColumnName="WeldCost" />
+                <ScalarProperty Name="WaterJetCost" ColumnName="WaterJetCost" />
+                <ScalarProperty Name="PlanningCost" ColumnName="PlanningCost" />
+                <ScalarProperty Name="DesignCost" ColumnName="DesignCost" />
+                <ScalarProperty Name="MaterialCost" ColumnName="MaterialCost" />
+                <ScalarProperty Name="BurdenCost" ColumnName="BurdenCost" />
+                <ScalarProperty Name="LaborCost" ColumnName="LaborCost" />
+                <ScalarProperty Name="ServiceCost" ColumnName="ServiceCost" />
+                <ScalarProperty Name="Inspection" ColumnName="Inspection" />
+                <ScalarProperty Name="Assy" ColumnName="Assy" />
+                <ScalarProperty Name="Machining" ColumnName="Machining" />
+                <ScalarProperty Name="Nc" ColumnName="Nc" />
+                <ScalarProperty Name="Weld" ColumnName="Weld" />
+                <ScalarProperty Name="Waterjet" ColumnName="Waterjet" />
+                <ScalarProperty Name="Planning" ColumnName="Planning" />
+                <ScalarProperty Name="Design" ColumnName="Design" />
+                <ScalarProperty Name="BaseID" ColumnName="BaseID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kickoffs">
+            <EntityTypeMapping TypeName="WipModel.Kickoff">
+              <MappingFragment StoreEntitySet="Kickoff">
+                <ScalarProperty Name="BaseID" ColumnName="BaseID" />
+                <ScalarProperty Name="ShippingEst" ColumnName="ShippingEst" />
+                <ScalarProperty Name="InspectionEst" ColumnName="InspectionEst" />
+                <ScalarProperty Name="AssemblyEst" ColumnName="AssemblyEst" />
+                <ScalarProperty Name="OutsourceEst" ColumnName="OutsourceEst" />
+                <ScalarProperty Name="ConventionalEst" ColumnName="ConventionalEst" />
+                <ScalarProperty Name="NCEst" ColumnName="NCEst" />
+                <ScalarProperty Name="WeldEst" ColumnName="WeldEst" />
+                <ScalarProperty Name="WaterjetEst" ColumnName="WaterjetEst" />
+                <ScalarProperty Name="DesignEst" ColumnName="DesignEst" />
+                <ScalarProperty Name="PlanningEst" ColumnName="PlanningEst" />
+                <ScalarProperty Name="Shipping" ColumnName="Shipping" />
+                <ScalarProperty Name="Inspection" ColumnName="Inspection" />
+                <ScalarProperty Name="Assy" ColumnName="Assy" />
+                <ScalarProperty Name="Outsource" ColumnName="Outsource" />
+                <ScalarProperty Name="Convetional" ColumnName="Convetional" />
+                <ScalarProperty Name="NC" ColumnName="NC" />
+                <ScalarProperty Name="Weld" ColumnName="Weld" />
+                <ScalarProperty Name="Waterjet" ColumnName="Waterjet" />
+                <ScalarProperty Name="Design" ColumnName="Design" />
+                <ScalarProperty Name="Planning" ColumnName="Planning" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0c27beba64734f73aad41c5b3c2aad3c" Name="Diagram1" ZoomLevel="82">
+      <Diagram DiagramId="0c27beba64734f73aad41c5b3c2aad3c" Name="Diagram1" ZoomLevel="81">
         <EntityTypeShape EntityType="WipModel.ActionItem" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WipModel.Batch" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WipModel.comment" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
@@ -16,14 +16,19 @@
         <EntityTypeShape EntityType="WipModel.Team" Width="1.5" PointX="6.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WipModel.ActiveJob" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WipModel.Job_batches" Width="1.5" PointX="2.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WipModel.Margin_Over_time" Width="1.5" PointX="8.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WipModel.Margin_Over_time" Width="1.5" PointX="12.875" PointY="6.125" IsExpanded="true" />
         <AssociationConnector Association="WipModel.FK_ActionItems_ActionItems" ManuallyRouted="false" />
         <EntityTypeShape EntityType="WipModel.Link" Width="1.5" PointX="8.75" PointY="8.75" />
         <EntityTypeShape EntityType="WipModel.BondActual" Width="1.5" PointX="10.75" PointY="0.75" />
         <EntityTypeShape EntityType="WipModel.Folder" Width="1.5" PointX="10.75" PointY="4.75" />
         <EntityTypeShape EntityType="WipModel.tblRedTag" Width="1.5" PointX="10.75" PointY="8.75" />
         <EntityTypeShape EntityType="WipModel.Reason" Width="1.5" PointX="4.875" PointY="8.25" />
-        <EntityTypeShape EntityType="WipModel.Scheduling" Width="1.5" PointX="5.375" PointY="11.75" />
+        <EntityTypeShape EntityType="WipModel.Scheduling" Width="1.5" PointX="4.75" PointY="10.375" />
+        <EntityTypeShape EntityType="WipModel.NewestActual" Width="1.5" PointX="7.75" PointY="11.75" />
+        <EntityTypeShape EntityType="WipModel.NewestBaseline" Width="1.5" PointX="0.75" PointY="12.75" />
+        <EntityTypeShape EntityType="WipModel.SupplierDirect" Width="1.5" PointX="13.375" PointY="8.75" />
+        <EntityTypeShape EntityType="WipModel.SupplierMain" Width="1.5" PointX="13.375" PointY="0.75" />
+        <EntityTypeShape EntityType="WipModel.Kickoff" Width="1.5" PointX="10.375" PointY="14.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="InventoryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Inventory_Parts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PartNumber" Type="varchar" MaxLength="50" />
+          <Property Name="JobNumber" Type="varchar" MaxLength="50" />
+          <Property Name="LotNumber" Type="int" />
+          <Property Name="DetailNumber" Type="varchar" MaxLength="50" />
+          <Property Name="MfgPart" Type="varchar" MaxLength="50" />
+          <Property Name="Nomenclature" Type="varchar" MaxLength="50" />
+          <Property Name="Supplier" Type="varchar" MaxLength="50" />
+          <Property Name="QtyReqdUnit" Type="int" />
+          <Property Name="QtyReqdTotal" Type="int" />
+          <Property Name="PO" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Inventory_Transactions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PartNumber" Type="varchar" MaxLength="50" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="TransactionType" Type="varchar" MaxLength="20" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="InventoryModelStoreContainer">
+          <EntitySet Name="Inventory_Parts" EntityType="Self.Inventory_Parts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inventory_Transactions" EntityType="Self.Inventory_Transactions" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="InventoryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Inventory_Parts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PartNumber" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="JobNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LotNumber" Type="Int32" />
+          <Property Name="DetailNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MfgPart" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nomenclature" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Supplier" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="QtyReqdUnit" Type="Int32" />
+          <Property Name="QtyReqdTotal" Type="Int32" />
+          <Property Name="PO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="InventoryEntity" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Inventory_Parts" EntityType="Self.Inventory_Parts" />
+          <EntitySet Name="Inventory_Transactions" EntityType="InventoryModel.Inventory_Transactions" />
+        </EntityContainer>
+        <EntityType Name="Inventory_Transactions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="PartNumber" Type="String" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="TransactionType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="InventoryModelStoreContainer" CdmEntityContainer="InventoryEntity">
+          <EntitySetMapping Name="Inventory_Parts">
+            <EntityTypeMapping TypeName="InventoryModel.Inventory_Parts">
+              <MappingFragment StoreEntitySet="Inventory_Parts">
+                <ScalarProperty Name="PO" ColumnName="PO" />
+                <ScalarProperty Name="QtyReqdTotal" ColumnName="QtyReqdTotal" />
+                <ScalarProperty Name="QtyReqdUnit" ColumnName="QtyReqdUnit" />
+                <ScalarProperty Name="Supplier" ColumnName="Supplier" />
+                <ScalarProperty Name="Nomenclature" ColumnName="Nomenclature" />
+                <ScalarProperty Name="MfgPart" ColumnName="MfgPart" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="PartNumber" ColumnName="PartNumber" />
+                <ScalarProperty Name="JobNumber" ColumnName="JobNumber" />
+                <ScalarProperty Name="LotNumber" ColumnName="LotNumber" />
+                <ScalarProperty Name="DetailNumber" ColumnName="DetailNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inventory_Transactions">
+            <EntityTypeMapping TypeName="InventoryModel.Inventory_Transactions">
+              <MappingFragment StoreEntitySet="Inventory_Transactions">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="PartNumber" ColumnName="PartNumber" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

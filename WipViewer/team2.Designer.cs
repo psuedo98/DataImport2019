@@ -199,12 +199,13 @@
             this.cmbPM.FormattingEnabled = true;
             this.cmbPM.Items.AddRange(new object[] {
             "Tony D\'Agostino",
-            "Dean Conrad",
             "Bob Dobleske",
+            "Dave Murphy",
             "Josh Zander",
             "Peter Thoel",
             "Jason Conley",
-            "Shannon Moore",
+            "Dean Conrad",
+            "Mike Pittiglio",
             "VCT"});
             this.cmbPM.Location = new System.Drawing.Point(100, 6);
             this.cmbPM.Name = "cmbPM";
@@ -222,9 +223,10 @@
             "Jeff Zabel",
             "Kevin M",
             "Amanda Nielsen",
-            "Chris Guiney",
+            "James Tilden",
             "Zack Vanfleteren",
             "Mark Bourn",
+            "Jesse Hendrix",
             "VCT"});
             this.cmbQa.Location = new System.Drawing.Point(100, 89);
             this.cmbQa.Name = "cmbQa";
@@ -237,17 +239,17 @@
             this.cmbBl.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBl.FormattingEnabled = true;
             this.cmbBl.Items.AddRange(new object[] {
-            "Dave Terrell",
             "Dennis Nucci",
-            "Greg Sullivan",
             "Gary Kirby",
             "John Barnes",
-            "Ken Riehle",
             "John Thoel",
-            "Keith Christoff",
-            "Jon Ciaramitaro",
             "Ken Trout",
-            "VCT"});
+            "Mike Anthony",
+            "Ed Nutting",
+            "VCT",
+            "Chris Scandalis",
+            "Dennis Harrow",
+            "Frank Jaszczolt"});
             this.cmbBl.Location = new System.Drawing.Point(100, 62);
             this.cmbBl.Name = "cmbBl";
             this.cmbBl.Size = new System.Drawing.Size(121, 21);
@@ -267,16 +269,13 @@
             this.cmbProcessor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbProcessor.FormattingEnabled = true;
             this.cmbProcessor.Items.AddRange(new object[] {
-            "Chris Scandalis",
             "Jerry Thoel",
             "Jakob Hallett",
-            "Zak Hallett",
-            "Jake and Zak",
             "Brian Kotas",
-            "Jason Frantsi",
-            "Herschel Gugan",
+            "David Szelog",
             "Amanda Shinsky ",
-            "VCT"});
+            "VCT",
+            "Josh Zander"});
             this.cmbProcessor.Location = new System.Drawing.Point(100, 34);
             this.cmbProcessor.Name = "cmbProcessor";
             this.cmbProcessor.Size = new System.Drawing.Size(121, 21);

@@ -89,6 +89,8 @@ namespace WipViewer
             this.panel3 = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
+            this.lblTimeStamp = new System.Windows.Forms.Label();
+            this.activeJobsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dsactivejobsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ds_activejobs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gc1)).BeginInit();
@@ -104,6 +106,7 @@ namespace WipViewer
             ((System.ComponentModel.ISupportInitialize)(this.rbShowColors)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rbHideColors)).BeginInit();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.activeJobsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // dsactivejobsBindingSource
@@ -359,6 +362,7 @@ namespace WipViewer
             this.rb1.BeforeTouchSize = new System.Drawing.Size(54, 21);
             this.rb1.Checked = true;
             this.rb1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.rb1.ImageCheckBoxSize = new System.Drawing.Size(26, 26);
             this.rb1.Location = new System.Drawing.Point(3, 3);
             this.rb1.MetroColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(89)))), ((int)(((byte)(91)))));
             this.rb1.Name = "rb1";
@@ -372,6 +376,7 @@ namespace WipViewer
             // 
             this.rb2.BeforeTouchSize = new System.Drawing.Size(54, 21);
             this.rb2.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.rb2.ImageCheckBoxSize = new System.Drawing.Size(26, 26);
             this.rb2.Location = new System.Drawing.Point(3, 24);
             this.rb2.MetroColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(89)))), ((int)(((byte)(91)))));
             this.rb2.Name = "rb2";
@@ -611,6 +616,7 @@ namespace WipViewer
             this.rbShowColors.BeforeTouchSize = new System.Drawing.Size(54, 21);
             this.rbShowColors.Checked = true;
             this.rbShowColors.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.rbShowColors.ImageCheckBoxSize = new System.Drawing.Size(26, 26);
             this.rbShowColors.Location = new System.Drawing.Point(3, 3);
             this.rbShowColors.MetroColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(89)))), ((int)(((byte)(91)))));
             this.rbShowColors.Name = "rbShowColors";
@@ -625,6 +631,7 @@ namespace WipViewer
             // 
             this.rbHideColors.BeforeTouchSize = new System.Drawing.Size(54, 21);
             this.rbHideColors.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.rbHideColors.ImageCheckBoxSize = new System.Drawing.Size(26, 26);
             this.rbHideColors.Location = new System.Drawing.Point(3, 24);
             this.rbHideColors.MetroColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(89)))), ((int)(((byte)(91)))));
             this.rbHideColors.Name = "rbHideColors";
@@ -664,11 +671,28 @@ namespace WipViewer
             this.label17.TabIndex = 0;
             this.label17.Text = "Display Options";
             // 
+            // lblTimeStamp
+            // 
+            this.lblTimeStamp.AutoSize = true;
+            this.lblTimeStamp.Location = new System.Drawing.Point(1414, 429);
+            this.lblTimeStamp.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTimeStamp.Name = "lblTimeStamp";
+            this.lblTimeStamp.Size = new System.Drawing.Size(41, 13);
+            this.lblTimeStamp.TabIndex = 24;
+            this.lblTimeStamp.Text = "label11";
+            this.lblTimeStamp.Click += new System.EventHandler(this.lblTimeStamp_Click);
+            // 
+            // activeJobsBindingSource
+            // 
+            this.activeJobsBindingSource.DataMember = "ActiveJobs";
+            this.activeJobsBindingSource.DataSource = this.dsactivejobsBindingSource;
+            // 
             // testgrid2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1682, 667);
+            this.ClientSize = new System.Drawing.Size(1602, 552);
+            this.Controls.Add(this.lblTimeStamp);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnZoomOut);
@@ -699,7 +723,9 @@ namespace WipViewer
             ((System.ComponentModel.ISupportInitialize)(this.rbShowColors)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rbHideColors)).EndInit();
             this.panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.activeJobsBindingSource)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -756,5 +782,7 @@ namespace WipViewer
         private Syncfusion.Windows.Forms.Tools.RadioButtonAdv rbHideColors;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lblTimeStamp;
+        private System.Windows.Forms.BindingSource activeJobsBindingSource;
     }
 }

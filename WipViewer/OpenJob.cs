@@ -16,5 +16,13 @@ namespace WipViewer
         {
             InitializeComponent();
         }
+
+        private void btnSubmit_Click(object sender, EventArgs e)
+        {
+            string jobnumber = txtJob.Text;
+
+            jobview2 jobview = new jobview2(jobnumber);
+            jobview.Show();
+        }
     }
 }

@@ -25,5 +25,7 @@ namespace WipViewer
         public int batch { get; set; }
         public string ShipMonth { get; set; }
         public Nullable<decimal> RemainingRev { get; set; }
+        public Nullable<decimal> Projected { get; set; }
+        public Nullable<System.DateTime> ContractDate { get; set; }
     }
 }

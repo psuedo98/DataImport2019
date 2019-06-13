@@ -25,6 +25,7 @@
           </Key>
           <Property Name="Batch" Type="int" Nullable="false" />
           <Property Name="BatchDate" Type="date" />
+          <Property Name="BatchTime" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="BondActuals">
           <Key>
@@ -50,7 +51,7 @@
           <Property Name="comment" Type="text" />
           <Property Name="date" Type="date" />
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="commenter" Type="nchar" MaxLength="60" />
+          <Property Name="commenter" Type="nchar" MaxLength="40" />
         </EntityType>
         <EntityType Name="Folders">
           <Key>
@@ -109,6 +110,8 @@
           <Property Name="batch" Type="int" Nullable="false" />
           <Property Name="ShipMonth" Type="varchar" MaxLength="50" />
           <Property Name="RemainingRev" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Projected" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ContractDate" Type="date" />
         </EntityType>
         <EntityType Name="Jobs">
           <Key>
@@ -116,6 +119,33 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Base" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kickoff">
+          <Key>
+            <PropertyRef Name="BaseID" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Planning" Type="int" />
+          <Property Name="Design" Type="int" />
+          <Property Name="Waterjet" Type="int" />
+          <Property Name="Weld" Type="int" />
+          <Property Name="NC" Type="int" />
+          <Property Name="Convetional" Type="int" />
+          <Property Name="Outsource" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Assy" Type="int" />
+          <Property Name="Inspection" Type="int" />
+          <Property Name="Shipping" Type="int" />
+          <Property Name="PlanningEst" Type="int" />
+          <Property Name="DesignEst" Type="int" />
+          <Property Name="WaterjetEst" Type="int" />
+          <Property Name="WeldEst" Type="int" />
+          <Property Name="NCEst" Type="int" />
+          <Property Name="ConventionalEst" Type="int" />
+          <Property Name="OutsourceEst" Type="int" />
+          <Property Name="AssemblyEst" Type="int" />
+          <Property Name="InspectionEst" Type="int" />
+          <Property Name="ShippingEst" Type="int" />
+          <Property Name="BaseID" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Links">
           <Key>
@@ -202,6 +232,44 @@
           <Property Name="StartFinalize" Type="date" />
           <Property Name="FinishFinalize" Type="date" />
         </EntityType>
+        <EntityType Name="SupplierDirect">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FOB" Type="nchar" MaxLength="30" />
+          <Property Name="ShipVia" Type="nchar" MaxLength="30" />
+          <Property Name="PrimaryCommodity" Type="nchar" MaxLength="40" />
+          <Property Name="SecondaryCommodity" Type="nchar" MaxLength="40" />
+          <Property Name="AS9100Registration" Type="nchar" MaxLength="5" />
+          <Property Name="ASExpiration" Type="date" />
+          <Property Name="ASDocument" Type="nchar" MaxLength="250" />
+          <Property Name="IsoRegistration" Type="nchar" MaxLength="5" />
+          <Property Name="IsoExpiration" Type="date" />
+          <Property Name="IsoDocument" Type="nchar" MaxLength="250" />
+          <Property Name="OtherRegistration" Type="nchar" MaxLength="5" />
+          <Property Name="OtherExpiration" Type="date" />
+          <Property Name="OtherDocument" Type="nchar" MaxLength="250" />
+          <Property Name="ItarApproved" Type="nchar" MaxLength="5" />
+          <Property Name="ItarExpiration" Type="date" />
+          <Property Name="ItarDocument" Type="nchar" MaxLength="250" />
+          <Property Name="DPDApproval" Type="nchar" MaxLength="5" />
+          <Property Name="SpecialProcesses" Type="nchar" MaxLength="5" />
+          <Property Name="SpecialProcessDetail" Type="nchar" MaxLength="200" />
+          <Property Name="Name" Type="nchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="SupplierMain">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="50" />
+          <Property Name="VendorID" Type="nchar" MaxLength="20" />
+          <Property Name="Email" Type="nchar" MaxLength="50" />
+          <Property Name="PrimaryContact" Type="nchar" MaxLength="40" />
+          <Property Name="EvalDate" Type="date" />
+          <Property Name="Risk" Type="nchar" MaxLength="20" />
+        </EntityType>
         <EntityType Name="Team">
           <Key>
             <PropertyRef Name="JobNumber" />
@@ -246,6 +314,8 @@ warning 6002: The table/view 'Wip.dbo.ActiveJobs' does not have a primary key de
           <Property Name="RemainingRev" Type="decimal" Precision="18" Scale="2" />
           <Property Name="age1" Type="int" />
           <Property Name="Hold" Type="nvarchar" MaxLength="20" />
+          <Property Name="Projected" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ContractDate" Type="date" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Wip.dbo.Job_batches' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -274,6 +344,56 @@ warning 6002: The table/view 'Wip.dbo.Margin_Over_time' does not have a primary 
           <Property Name="Margin" Type="decimal" Precision="18" Scale="2" />
           <Property Name="ShipDate" Type="date" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Wip.dbo.NewestActuals' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="NewestActuals">
+          <Key>
+            
+            <PropertyRef Name="job" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="job" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="createdate" Type="datetime" />
+          <Property Name="designstart" Type="date" />
+          <Property Name="designend" Type="date" />
+          <Property Name="processingstart" Type="date" />
+          <Property Name="processingend" Type="date" />
+          <Property Name="weldstart" Type="date" />
+          <Property Name="weldend" Type="date" />
+          <Property Name="machinestart" Type="date" />
+          <Property Name="machineend" Type="date" />
+          <Property Name="assemblystart" Type="date" />
+          <Property Name="assemblyend" Type="date" />
+          <Property Name="qastart" Type="date" />
+          <Property Name="qaend" Type="date" />
+          <Property Name="materialstart" Type="date" />
+          <Property Name="materialend" Type="date" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Wip.dbo.NewestBaseline' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="NewestBaseline">
+          <Key>
+            
+            <PropertyRef Name="job" />
+          </Key>
+          <Property Name="Expr1" Type="datetime" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="job" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="designstart" Type="date" />
+          <Property Name="designend" Type="date" />
+          <Property Name="processingstart" Type="date" />
+          <Property Name="weldstart" Type="date" />
+          <Property Name="processingend" Type="date" />
+          <Property Name="weldend" Type="date" />
+          <Property Name="machinestart" Type="date" />
+          <Property Name="machineend" Type="date" />
+          <Property Name="assemblystart" Type="date" />
+          <Property Name="assemblyend" Type="date" />
+          <Property Name="qaend" Type="date" />
+          <Property Name="qastart" Type="date" />
+          <Property Name="materialstart" Type="date" />
+          <Property Name="materialend" Type="date" />
+        </EntityType>
         <Association Name="FK_ActionItems_ActionItems">
           <End Role="ActionItems" Type="Self.ActionItems" Multiplicity="1" />
           <End Role="ActionItems1" Type="Self.ActionItems" Multiplicity="0..1" />
@@ -296,11 +416,14 @@ warning 6002: The table/view 'Wip.dbo.Margin_Over_time' does not have a primary 
           <EntitySet Name="JobHours" EntityType="Self.JobHours" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="JobMetrics" EntityType="Self.JobMetrics" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Jobs" EntityType="Self.Jobs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kickoff" EntityType="Self.Kickoff" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Links" EntityType="Self.Links" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="pictures" EntityType="Self.pictures" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reasons" EntityType="Self.Reasons" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RedTag" EntityType="Self.RedTag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Scheduling" EntityType="Self.Scheduling" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupplierDirect" EntityType="Self.SupplierDirect" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupplierMain" EntityType="Self.SupplierMain" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Team" EntityType="Self.Team" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ActiveJobs" EntityType="Self.ActiveJobs" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -324,7 +447,9 @@ warning 6002: The table/view 'Wip.dbo.Margin_Over_time' does not have a primary 
     [ActiveJobs].[QA] AS [QA], 
     [ActiveJobs].[RemainingRev] AS [RemainingRev], 
     [ActiveJobs].[age1] AS [age1], 
-    [ActiveJobs].[Hold] AS [Hold]
+    [ActiveJobs].[Hold] AS [Hold], 
+    [ActiveJobs].[Projected] AS [Projected], 
+    [ActiveJobs].[ContractDate] AS [ContractDate]
     FROM [dbo].[ActiveJobs] AS [ActiveJobs]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Job_batches" EntityType="Self.Job_batches" store:Type="Views" store:Schema="dbo">
@@ -346,6 +471,48 @@ warning 6002: The table/view 'Wip.dbo.Margin_Over_time' does not have a primary 
     [Margin_Over_time].[Margin] AS [Margin], 
     [Margin_Over_time].[ShipDate] AS [ShipDate]
     FROM [dbo].[Margin_Over_time] AS [Margin_Over_time]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="NewestActuals" EntityType="Self.NewestActuals" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [NewestActuals].[id] AS [id], 
+    [NewestActuals].[job] AS [job], 
+    [NewestActuals].[createdate] AS [createdate], 
+    [NewestActuals].[designstart] AS [designstart], 
+    [NewestActuals].[designend] AS [designend], 
+    [NewestActuals].[processingstart] AS [processingstart], 
+    [NewestActuals].[processingend] AS [processingend], 
+    [NewestActuals].[weldstart] AS [weldstart], 
+    [NewestActuals].[weldend] AS [weldend], 
+    [NewestActuals].[machinestart] AS [machinestart], 
+    [NewestActuals].[machineend] AS [machineend], 
+    [NewestActuals].[assemblystart] AS [assemblystart], 
+    [NewestActuals].[assemblyend] AS [assemblyend], 
+    [NewestActuals].[qastart] AS [qastart], 
+    [NewestActuals].[qaend] AS [qaend], 
+    [NewestActuals].[materialstart] AS [materialstart], 
+    [NewestActuals].[materialend] AS [materialend]
+    FROM [dbo].[NewestActuals] AS [NewestActuals]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="NewestBaseline" EntityType="Self.NewestBaseline" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [NewestBaseline].[Expr1] AS [Expr1], 
+    [NewestBaseline].[id] AS [id], 
+    [NewestBaseline].[job] AS [job], 
+    [NewestBaseline].[designstart] AS [designstart], 
+    [NewestBaseline].[designend] AS [designend], 
+    [NewestBaseline].[processingstart] AS [processingstart], 
+    [NewestBaseline].[weldstart] AS [weldstart], 
+    [NewestBaseline].[processingend] AS [processingend], 
+    [NewestBaseline].[weldend] AS [weldend], 
+    [NewestBaseline].[machinestart] AS [machinestart], 
+    [NewestBaseline].[machineend] AS [machineend], 
+    [NewestBaseline].[assemblystart] AS [assemblystart], 
+    [NewestBaseline].[assemblyend] AS [assemblyend], 
+    [NewestBaseline].[qaend] AS [qaend], 
+    [NewestBaseline].[qastart] AS [qastart], 
+    [NewestBaseline].[materialstart] AS [materialstart], 
+    [NewestBaseline].[materialend] AS [materialend]
+    FROM [dbo].[NewestBaseline] AS [NewestBaseline]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_ActionItems_ActionItems" Association="Self.FK_ActionItems_ActionItems">
             <End Role="ActionItems" EntitySet="ActionItems" />
@@ -378,6 +545,7 @@ warning 6002: The table/view 'Wip.dbo.Margin_Over_time' does not have a primary 
           </Key>
           <Property Name="Batch1" Type="Int32" Nullable="false" />
           <Property Name="BatchDate" Type="DateTime" Precision="0" />
+          <Property Name="BatchTime" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="comment">
           <Key>
@@ -387,7 +555,7 @@ warning 6002: The table/view 'Wip.dbo.Margin_Over_time' does not have a primary 
           <Property Name="comment1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="date" Type="DateTime" Precision="0" />
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="commenter" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+          <Property Name="commenter" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="ImportantDate">
           <Key>
@@ -434,6 +602,8 @@ warning 6002: The table/view 'Wip.dbo.Margin_Over_time' does not have a primary 
           <Property Name="batch" Type="Int32" Nullable="false" />
           <Property Name="ShipMonth" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="RemainingRev" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Projected" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ContractDate" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="Job">
           <Key>
@@ -490,6 +660,8 @@ warning 6002: The table/view 'Wip.dbo.Margin_Over_time' does not have a primary 
           <Property Name="RemainingRev" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="age1" Type="Int32" />
           <Property Name="Hold" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Projected" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ContractDate" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="Job_batches">
           <Key>
@@ -549,6 +721,11 @@ warning 6002: The table/view 'Wip.dbo.Margin_Over_time' does not have a primary 
           <EntitySet Name="tblRedTags" EntityType="WipModel.tblRedTag" />
           <EntitySet Name="Reasons" EntityType="WipModel.Reason" />
           <EntitySet Name="Schedulings" EntityType="WipModel.Scheduling" />
+          <EntitySet Name="NewestActuals" EntityType="WipModel.NewestActual" />
+          <EntitySet Name="NewestBaselines" EntityType="WipModel.NewestBaseline" />
+          <EntitySet Name="SupplierDirects" EntityType="WipModel.SupplierDirect" />
+          <EntitySet Name="SupplierMains" EntityType="WipModel.SupplierMain" />
+          <EntitySet Name="Kickoffs" EntityType="WipModel.Kickoff" />
         </EntityContainer>
         <EntityType Name="Link">
           <Key>
@@ -656,6 +833,115 @@ warning 6002: The table/view 'Wip.dbo.Margin_Over_time' does not have a primary 
           <Property Name="StartFinalize" Type="DateTime" Precision="0" />
           <Property Name="FinishFinalize" Type="DateTime" Precision="0" />
         </EntityType>
+        <EntityType Name="NewestActual">
+          <Key>
+            <PropertyRef Name="job" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="job" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="createdate" Type="DateTime" Precision="3" />
+          <Property Name="designstart" Type="DateTime" Precision="0" />
+          <Property Name="designend" Type="DateTime" Precision="0" />
+          <Property Name="processingstart" Type="DateTime" Precision="0" />
+          <Property Name="processingend" Type="DateTime" Precision="0" />
+          <Property Name="weldstart" Type="DateTime" Precision="0" />
+          <Property Name="weldend" Type="DateTime" Precision="0" />
+          <Property Name="machinestart" Type="DateTime" Precision="0" />
+          <Property Name="machineend" Type="DateTime" Precision="0" />
+          <Property Name="assemblystart" Type="DateTime" Precision="0" />
+          <Property Name="assemblyend" Type="DateTime" Precision="0" />
+          <Property Name="qastart" Type="DateTime" Precision="0" />
+          <Property Name="qaend" Type="DateTime" Precision="0" />
+          <Property Name="materialstart" Type="DateTime" Precision="0" />
+          <Property Name="materialend" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="NewestBaseline">
+          <Key>
+            <PropertyRef Name="job" />
+          </Key>
+          <Property Name="Expr1" Type="DateTime" Precision="3" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="job" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="designstart" Type="DateTime" Precision="0" />
+          <Property Name="designend" Type="DateTime" Precision="0" />
+          <Property Name="processingstart" Type="DateTime" Precision="0" />
+          <Property Name="weldstart" Type="DateTime" Precision="0" />
+          <Property Name="processingend" Type="DateTime" Precision="0" />
+          <Property Name="weldend" Type="DateTime" Precision="0" />
+          <Property Name="machinestart" Type="DateTime" Precision="0" />
+          <Property Name="machineend" Type="DateTime" Precision="0" />
+          <Property Name="assemblystart" Type="DateTime" Precision="0" />
+          <Property Name="assemblyend" Type="DateTime" Precision="0" />
+          <Property Name="qaend" Type="DateTime" Precision="0" />
+          <Property Name="qastart" Type="DateTime" Precision="0" />
+          <Property Name="materialstart" Type="DateTime" Precision="0" />
+          <Property Name="materialend" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="SupplierDirect">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FOB" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="PrimaryCommodity" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
+          <Property Name="SecondaryCommodity" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
+          <Property Name="AS9100Registration" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="ASExpiration" Type="DateTime" Precision="0" />
+          <Property Name="ASDocument" Type="String" MaxLength="250" FixedLength="true" Unicode="true" />
+          <Property Name="IsoRegistration" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="IsoExpiration" Type="DateTime" Precision="0" />
+          <Property Name="IsoDocument" Type="String" MaxLength="250" FixedLength="true" Unicode="true" />
+          <Property Name="OtherRegistration" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="OtherExpiration" Type="DateTime" Precision="0" />
+          <Property Name="OtherDocument" Type="String" MaxLength="250" FixedLength="true" Unicode="true" />
+          <Property Name="ItarApproved" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="ItarExpiration" Type="DateTime" Precision="0" />
+          <Property Name="ItarDocument" Type="String" MaxLength="250" FixedLength="true" Unicode="true" />
+          <Property Name="DPDApproval" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="SpecialProcesses" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="SpecialProcessDetail" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+          <Property Name="ShipVia" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="1000" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SupplierMain">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="VendorID" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="PrimaryContact" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
+          <Property Name="EvalDate" Type="DateTime" Precision="0" />
+          <Property Name="Risk" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Kickoff">
+          <Key>
+            <PropertyRef Name="BaseID" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Planning" Type="Int32" />
+          <Property Name="Design" Type="Int32" />
+          <Property Name="Waterjet" Type="Int32" />
+          <Property Name="Weld" Type="Int32" />
+          <Property Name="NC" Type="Int32" />
+          <Property Name="Convetional" Type="Int32" />
+          <Property Name="Outsource" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Assy" Type="Int32" />
+          <Property Name="Inspection" Type="Int32" />
+          <Property Name="Shipping" Type="Int32" />
+          <Property Name="PlanningEst" Type="Int32" />
+          <Property Name="DesignEst" Type="Int32" />
+          <Property Name="WaterjetEst" Type="Int32" />
+          <Property Name="WeldEst" Type="Int32" />
+          <Property Name="NCEst" Type="Int32" />
+          <Property Name="ConventionalEst" Type="Int32" />
+          <Property Name="OutsourceEst" Type="Int32" />
+          <Property Name="AssemblyEst" Type="Int32" />
+          <Property Name="InspectionEst" Type="Int32" />
+          <Property Name="ShippingEst" Type="Int32" />
+          <Property Name="BaseID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -680,6 +966,7 @@ warning 6002: The table/view 'Wip.dbo.Margin_Over_time' does not have a primary 
           <EntitySetMapping Name="Batches">
             <EntityTypeMapping TypeName="WipModel.Batch">
               <MappingFragment StoreEntitySet="Batches">
+                <ScalarProperty Name="BatchTime" ColumnName="BatchTime" />
                 <ScalarProperty Name="Batch1" ColumnName="Batch" />
                 <ScalarProperty Name="BatchDate" ColumnName="BatchDate" />
               </MappingFragment>
@@ -729,6 +1016,8 @@ warning 6002: The table/view 'Wip.dbo.Margin_Over_time' does not have a primary 
           <EntitySetMapping Name="JobMetrics">
             <EntityTypeMapping TypeName="WipModel.JobMetric">
               <MappingFragment StoreEntitySet="JobMetrics">
+                <ScalarProperty Name="ContractDate" ColumnName="ContractDate" />
+                <ScalarProperty Name="Projected" ColumnName="Projected" />
                 <ScalarProperty Name="RemainingRev" ColumnName="RemainingRev" />
                 <ScalarProperty Name="BaseID" ColumnName="BaseID" />
                 <ScalarProperty Name="Comp" ColumnName="Comp" />
@@ -779,6 +1068,8 @@ warning 6002: The table/view 'Wip.dbo.Margin_Over_time' does not have a primary 
           <EntitySetMapping Name="ActiveJobs">
             <EntityTypeMapping TypeName="WipModel.ActiveJob">
               <MappingFragment StoreEntitySet="ActiveJobs">
+                <ScalarProperty Name="ContractDate" ColumnName="ContractDate" />
+                <ScalarProperty Name="Projected" ColumnName="Projected" />
                 <ScalarProperty Name="Hold" ColumnName="Hold" />
                 <ScalarProperty Name="age1" ColumnName="age1" />
                 <ScalarProperty Name="RemainingRev" ColumnName="RemainingRev" />
@@ -936,6 +1227,120 @@ warning 6002: The table/view 'Wip.dbo.Margin_Over_time' does not have a primary 
                 <ScalarProperty Name="FinishFab" ColumnName="FinishFab" />
                 <ScalarProperty Name="StartFab" ColumnName="StartFab" />
                 <ScalarProperty Name="DataHold" ColumnName="DataHold" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NewestActuals">
+            <EntityTypeMapping TypeName="WipModel.NewestActual">
+              <MappingFragment StoreEntitySet="NewestActuals">
+                <ScalarProperty Name="materialend" ColumnName="materialend" />
+                <ScalarProperty Name="materialstart" ColumnName="materialstart" />
+                <ScalarProperty Name="qaend" ColumnName="qaend" />
+                <ScalarProperty Name="qastart" ColumnName="qastart" />
+                <ScalarProperty Name="assemblyend" ColumnName="assemblyend" />
+                <ScalarProperty Name="assemblystart" ColumnName="assemblystart" />
+                <ScalarProperty Name="machineend" ColumnName="machineend" />
+                <ScalarProperty Name="machinestart" ColumnName="machinestart" />
+                <ScalarProperty Name="weldend" ColumnName="weldend" />
+                <ScalarProperty Name="weldstart" ColumnName="weldstart" />
+                <ScalarProperty Name="processingend" ColumnName="processingend" />
+                <ScalarProperty Name="processingstart" ColumnName="processingstart" />
+                <ScalarProperty Name="designend" ColumnName="designend" />
+                <ScalarProperty Name="designstart" ColumnName="designstart" />
+                <ScalarProperty Name="createdate" ColumnName="createdate" />
+                <ScalarProperty Name="job" ColumnName="job" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NewestBaselines">
+            <EntityTypeMapping TypeName="WipModel.NewestBaseline">
+              <MappingFragment StoreEntitySet="NewestBaseline">
+                <ScalarProperty Name="materialend" ColumnName="materialend" />
+                <ScalarProperty Name="materialstart" ColumnName="materialstart" />
+                <ScalarProperty Name="qastart" ColumnName="qastart" />
+                <ScalarProperty Name="qaend" ColumnName="qaend" />
+                <ScalarProperty Name="assemblyend" ColumnName="assemblyend" />
+                <ScalarProperty Name="assemblystart" ColumnName="assemblystart" />
+                <ScalarProperty Name="machineend" ColumnName="machineend" />
+                <ScalarProperty Name="machinestart" ColumnName="machinestart" />
+                <ScalarProperty Name="weldend" ColumnName="weldend" />
+                <ScalarProperty Name="processingend" ColumnName="processingend" />
+                <ScalarProperty Name="weldstart" ColumnName="weldstart" />
+                <ScalarProperty Name="processingstart" ColumnName="processingstart" />
+                <ScalarProperty Name="designend" ColumnName="designend" />
+                <ScalarProperty Name="designstart" ColumnName="designstart" />
+                <ScalarProperty Name="job" ColumnName="job" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupplierDirects">
+            <EntityTypeMapping TypeName="WipModel.SupplierDirect">
+              <MappingFragment StoreEntitySet="SupplierDirect">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ShipVia" ColumnName="ShipVia" />
+                <ScalarProperty Name="SpecialProcessDetail" ColumnName="SpecialProcessDetail" />
+                <ScalarProperty Name="SpecialProcesses" ColumnName="SpecialProcesses" />
+                <ScalarProperty Name="DPDApproval" ColumnName="DPDApproval" />
+                <ScalarProperty Name="ItarDocument" ColumnName="ItarDocument" />
+                <ScalarProperty Name="ItarExpiration" ColumnName="ItarExpiration" />
+                <ScalarProperty Name="ItarApproved" ColumnName="ItarApproved" />
+                <ScalarProperty Name="OtherDocument" ColumnName="OtherDocument" />
+                <ScalarProperty Name="OtherExpiration" ColumnName="OtherExpiration" />
+                <ScalarProperty Name="OtherRegistration" ColumnName="OtherRegistration" />
+                <ScalarProperty Name="IsoDocument" ColumnName="IsoDocument" />
+                <ScalarProperty Name="IsoExpiration" ColumnName="IsoExpiration" />
+                <ScalarProperty Name="IsoRegistration" ColumnName="IsoRegistration" />
+                <ScalarProperty Name="ASDocument" ColumnName="ASDocument" />
+                <ScalarProperty Name="ASExpiration" ColumnName="ASExpiration" />
+                <ScalarProperty Name="AS9100Registration" ColumnName="AS9100Registration" />
+                <ScalarProperty Name="SecondaryCommodity" ColumnName="SecondaryCommodity" />
+                <ScalarProperty Name="PrimaryCommodity" ColumnName="PrimaryCommodity" />
+                <ScalarProperty Name="FOB" ColumnName="FOB" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupplierMains">
+            <EntityTypeMapping TypeName="WipModel.SupplierMain">
+              <MappingFragment StoreEntitySet="SupplierMain">
+                <ScalarProperty Name="Risk" ColumnName="Risk" />
+                <ScalarProperty Name="EvalDate" ColumnName="EvalDate" />
+                <ScalarProperty Name="PrimaryContact" ColumnName="PrimaryContact" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="VendorID" ColumnName="VendorID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kickoffs">
+            <EntityTypeMapping TypeName="WipModel.Kickoff">
+              <MappingFragment StoreEntitySet="Kickoff">
+                <ScalarProperty Name="BaseID" ColumnName="BaseID" />
+                <ScalarProperty Name="ShippingEst" ColumnName="ShippingEst" />
+                <ScalarProperty Name="InspectionEst" ColumnName="InspectionEst" />
+                <ScalarProperty Name="AssemblyEst" ColumnName="AssemblyEst" />
+                <ScalarProperty Name="OutsourceEst" ColumnName="OutsourceEst" />
+                <ScalarProperty Name="ConventionalEst" ColumnName="ConventionalEst" />
+                <ScalarProperty Name="NCEst" ColumnName="NCEst" />
+                <ScalarProperty Name="WeldEst" ColumnName="WeldEst" />
+                <ScalarProperty Name="WaterjetEst" ColumnName="WaterjetEst" />
+                <ScalarProperty Name="DesignEst" ColumnName="DesignEst" />
+                <ScalarProperty Name="PlanningEst" ColumnName="PlanningEst" />
+                <ScalarProperty Name="Shipping" ColumnName="Shipping" />
+                <ScalarProperty Name="Inspection" ColumnName="Inspection" />
+                <ScalarProperty Name="Assy" ColumnName="Assy" />
+                <ScalarProperty Name="Outsource" ColumnName="Outsource" />
+                <ScalarProperty Name="Convetional" ColumnName="Convetional" />
+                <ScalarProperty Name="NC" ColumnName="NC" />
+                <ScalarProperty Name="Weld" ColumnName="Weld" />
+                <ScalarProperty Name="Waterjet" ColumnName="Waterjet" />
+                <ScalarProperty Name="Design" ColumnName="Design" />
+                <ScalarProperty Name="Planning" ColumnName="Planning" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
